@@ -21,19 +21,27 @@ export default function CaixaReveal() {
   // suaviza o vínculo com o scroll para o movimento não ficar granulado
   const p = useSpring(scrollYProgress, { stiffness: 80, damping: 22, mass: 0.4 })
 
-  const tampa = useTransform(p, [0.04, 0.46], [-90, 18])
-  const abaFrente = useTransform(p, [0.04, 0.4], [0, 82])
-  const cena = useTransform(p, [0, 1], [INCLINACAO, 48])
-  const giro = useTransform(p, [0, 1], [-16, 6])
+  // Linha do tempo. O trecho final (0.80 -> 1) repete os mesmos valores de
+  // propósito: é a pausa em que a página fica presa sem nada se mexer.
+  const tampa = useTransform(p, [0.03, 0.34], [-90, 18])
+  const abaFrente = useTransform(p, [0.03, 0.30], [0, 82])
+  const cena = useTransform(p, [0, 0.62, 1], [INCLINACAO, 50, 50])
+  const giro = useTransform(p, [0, 0.62, 1], [-16, 4, 4])
 
-  const pecaSobe = useTransform(p, [0.3, 0.92], [30, -196])
-  const pecaOpacidade = useTransform(p, [0.3, 0.46], [0, 1])
-  const pecaEscala = useTransform(p, [0.3, 0.92], [0.82, 1])
-  const luz = useTransform(p, [0.26, 0.55], [0, 1])
-  const textoOp = useTransform(p, [0.55, 0.75], [0, 1])
-  const textoY = useTransform(p, [0.55, 0.75], [24, 0])
+  const pecaOpacidade = useTransform(p, [0.24, 0.38], [0, 1])
+  const pecaSobe = useTransform(p, [0.24, 0.52, 0.78, 1], [30, -150, -104, -104])
+  const pecaEscala = useTransform(p, [0.24, 0.52, 0.78, 1], [0.82, 1, 1.52, 1.52])
+
+  // a caixa se dissolve depois que a peça já saiu de dentro dela
+  const caixaOpacidade = useTransform(p, [0.54, 0.74], [1, 0])
+  const caixaDesce = useTransform(p, [0.54, 0.74], [0, 40])
+
+  const luz = useTransform(p, [0.22, 0.5], [0, 1])
+  const textoOp = useTransform(p, [0.80, 0.92], [0, 1])
+  const textoY = useTransform(p, [0.80, 0.92], [20, 0])
 
   const cenaTransform = useMotionTemplate`rotateX(${cena}deg) rotateZ(${giro}deg)`
+  const corpoTransform = useMotionTemplate`translateY(${caixaDesce}px)`
   const tampaTransform = useMotionTemplate`rotateX(${tampa}deg)`
   const abaTransform = useMotionTemplate`rotateX(${abaFrente}deg)`
   const pecaTransform = useMotionTemplate`translate(-50%, 0) rotateX(-${cena}deg) translateY(${pecaSobe}px) scale(${pecaEscala})`
@@ -41,7 +49,7 @@ export default function CaixaReveal() {
   const foto = products[0].fotos[6] ?? products[0].fotos[0]
 
   return (
-    <section ref={alvo} className="relative h-[320vh] bg-ink-950">
+    <section ref={alvo} className="relative h-[460vh] bg-ink-950">
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
         <motion.div
           aria-hidden
@@ -53,7 +61,8 @@ export default function CaixaReveal() {
           <motion.div className="caixa-cena" style={{ transform: cenaTransform }}>
             {/* chão */}
             <div className="caixa-chao">
-              {/* peça: contra-gira a inclinação da cena para encarar a câmera */}
+              {/* peça: contra-gira a inclinação da cena para encarar a câmera.
+                  Fica fora de .caixa-corpo para não sumir com a caixa. */}
               <motion.img
                 src={foto.full}
                 alt={`${products[0].name} saindo da caixa`}
@@ -62,23 +71,29 @@ export default function CaixaReveal() {
                 loading="lazy"
               />
 
-              <div className="caixa-parede caixa-esq" />
-              <div className="caixa-parede caixa-dir" />
-              <div className="caixa-parede caixa-frente">
-                <motion.div className="caixa-aba-frente" style={{ transform: abaTransform }} />
-              </div>
-              <div className="caixa-parede caixa-tras">
-                <motion.div className="caixa-tampa" style={{ transform: tampaTransform }}>
-                  <div className="caixa-tampa-interna" />
-                </motion.div>
-              </div>
+              <motion.div
+                className="caixa-corpo"
+                style={{ opacity: caixaOpacidade, transform: corpoTransform }}
+              >
+                <div className="caixa-piso" />
+                <div className="caixa-parede caixa-esq" />
+                <div className="caixa-parede caixa-dir" />
+                <div className="caixa-parede caixa-frente">
+                  <motion.div className="caixa-aba-frente" style={{ transform: abaTransform }} />
+                </div>
+                <div className="caixa-parede caixa-tras">
+                  <motion.div className="caixa-tampa" style={{ transform: tampaTransform }}>
+                    <div className="caixa-tampa-interna" />
+                  </motion.div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
 
         <motion.div
           style={{ opacity: textoOp, y: textoY }}
-          className="relative z-10 mt-8 max-w-md px-5 text-center"
+          className="absolute inset-x-0 bottom-12 z-10 mx-auto max-w-md px-5 text-center"
         >
           <p className="eyebrow text-ember-300">Chega assim</p>
           <h2 className="mt-4 font-display text-3xl text-bone-100 md:text-4xl">

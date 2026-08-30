@@ -128,6 +128,19 @@
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
+}
+
+/* Corpo da caixa: tudo que deve sumir no fim. A peça fica fora dele,
+   irmã, senão desapareceria junto. */
+.caixa-corpo {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.caixa-piso {
+  position: absolute;
+  inset: 0;
   background:
     radial-gradient(70% 60% at 50% 40%, rgba(224, 112, 79, 0.34), transparent 72%),
     linear-gradient(160deg, #241c19, #0e0b0a);
