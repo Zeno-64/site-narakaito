@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Cinzel', ui-serif, Georgia, serif;
+  --font-sans: 'Raleway', ui-sans-serif, system-ui, sans-serif;
+
+  /* Base escura, puxada do fundo da logo */
+  --color-ink-950: #070605;
+  --color-ink-900: #0a0908;
+  --color-ink-850: #100d0c;
+  --color-ink-800: #171312;
+  --color-ink-700: #241d1b;
+  --color-ink-600: #372d2a;
+
+  /* Brasa: vermelho da chama da logo -> laranja quente */
+  --color-ember-900: #5c1712;
+  --color-ember-700: #8c241c;
+  --color-ember-500: #b0332c;
+  --color-ember-400: #c9463a;
+  --color-ember-300: #e0704f;
+  --color-ember-200: #eda05f;
+
+  --color-bone-100: #f2ede7;
+  --color-bone-300: #cdc3ba;
+  --color-bone-500: #948880;
+  --color-bone-600: #6f645d;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-bone-300);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-ember-700);
+    color: var(--color-bone-100);
+  }
+}
+
+@layer components {
+  /* Rótulo em caixa alta com muito espaçamento: usado em eyebrows e botões */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  /* Textura de brasa: pontinhos quentes esparsos sobre o fundo escuro */
+  .ember-field {
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, var(--color-ember-300) 50%, transparent 51%),
+      radial-gradient(1px 1px at 68% 14%, var(--color-ember-200) 50%, transparent 51%),
+      radial-gradient(1px 1px at 34% 71%, var(--color-ember-400) 50%, transparent 51%),
+      radial-gradient(1px 1px at 82% 63%, var(--color-ember-300) 50%, transparent 51%),
+      radial-gradient(1px 1px at 51% 41%, var(--color-ember-200) 50%, transparent 51%);
+    background-size: 340px 340px;
+    opacity: 0.35;
+  }
+}
+
+/* A faixa de avisos do topo corre em loop; para quando o usuário passa o mouse */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 34s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
