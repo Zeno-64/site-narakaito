@@ -1,6 +1,7 @@
 import About from './components/About'
 import Atelier from './components/Atelier'
 import BeforeAfter from './components/BeforeAfter'
+import CaixaReveal from './components/CaixaReveal'
 import Catalog from './components/Catalog'
 import Collections from './components/Collections'
 import Differentials from './components/Differentials'
@@ -22,6 +23,7 @@ export default function App() {
         <Collections />
         <Differentials />
         <Catalog />
+        <CaixaReveal />
         <Library />
         <BeforeAfter />
         <Atelier />

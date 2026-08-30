@@ -23,12 +23,16 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
-        solid
-          ? 'border-ink-700 bg-ink-950/92 backdrop-blur-md'
-          : 'border-transparent bg-transparent'
+      className={`sticky top-0 z-50 border-b border-ink-700 backdrop-blur-md transition-colors duration-300 ${
+        solid ? 'bg-ink-950/95' : 'bg-ink-950/75'
       }`}
     >
+      {/* Fio de brasa por baixo da barra: separa a navegação do resto da
+          página mesmo com o scroll no topo. */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-ember-500/70 to-transparent"
+      />
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
         <a href="#topo" className="flex shrink-0 items-center" aria-label="Narakaito Lab, início">
           {/* Lockup horizontal: a chama ao lado do wordmark, para caber na altura do header */}

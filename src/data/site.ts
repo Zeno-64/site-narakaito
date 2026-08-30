@@ -61,15 +61,44 @@ export const modelos: Modelo[] = [
   { nome: 'A confirmar', serie: 'A confirmar', escultor: 'YoruNoAne', foto: fotos('frieren')[0] },
 ]
 
-/** Peça de destaque do topo: foto do ateliê, sem marca d'água. */
-export const destaque = {
-  eyebrow: 'Naruto Shippuden · Peça em destaque',
-  titulo: 'Madara',
-  subtitulo: 'Uchiha',
-  texto:
-    'Armadura vermelha, gunbai nas costas e a foice cortando o ar em lâmina roxa. Impressa em resina, lixada peça por peça e pintada à mão até o azul da chakra ficar no ponto.',
-  foto: fotos('madara')[0],
+/** Peças que rodam no carrossel do topo. Só fotos do ateliê, sem marca d'água. */
+export type Destaque = {
+  eyebrow: string
+  titulo: string
+  subtitulo: string
+  texto: string
+  foto: Foto
 }
+
+export const destaques: Destaque[] = [
+  {
+    eyebrow: 'Naruto Shippuden · Peça em destaque',
+    titulo: 'Madara',
+    subtitulo: 'Uchiha',
+    texto:
+      'Armadura vermelha, gunbai nas costas e a foice cortando o ar em lâmina roxa. Impressa em resina, lixada peça por peça e pintada à mão até o azul da chakra ficar no ponto.',
+    foto: fotos('madara')[0],
+  },
+  {
+    eyebrow: 'The Legend of Zelda · Peça em destaque',
+    titulo: 'Link',
+    subtitulo: 'Adulto',
+    texto:
+      'Túnica verde, escudo hyliano nas costas e a Master Sword sacada junto da árvore. Base cheia de folha, cogumelo e musgo, tudo pintado fio a fio.',
+    foto: fotos('link_adulto_zelda')[0],
+  },
+  {
+    eyebrow: 'The Legend of Zelda · Peça em destaque',
+    titulo: 'Link',
+    subtitulo: 'Criança',
+    texto:
+      'Sentado no toco, ocarina nas mãos e as notas saindo em luz azul. Uma peça silenciosa no meio de tanta pose de luta — e das mais difíceis de pintar.',
+    foto: fotos('link_crianca_zelda')[0],
+  },
+]
+
+/** Quanto tempo cada destaque fica na tela antes de passar, em ms. */
+export const duracaoDestaque = 7000
 
 /** Foto usada na seção "Sobre". */
 export const fotoAtelie = fotos('link_adulto_zelda')[2]

@@ -64,6 +64,19 @@
     background-size: 340px 340px;
     opacity: 0.35;
   }
+  /* Dissolve os quatro lados da foto no fundo, para não sobrar retângulo.
+     Dois gradientes cruzados em vez de uma elipse: a elipse que zera no meio
+     da lateral acabaria comendo a peça. */
+  .foto-sangrada {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 17%, #000 83%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 13%, #000 81%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 17%, #000 83%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 13%, #000 81%, transparent 100%);
+    mask-composite: intersect;
+  }
 }
 
 /* A faixa de avisos do topo corre em loop; para quando o usuário passa o mouse */
@@ -92,4 +105,163 @@
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ---- Caixa 3D que abre no scroll ---------------------------------------
+   Cada parede é dobrada 90° a partir de uma aresta do chão, com
+   transform-origin na própria dobra. Os sinais de rotação foram escolhidos
+   para todas subirem para fora da caixa (+z do plano do chão). */
+
+.caixa-palco {
+  perspective: 1300px;
+  perspective-origin: 50% 44%;
+}
+
+.caixa-cena {
+  position: relative;
+  width: 460px;
+  height: 320px;
+  transform-style: preserve-3d;
+}
+
+.caixa-chao {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  background:
+    radial-gradient(70% 60% at 50% 40%, rgba(224, 112, 79, 0.34), transparent 72%),
+    linear-gradient(160deg, #241c19, #0e0b0a);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.85);
+}
+
+.caixa-parede {
+  position: absolute;
+  transform-style: preserve-3d;
+  /* caixa preta, mas com faces claras o bastante para separar do fundo e
+     uma luz de aresta no topo, senão vira preto sobre preto */
+  background: linear-gradient(180deg, #3a2f2b, #14100e);
+  border: 1px solid rgba(224, 112, 79, 0.30);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 160, 95, 0.35),
+    inset 0 -30px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* dobra na aresta de trás do chão */
+.caixa-tras {
+  bottom: 100%;
+  left: 0;
+  width: 460px;
+  height: 168px;
+  transform-origin: center bottom;
+  transform: rotateX(-90deg);
+}
+
+/* dobra na aresta da frente */
+.caixa-frente {
+  top: 100%;
+  left: 0;
+  width: 460px;
+  height: 168px;
+  transform-origin: center top;
+  transform: rotateX(90deg);
+}
+
+.caixa-esq {
+  right: 100%;
+  top: 0;
+  width: 168px;
+  height: 320px;
+  transform-origin: right center;
+  transform: rotateY(90deg);
+}
+
+.caixa-dir {
+  left: 100%;
+  top: 0;
+  width: 168px;
+  height: 320px;
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+}
+
+/* tampa: dobra na aresta de cima da parede de trás.
+   -90° = deitada sobre a boca da caixa, 0° = em pé, >0 = tombada para trás */
+.caixa-tampa {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 460px;
+  height: 320px;
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  background: linear-gradient(200deg, #3d322d, #14100e);
+  border: 1px solid rgba(224, 112, 79, 0.32);
+  box-shadow: inset 0 1px 0 rgba(237, 160, 95, 0.30);
+}
+
+.caixa-tampa-interna {
+  position: absolute;
+  inset: 8px;
+  background:
+    radial-gradient(60% 70% at 50% 30%, rgba(224, 112, 79, 0.28), transparent 72%),
+    linear-gradient(180deg, #241d1b, #100d0c);
+}
+
+/* aba da frente, dobrada na aresta de cima da parede da frente */
+.caixa-aba-frente {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 460px;
+  height: 92px;
+  transform-origin: center top;
+  background: linear-gradient(180deg, #332925, #100c0b);
+  border: 1px solid rgba(224, 112, 79, 0.26);
+}
+
+/* a peça contra-gira a inclinação da cena para encarar a câmera */
+.caixa-peca {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  z-index: 1;
+  width: 292px;
+  height: auto;
+  transform-origin: center bottom;
+}
+
+@media (max-width: 640px) {
+  .caixa-palco {
+    transform: scale(0.58);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .caixa-palco {
+    transform: scale(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caixa-cena {
+    transform: rotateX(52deg) rotateZ(0deg) !important;
+  }
+}
+
+/* sombra projetada, para a caixa não parecer flutuando sem peso */
+.caixa-palco::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  width: 460px;
+  height: 60px;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.75), transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.caixa-palco {
+  position: relative;
 }
