@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { whatsappUrl } from '../data/site'
 
+// com o "/" na frente, funcionam tanto na home quanto dentro de /peca/:slug
 const nav = [
-  { label: 'Início', href: '#topo' },
-  { label: 'Coleções', href: '#colecoes' },
-  { label: 'Catálogo', href: '#catalogo' },
-  { label: 'Ateliê', href: '#atelie' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Início', href: '/' },
+  { label: 'Coleções', href: '/#colecoes' },
+  { label: 'Catálogo', href: '/#catalogo' },
+  { label: 'Ateliê', href: '/#atelie' },
+  { label: 'Sobre', href: '/#sobre' },
+  { label: 'FAQ', href: '/#faq' },
 ]
 
 export default function Header() {
@@ -34,7 +36,7 @@ export default function Header() {
         className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-ember-500/70 to-transparent"
       />
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
-        <a href="#topo" className="flex shrink-0 items-center" aria-label="Narakaito Lab, início">
+        <Link to="/" className="flex shrink-0 items-center" aria-label="Narakaito Lab, início">
           {/* Lockup horizontal: a chama ao lado do wordmark, para caber na altura do header */}
           <img
             src="/images/logo-mark.png"
@@ -51,17 +53,17 @@ export default function Header() {
             width={593}
             height={124}
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
+              to={item.href}
               className="eyebrow text-bone-300 transition-colors hover:text-ember-200"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -90,14 +92,14 @@ export default function Header() {
         <nav className="border-t border-ink-700 bg-ink-950/98 lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-5">
             {nav.map((item) => (
-              <a
+              <Link
                 key={item.href}
-                href={item.href}
+                to={item.href}
                 onClick={() => setOpen(false)}
                 className="eyebrow border-b border-ink-800 py-4 text-bone-300"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <a
               href={whatsappUrl}

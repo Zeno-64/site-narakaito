@@ -1,35 +1,21 @@
-import About from './components/About'
-import Atelier from './components/Atelier'
-import BeforeAfter from './components/BeforeAfter'
-import CaixaReveal from './components/CaixaReveal'
-import Catalog from './components/Catalog'
-import Collections from './components/Collections'
-import Differentials from './components/Differentials'
-import Faq from './components/Faq'
+import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import Hero from './components/Hero'
-import Library from './components/Library'
 import TopBar from './components/TopBar'
 import WhatsAppFab from './components/WhatsAppFab'
+import Home from './pages/Home'
+import Produto from './pages/Produto'
 
 export default function App() {
   return (
     <>
       <TopBar />
       <Header />
-      <main>
-        <Hero />
-        <Collections />
-        <Differentials />
-        <Catalog />
-        <CaixaReveal />
-        <Library />
-        <BeforeAfter />
-        <Atelier />
-        <About />
-        <Faq />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/peca/:slug" element={<Produto />} />
+        <Route path="*" element={<Produto />} />
+      </Routes>
       <Footer />
       <WhatsAppFab />
     </>

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import type { Product } from '../data/site'
-import { whatsappUrl } from '../data/site'
+import { Link } from 'react-router-dom'
+import type { Peca } from '../data/site'
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: Peca }) {
   const [i, setI] = useState(0)
   const total = product.fotos.length
 
@@ -15,7 +15,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <img
             key={foto.sm}
             src={foto.sm}
-            alt={`${product.name} — foto ${idx + 1}`}
+            alt={`${product.nome} — foto ${idx + 1}`}
             loading={idx === 0 ? 'eager' : 'lazy'}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
               idx === i ? 'opacity-100' : 'opacity-0'
@@ -69,17 +69,15 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-display text-xl text-bone-100">{product.name}</h3>
-        <p className="eyebrow mt-2 text-bone-600">{product.series}</p>
-        <p className="mt-5 text-sm text-bone-300">{product.price ?? 'Orçamento sob consulta'}</p>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noreferrer"
+        <h3 className="font-display text-xl text-bone-100">{product.nome}</h3>
+        <p className="eyebrow mt-2 text-bone-600">{product.serie}</p>
+        <p className="mt-5 text-sm text-bone-300">{product.preco ?? 'Orçamento sob consulta'}</p>
+        <Link
+          to={`/peca/${product.slug}`}
           className="eyebrow mt-6 border border-ink-600 py-3 text-center text-bone-300 transition-colors group-hover:border-ember-500 group-hover:text-bone-100"
         >
           Encomendar
-        </a>
+        </Link>
       </div>
     </article>
   )

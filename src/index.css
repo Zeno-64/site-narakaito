@@ -220,14 +220,18 @@
     linear-gradient(180deg, #241d1b, #100d0c);
 }
 
-/* aba da frente, dobrada na aresta de cima da parede da frente */
+/* Lingueta da TAMPA, dobrada na aresta da frente dela (e não na parede da
+   frente): é ela que desce pela frente da caixa quando fecha e sobe junto
+   com a tampa quando abre.
+   Local +z da tampa é a face interna, que aponta para baixo com a caixa
+   fechada -- por isso -90° = lingueta descida, ~-8° = quase no plano da tampa. */
 .caixa-aba-frente {
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 0;
   width: 460px;
   height: 92px;
-  transform-origin: center top;
+  transform-origin: center bottom;
   background: linear-gradient(180deg, #332925, #100c0b);
   border: 1px solid rgba(224, 112, 79, 0.26);
 }

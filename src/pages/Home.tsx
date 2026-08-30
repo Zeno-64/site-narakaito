@@ -1,0 +1,40 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import About from '../components/About'
+import Atelier from '../components/Atelier'
+import BeforeAfter from '../components/BeforeAfter'
+import CaixaReveal from '../components/CaixaReveal'
+import Catalog from '../components/Catalog'
+import Collections from '../components/Collections'
+import Differentials from '../components/Differentials'
+import Faq from '../components/Faq'
+import Hero from '../components/Hero'
+import Library from '../components/Library'
+
+export default function Home() {
+  const { hash } = useLocation()
+
+  // Chegando de outra página com âncora (/#catalogo), o alvo só existe
+  // depois que a home monta — por isso o scroll acontece aqui.
+  useEffect(() => {
+    document.title = 'Narakaito Lab · Colecionáveis em Resina Pintados à Mão'
+    if (!hash) return
+    const alvo = document.querySelector(hash)
+    if (alvo) alvo.scrollIntoView()
+  }, [hash])
+
+  return (
+    <main>
+      <Hero />
+      <Collections />
+      <Differentials />
+      <Catalog />
+      <CaixaReveal />
+      <Library />
+      <BeforeAfter />
+      <Atelier />
+      <About />
+      <Faq />
+    </main>
+  )
+}

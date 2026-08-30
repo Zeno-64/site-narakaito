@@ -1,4 +1,5 @@
-import { modelos, whatsappUrl } from '../data/site'
+import { Link } from 'react-router-dom'
+import { modelos } from '../data/site'
 import Reveal from './Reveal'
 import SectionTitle from './SectionTitle'
 
@@ -19,7 +20,7 @@ export default function Library() {
               <article className="group flex h-full flex-col border border-ink-700 bg-ink-900 transition-colors hover:border-ember-500/70">
                 <div className="relative aspect-square overflow-hidden bg-ink-800">
                   <img
-                    src={modelo.foto.sm}
+                    src={modelo.fotos[0].sm}
                     alt={`Modelo de ${modelo.nome}`}
                     loading="lazy"
                     className="h-full w-full object-cover"
@@ -31,14 +32,12 @@ export default function Library() {
                   <p className="mt-4 text-xs text-bone-600">
                     Escultura de {modelo.escultor}
                   </p>
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="eyebrow mt-5 border border-ink-600 py-3 text-center text-bone-300 transition-colors group-hover:border-ember-500 group-hover:text-bone-100"
+                  <Link
+                    to={`/peca/${modelo.slug}`}
+                    className="eyebrow mt-5 block border border-ink-600 py-3 text-center text-bone-300 transition-colors group-hover:border-ember-500 group-hover:text-bone-100"
                   >
                     Encomendar
-                  </a>
+                  </Link>
                 </div>
               </article>
             </Reveal>
@@ -47,7 +46,7 @@ export default function Library() {
 
         <div className="mt-10">
           <a
-            href={whatsappUrl}
+            href="https://wa.me/5531000000000"
             target="_blank"
             rel="noreferrer"
             className="eyebrow text-ember-200 transition-colors hover:text-ember-300"

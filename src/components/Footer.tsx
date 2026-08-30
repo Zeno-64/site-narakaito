@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { whatsappUrl } from '../data/site'
 
 const year = new Date().getFullYear()
@@ -24,29 +25,29 @@ export default function Footer() {
           <p className="eyebrow text-bone-100">Navegar</p>
           <ul className="mt-5 space-y-3 text-sm text-bone-500">
             <li>
-              <a href="#colecoes" className="transition-colors hover:text-ember-200">
+              <Link to="/#colecoes" className="transition-colors hover:text-ember-200">
                 Coleções
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#catalogo" className="transition-colors hover:text-ember-200">
+              <Link to="/#catalogo" className="transition-colors hover:text-ember-200">
                 Catálogo
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#atelie" className="transition-colors hover:text-ember-200">
+              <Link to="/#atelie" className="transition-colors hover:text-ember-200">
                 Ateliê
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#sobre" className="transition-colors hover:text-ember-200">
+              <Link to="/#sobre" className="transition-colors hover:text-ember-200">
                 Sobre
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#faq" className="transition-colors hover:text-ember-200">
+              <Link to="/#faq" className="transition-colors hover:text-ember-200">
                 FAQ
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

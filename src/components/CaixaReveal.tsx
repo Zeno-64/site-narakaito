@@ -24,7 +24,7 @@ export default function CaixaReveal() {
   // Linha do tempo. O trecho final (0.80 -> 1) repete os mesmos valores de
   // propósito: é a pausa em que a página fica presa sem nada se mexer.
   const tampa = useTransform(p, [0.03, 0.34], [-90, 18])
-  const abaFrente = useTransform(p, [0.03, 0.30], [0, 82])
+  const abaFrente = useTransform(p, [0.03, 0.34], [-90, -8])
   const cena = useTransform(p, [0, 0.62, 1], [INCLINACAO, 50, 50])
   const giro = useTransform(p, [0, 0.62, 1], [-16, 4, 4])
 
@@ -65,7 +65,7 @@ export default function CaixaReveal() {
                   Fica fora de .caixa-corpo para não sumir com a caixa. */}
               <motion.img
                 src={foto.full}
-                alt={`${products[0].name} saindo da caixa`}
+                alt={`${products[0].nome} saindo da caixa`}
                 className="caixa-peca foto-sangrada"
                 style={{ transform: pecaTransform, opacity: pecaOpacidade }}
                 loading="lazy"
@@ -78,12 +78,11 @@ export default function CaixaReveal() {
                 <div className="caixa-piso" />
                 <div className="caixa-parede caixa-esq" />
                 <div className="caixa-parede caixa-dir" />
-                <div className="caixa-parede caixa-frente">
-                  <motion.div className="caixa-aba-frente" style={{ transform: abaTransform }} />
-                </div>
+                <div className="caixa-parede caixa-frente" />
                 <div className="caixa-parede caixa-tras">
                   <motion.div className="caixa-tampa" style={{ transform: tampaTransform }}>
                     <div className="caixa-tampa-interna" />
+                    <motion.div className="caixa-aba-frente" style={{ transform: abaTransform }} />
                   </motion.div>
                 </div>
               </motion.div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { destaques, duracaoDestaque, whatsappUrl } from '../data/site'
+import { Link } from 'react-router-dom'
+import { destaques, duracaoDestaque } from '../data/site'
 import Particles from './Particles'
 
 /** Escreve o texto letra por letra. Devolve o trecho já digitado. */
@@ -132,14 +133,12 @@ export default function Hero() {
           </AnimatePresence>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to={`/peca/${peca.slug}`}
               className="eyebrow bg-ember-500 px-8 py-4 text-bone-100 transition-colors hover:bg-ember-400"
             >
               Quero esta peça →
-            </a>
+            </Link>
             <a
               href="#catalogo"
               className="eyebrow border border-ink-600 px-8 py-4 text-bone-300 transition-colors hover:border-ember-500 hover:text-bone-100"
