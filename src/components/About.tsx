@@ -1,5 +1,5 @@
 import Reveal from './Reveal'
-import { whatsappUrl } from '../data/site'
+import { fotoAtelie, whatsappUrl } from '../data/site'
 
 export default function About() {
   return (
@@ -10,11 +10,13 @@ export default function About() {
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:px-8">
         <Reveal>
-          <div className="relative aspect-4/3 overflow-hidden border border-ink-700 bg-ink-850">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <img src="/images/logo-mark.png" alt="" aria-hidden className="h-20 w-20 opacity-30" />
-              <p className="eyebrow text-bone-600">Foto da bancada</p>
-            </div>
+          <div className="relative aspect-4/5 overflow-hidden border border-ink-700 bg-ink-850">
+            <img
+              src={fotoAtelie.full}
+              alt="Peça pintada à mão no ateliê da Narakaito Lab"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
           </div>
         </Reveal>
 

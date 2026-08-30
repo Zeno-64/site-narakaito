@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion'
-import { whatsappUrl } from '../data/site'
+import { destaque, whatsappUrl } from '../data/site'
 
 export default function Hero() {
   return (
     <section id="topo" className="relative -mt-20 overflow-hidden pt-20">
-      {/* Fundo: brasa quente saindo do canto direito, onde a peça vai entrar */}
       <div aria-hidden className="absolute inset-0 bg-ink-950" />
       <div
         aria-hidden
@@ -22,18 +21,16 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="eyebrow text-ember-200">Sousou no Frieren · Peça em destaque</p>
+          <p className="eyebrow text-ember-200">{destaque.eyebrow}</p>
 
           <h1 className="mt-6 font-display text-5xl leading-[1.05] text-bone-100 md:text-6xl lg:text-7xl">
-            Frieren,
+            {destaque.titulo}
             <br />
-            <span className="text-ember-400">a Ceifadora</span>
+            <span className="text-ember-400">{destaque.subtitulo}</span>
           </h1>
 
           <p className="mt-7 max-w-lg text-base leading-relaxed text-bone-300 md:text-lg">
-            Manto claro, cajado em riste e aquele olhar de quem já viu séculos passarem.
-            Impressa em resina 16K, lixada peça por peça e pintada à mão até o degradê do
-            cabelo ficar do jeito certo.
+            {destaque.texto}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -60,25 +57,17 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
         >
-          {/* Vitrine da peça em destaque — a foto entra aqui quando escolhermos. */}
           <div className="relative aspect-4/5 w-full overflow-hidden border border-ink-700 bg-ink-850">
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_35%,rgba(176,51,44,0.28),transparent_70%)]"
+            <img
+              src={destaque.foto.full}
+              alt={`${destaque.titulo} ${destaque.subtitulo} — peça pintada à mão`}
+              className="h-full w-full object-cover"
+              fetchPriority="high"
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
-              <img
-                src="/images/logo-mark.png"
-                alt=""
-                aria-hidden
-                className="h-24 w-24 opacity-30"
-              />
-              <p className="eyebrow text-bone-600">Foto da peça</p>
-            </div>
           </div>
           <div
             aria-hidden
-            className="absolute -bottom-px left-0 right-0 h-24 bg-gradient-to-t from-ink-950 to-transparent"
+            className="absolute -bottom-px left-0 right-0 h-24 bg-gradient-to-t from-ink-950/90 to-transparent"
           />
         </motion.div>
       </div>

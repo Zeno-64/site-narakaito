@@ -1,4 +1,4 @@
-import { library, whatsappUrl } from '../data/site'
+import { modelos, whatsappUrl } from '../data/site'
 import Reveal from './Reveal'
 import SectionTitle from './SectionTitle'
 
@@ -9,22 +9,43 @@ export default function Library() {
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <SectionTitle
           eyebrow="Biblioteca de modelos"
-          title="Escolhe o personagem que a gente esculpe"
-          blurb="Trabalhamos com uma biblioteca grande de esculturas digitais e também com modelagem sob medida. Alguns nomes que já saíram daqui:"
+          title="Escolhe o personagem que a gente imprime e pinta"
+          blurb="Estes são modelos disponíveis para encomenda. As imagens são as artes de divulgação dos escultores que assinam cada escultura — a sua peça é impressa e pintada aqui no ateliê."
         />
 
-        <div className="mt-12 grid grid-cols-2 gap-px bg-ink-800 sm:grid-cols-3 lg:grid-cols-5">
-          {library.map((item, i) => (
-            <Reveal key={item.name} delay={(i % 5) * 0.05} className="bg-ink-900">
-              <div className="h-full px-5 py-6">
-                <p className="font-display text-lg text-bone-100">{item.name}</p>
-                <p className="eyebrow mt-2 text-[0.625rem] text-bone-600">{item.series}</p>
-              </div>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {modelos.map((modelo, i) => (
+            <Reveal key={modelo.nome} delay={(i % 3) * 0.06}>
+              <article className="group flex h-full flex-col border border-ink-700 bg-ink-900 transition-colors hover:border-ember-500/70">
+                <div className="relative aspect-square overflow-hidden bg-ink-800">
+                  <img
+                    src={modelo.foto.sm}
+                    alt={`Modelo de ${modelo.nome}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-display text-lg text-bone-100">{modelo.nome}</h3>
+                  <p className="eyebrow mt-2 text-[0.625rem] text-bone-600">{modelo.serie}</p>
+                  <p className="mt-4 text-xs text-bone-600">
+                    Escultura de {modelo.escultor}
+                  </p>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="eyebrow mt-5 border border-ink-600 py-3 text-center text-bone-300 transition-colors group-hover:border-ember-500 group-hover:text-bone-100"
+                  >
+                    Encomendar
+                  </a>
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-6">
+        <div className="mt-10">
           <a
             href={whatsappUrl}
             target="_blank"

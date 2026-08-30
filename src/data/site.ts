@@ -1,24 +1,88 @@
+/** Monta os caminhos das 8 fotos geradas para cada pasta em public/fotos/. */
+function fotos(pasta: string, total = 8) {
+  return Array.from({ length: total }, (_, i) => {
+    const base = `/fotos/${pasta}/${pasta}-${String(i + 1).padStart(2, '0')}`
+    return { sm: `${base}-sm.webp`, full: `${base}.webp` }
+  })
+}
+
+export type Foto = { sm: string; full: string }
+
 export type Product = {
   slug: string
   name: string
   series: string
-  /** Pasta em public/images/ com as fotos da peça. Ainda não plugada no card. */
-  folder: string
+  fotos: Foto[]
   price?: string
   badges?: string[]
 }
 
-/** Peças que já têm foto no ateliê (public/images/<folder>). */
+/**
+ * Peças pintadas no ateliê. Só entram aqui as pastas cujas fotos são da
+ * bancada (1080x1350, sem marca d'água de terceiro).
+ */
 export const products: Product[] = [
-  { slug: 'frieren', name: 'Frieren', series: 'Sousou no Frieren', folder: 'frieren', badges: ['Sob encomenda'] },
-  { slug: 'sukuna', name: 'Sukuna', series: 'Jujutsu Kaisen', folder: 'sukuna', badges: ['Novidade', 'Sob encomenda'] },
-  { slug: 'madara', name: 'Madara Uchiha', series: 'Naruto Shippuden', folder: 'madara', badges: ['Sob encomenda'] },
-  { slug: 'link-adulto', name: 'Link Adulto', series: 'The Legend of Zelda', folder: 'link_adulto_zelda', badges: ['Sob encomenda'] },
-  { slug: 'link-crianca', name: 'Link Criança', series: 'The Legend of Zelda', folder: 'link_crianca_zelda', badges: ['Sob encomenda'] },
-  { slug: 'roy-mustang', name: 'Roy Mustang', series: 'Fullmetal Alchemist', folder: 'roy_mustang', badges: ['Sob encomenda'] },
-  { slug: 'mustang-ferido', name: 'Roy Mustang · Ferido', series: 'Fullmetal Alchemist', folder: 'mustang_dodoi', badges: ['Novidade', 'Sob encomenda'] },
-  { slug: 'qifrey', name: 'Qifrey', series: 'Witch Hat Atelier', folder: 'qifrey', badges: ['Sob encomenda'] },
+  {
+    slug: 'madara',
+    name: 'Madara Uchiha',
+    series: 'Naruto Shippuden',
+    fotos: fotos('madara'),
+    badges: ['Sob encomenda'],
+  },
+  {
+    slug: 'link-adulto',
+    name: 'Link Adulto',
+    series: 'The Legend of Zelda',
+    fotos: fotos('link_adulto_zelda'),
+    badges: ['Sob encomenda'],
+  },
+  {
+    slug: 'link-crianca',
+    name: 'Link Criança',
+    series: 'The Legend of Zelda',
+    fotos: fotos('link_crianca_zelda'),
+    badges: ['Novidade', 'Sob encomenda'],
+  },
 ]
+
+/**
+ * Modelos que podem ser impressos e pintados sob encomenda. As imagens são os
+ * renders promocionais dos escultores (marca d'água do Patreon deles visível),
+ * não fotos de peças nossas — por isso ficam na biblioteca e não no catálogo.
+ */
+export type Modelo = { nome: string; serie: string; escultor: string; foto: Foto }
+
+export const modelos: Modelo[] = [
+  { nome: 'Sukuna', serie: 'Jujutsu Kaisen', escultor: 'Michel Rodrigues', foto: fotos('sukuna')[0] },
+  { nome: 'Roy Mustang', serie: 'Fullmetal Alchemist', escultor: 'KAI', foto: fotos('roy_mustang')[0] },
+  { nome: 'Roy Mustang · Ferido', serie: 'Fullmetal Alchemist', escultor: 'KAI', foto: fotos('mustang_dodoi')[0] },
+  { nome: 'Qifrey', serie: 'Witch Hat Atelier', escultor: 'Bulkamancer', foto: fotos('qifrey')[0] },
+  // TODO: a pasta veio nomeada "frieren", mas a peça não é a Frieren. Confirmar com o Kevin.
+  { nome: 'A confirmar', serie: 'A confirmar', escultor: 'YoruNoAne', foto: fotos('frieren')[0] },
+]
+
+/** Peça de destaque do topo: foto do ateliê, sem marca d'água. */
+export const destaque = {
+  eyebrow: 'Naruto Shippuden · Peça em destaque',
+  titulo: 'Madara',
+  subtitulo: 'Uchiha',
+  texto:
+    'Armadura vermelha, gunbai nas costas e a foice cortando o ar em lâmina roxa. Impressa em resina, lixada peça por peça e pintada à mão até o azul da chakra ficar no ponto.',
+  foto: fotos('madara')[0],
+}
+
+/** Foto usada na seção "Sobre". */
+export const fotoAtelie = fotos('link_adulto_zelda')[2]
+
+/**
+ * Comparador antes/depois. Atenção: este par são os renders promocionais do
+ * escultor (marca d'água "PATREON.COM/BULKAMANCER" e crédito visíveis), não
+ * uma peça crua e pintada pela Narakaito. Kevin foi avisado.
+ */
+export const comparador = {
+  cru: '/fotos/comparador/sukuna-resina.webp',
+  pintado: '/fotos/comparador/sukuna-pintado.webp',
+}
 
 export const collections = [
   { title: 'Anime & Mangá', caption: 'Coleção', blurb: 'Os personagens que você acompanhou capítulo a capítulo.' },
@@ -31,19 +95,6 @@ export const differentials = [
   { title: 'Pintura à Mão', text: 'Aerografia e pincel, camada por camada. Nenhuma peça sai igual à outra.' },
   { title: 'Chega Inteira', text: 'Caixa reforçada, berço interno e proteção individual para viajar o Brasil sem susto.' },
   { title: 'Fala Direto com o Lab', text: 'Do orçamento à entrega, você conversa com quem está pintando a sua peça.' },
-]
-
-export const library = [
-  { name: 'Frieren', series: 'Sousou no Frieren' },
-  { name: 'Sukuna', series: 'Jujutsu Kaisen' },
-  { name: 'Madara', series: 'Naruto' },
-  { name: 'Link', series: 'The Legend of Zelda' },
-  { name: 'Roy Mustang', series: 'Fullmetal Alchemist' },
-  { name: 'Qifrey', series: 'Witch Hat Atelier' },
-  { name: 'Gojo', series: 'Jujutsu Kaisen' },
-  { name: 'Zoro', series: 'One Piece' },
-  { name: 'Aloy', series: 'Horizon' },
-  { name: 'Geralt', series: 'The Witcher' },
 ]
 
 export const equipment = [

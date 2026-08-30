@@ -11,12 +11,12 @@ export default function Catalog() {
         <SectionTitle
           eyebrow="Figures em destaque"
           title="Saindo do ateliê"
-          blurb="Peças que já passaram pela nossa bancada. Todas sob encomenda: você escolhe, a gente imprime, pinta e envia."
+          blurb="Peças que já passaram pela nossa bancada, fotografadas depois de prontas. Todas sob encomenda."
         />
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, i) => (
-            <Reveal key={product.slug} delay={(i % 4) * 0.06}>
+            <Reveal key={product.slug} delay={(i % 3) * 0.06}>
               <ProductCard product={product} />
             </Reveal>
           ))}
