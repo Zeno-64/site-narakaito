@@ -104,7 +104,7 @@ export default function Hero() {
           >
             <span aria-hidden>
               <span className="block min-h-[1.05em]">{linha1}</span>
-              <span className="block min-h-[1.05em] text-ember-400">
+              <span className="brilho-ember block min-h-[1.05em] text-ember-400">
                 {linha2}
                 {digitado.length < nomeCompleto.length && (
                   <span className="ml-1 inline-block w-[0.06em] animate-pulse bg-ember-400 align-baseline text-transparent">
