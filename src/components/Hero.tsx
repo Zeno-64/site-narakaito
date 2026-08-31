@@ -76,15 +76,11 @@ export default function Hero() {
       onFocusCapture={() => setPausado(true)}
       onBlurCapture={() => setPausado(false)}
     >
+      {/* Antes havia dois véus radiais vermelho/laranja aqui (rgba(176,51,44)
+          e rgba(224,112,79)) — tingiam a seção inteira de vermelho. Um véu
+          preto sobre o ink-950 (#070605), que já é quase preto, não muda
+          nada visualmente, então o fundo virou só a cor sólida. */}
       <div aria-hidden className="absolute inset-0 bg-ink-950" />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(115%_85%_at_75%_42%,rgba(176,51,44,0.40),transparent_63%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(70%_60%_at_18%_100%,rgba(224,112,79,0.14),transparent_70%)]"
-      />
       <Particles />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1fr_1fr] lg:gap-4 lg:px-8 lg:py-24">
