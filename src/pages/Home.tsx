@@ -5,7 +5,6 @@ import Atelier from '../components/Atelier'
 import BeforeAfter from '../components/BeforeAfter'
 import CaixaReveal from '../components/CaixaReveal'
 import Catalog from '../components/Catalog'
-import Collections from '../components/Collections'
 import Differentials from '../components/Differentials'
 import Faq from '../components/Faq'
 import Hero from '../components/Hero'
@@ -30,7 +29,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Collections />
       <Differentials />
       <Catalog />
       <CaixaReveal />
