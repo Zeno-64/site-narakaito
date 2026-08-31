@@ -1,6 +1,21 @@
-import { useRef } from 'react'
-import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from 'framer-motion'
+import { useRef, useState } from 'react'
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
 import { products } from '../data/site'
+
+// Variável de módulo, não sessionStorage: sessionStorage sobrevive a um F5,
+// e o pedido era exatamente o contrário -- "só volta a funcionar com
+// refresh". Uma variável aqui fora do componente mantém o valor entre
+// navegações internas da SPA (o módulo não é recarregado ao trocar de rota),
+// mas volta a `false` sozinha em qualquer recarregamento de página, porque
+// nesse caso o bundle inteiro é reexecutado do zero.
+let jaAbriuNestaCarga = false
 
 /**
  * Caixa em CSS 3D que abre conforme o scroll e revela a peça.
@@ -21,6 +36,17 @@ export default function CaixaReveal() {
   // suaviza o vínculo com o scroll para o movimento não ficar granulado
   const p = useSpring(scrollYProgress, { stiffness: 80, damping: 22, mass: 0.4 })
 
+  // Uma vez vista, a animação não repete: ao navegar pra uma página de peça
+  // e voltar pra home, essa seção reaparece já aberta, sem obrigar a rolar
+  // de novo pelos ~4.6 telas da revelação. Só reinicia com F5.
+  const [jaAbriu, setJaAbriu] = useState(jaAbriuNestaCarga)
+
+  useMotionValueEvent(p, 'change', (v) => {
+    if (v < 0.8 || jaAbriuNestaCarga) return
+    jaAbriuNestaCarga = true
+    setJaAbriu(true)
+  })
+
   // Linha do tempo. O trecho final (0.80 -> 1) repete os mesmos valores de
   // propósito: é a pausa em que a página fica presa sem nada se mexer.
   const tampa = useTransform(p, [0.03, 0.34], [-90, 18])
@@ -29,8 +55,12 @@ export default function CaixaReveal() {
   const giro = useTransform(p, [0, 0.62, 1], [-16, 4, 4])
 
   const pecaOpacidade = useTransform(p, [0.24, 0.38], [0, 1])
-  const pecaSobe = useTransform(p, [0.24, 0.52, 0.78, 1], [30, -150, -104, -104])
-  const pecaEscala = useTransform(p, [0.24, 0.52, 0.78, 1], [0.82, 1, 1.52, 1.52])
+  // Escala e subida bem menores que antes (eram 1.52x / -104px): com a
+  // origem da transformação na base da peça, escalar pra cima faz a
+  // imagem crescer só pelo topo -- em 1.52x ela furava o teto da tela e
+  // sobrava um vão enorme até o texto embaixo.
+  const pecaSobe = useTransform(p, [0.24, 0.52, 0.78, 1], [30, -70, -40, -40])
+  const pecaEscala = useTransform(p, [0.24, 0.52, 0.78, 1], [0.82, 1, 1.15, 1.15])
 
   // a caixa se dissolve depois que a peça já saiu de dentro dela
   const caixaOpacidade = useTransform(p, [0.54, 0.74], [1, 0])
@@ -47,6 +77,35 @@ export default function CaixaReveal() {
   const pecaTransform = useMotionTemplate`translate(-50%, 0) rotateX(-${cena}deg) translateY(${pecaSobe}px) scale(${pecaEscala})`
 
   const foto = products[0].fotos[6] ?? products[0].fotos[0]
+
+  // Versão estática: mesmo visual do fim da revelação (peça grande, caixa já
+  // sumida), mas em fluxo normal de página -- sem os ~4.6 telas de altura
+  // que só existiam para dar espaço de rolagem à animação.
+  if (jaAbriu) {
+    return (
+      <section className="relative overflow-hidden bg-ink-950 py-24 lg:py-28">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_45%_at_50%_40%,rgba(176,51,44,0.45),transparent_70%)]"
+        />
+        <div className="relative mx-auto flex max-w-md flex-col items-center px-5 text-center">
+          <img
+            src={foto.full}
+            alt={`${products[0].nome} — peça pintada à mão`}
+            className="foto-sangrada w-full max-w-xs"
+          />
+          <p className="eyebrow mt-10 text-ember-300">Chega assim</p>
+          <h2 className="mt-4 font-display text-3xl text-bone-100 md:text-4xl">
+            Caixa reforçada, peça inteira
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-bone-500">
+            Berço interno, proteção individual e um lacre que só você abre. Do ateliê até a
+            sua estante, sem sustos no caminho.
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section ref={alvo} className="relative h-[460vh] bg-ink-950">
@@ -92,7 +151,7 @@ export default function CaixaReveal() {
 
         <motion.div
           style={{ opacity: textoOp, y: textoY }}
-          className="absolute inset-x-0 bottom-12 z-10 mx-auto max-w-md px-5 text-center"
+          className="absolute inset-x-0 bottom-20 z-10 mx-auto max-w-md px-5 text-center"
         >
           <p className="eyebrow text-ember-300">Chega assim</p>
           <h2 className="mt-4 font-display text-3xl text-bone-100 md:text-4xl">
