@@ -99,7 +99,7 @@ export default function Hero() {
           </AnimatePresence>
 
           <h1
-            className="mt-6 font-display text-5xl leading-[1.05] text-bone-100 md:text-6xl lg:text-7xl"
+            className="mt-6 font-display text-5xl font-normal leading-[1.05] tracking-[0.02em] text-bone-100 md:text-6xl lg:text-7xl"
             aria-label={`${peca.titulo} ${peca.subtitulo}`}
           >
             <span aria-hidden>
@@ -114,19 +114,6 @@ export default function Hero() {
               </span>
             </span>
           </h1>
-
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={`texto-${ativo}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.45, delay: 0.1 }}
-              className="mt-7 max-w-lg text-base leading-relaxed text-bone-300 md:text-lg"
-            >
-              {peca.texto}
-            </motion.p>
-          </AnimatePresence>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
@@ -143,8 +130,10 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Barra que carrega até trocar de peça */}
-          <div className="mt-12 flex max-w-md items-center gap-3">
+          {/* Seletor de peça: bolinhas padrão de carrossel. O tempo até
+              trocar de peça não mora mais aqui — virou a linha de luz na
+              divisória de baixo da seção (ver abaixo). */}
+          <div className="mt-12 flex items-center gap-3">
             {destaques.map((d, i) => (
               <button
                 key={d.titulo + d.subtitulo}
@@ -152,16 +141,15 @@ export default function Hero() {
                 onClick={() => irPara(i)}
                 aria-label={`Ver ${d.titulo} ${d.subtitulo}`}
                 aria-current={i === ativo}
-                className="group h-4 flex-1"
+                className="group p-1.5"
               >
-                <span className="block h-px w-full bg-ink-600 transition-colors group-hover:bg-bone-600">
-                  <span
-                    className="block h-px bg-ember-400"
-                    style={{
-                      width: i < ativo ? '100%' : i === ativo ? `${progresso * 100}%` : '0%',
-                    }}
-                  />
-                </span>
+                <span
+                  className={`block h-2 w-2 rounded-full transition-colors ${
+                    i === ativo
+                      ? 'bg-ember-400 shadow-[0_0_6px_rgba(176,51,44,0.7)]'
+                      : 'bg-ink-600 group-hover:bg-bone-600'
+                  }`}
+                />
               </button>
             ))}
           </div>
@@ -192,6 +180,17 @@ export default function Hero() {
             </AnimatePresence>
           </div>
         </div>
+      </div>
+
+      {/* Marcador de tempo do carrossel: uma linha de luz vermelha bem na
+          divisória entre o hero (ink-950) e a próxima seção, em vez das
+          três barras que ficavam no meio do conteúdo. Enche da esquerda
+          pra direita ao longo dos 7s de cada peça e reinicia na troca. */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 z-10 h-px bg-ink-800">
+        <div
+          className="h-full bg-ember-400 shadow-[0_0_8px_2px_rgba(176,51,44,0.55)] transition-[width]"
+          style={{ width: `${progresso * 100}%`, transitionDuration: progresso === 0 ? '0ms' : '80ms' }}
+        />
       </div>
     </section>
   )
