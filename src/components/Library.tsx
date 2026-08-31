@@ -10,7 +10,7 @@ export default function Library() {
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <SectionTitle
           eyebrow="Biblioteca de modelos"
-          title="Escolhe o personagem que a gente imprime e pinta"
+          title="Escolha um personagem!"
           blurb="Estes são modelos disponíveis para encomenda. As imagens são as artes de divulgação dos escultores que assinam cada escultura — a sua peça é impressa e pintada aqui no ateliê."
         />
 

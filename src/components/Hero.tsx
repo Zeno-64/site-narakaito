@@ -129,30 +129,6 @@ export default function Hero() {
               Ver o catálogo
             </a>
           </div>
-
-          {/* Seletor de peça: bolinhas padrão de carrossel. O tempo até
-              trocar de peça não mora mais aqui — virou a linha de luz na
-              divisória de baixo da seção (ver abaixo). */}
-          <div className="mt-12 flex items-center gap-3">
-            {destaques.map((d, i) => (
-              <button
-                key={d.titulo + d.subtitulo}
-                type="button"
-                onClick={() => irPara(i)}
-                aria-label={`Ver ${d.titulo} ${d.subtitulo}`}
-                aria-current={i === ativo}
-                className="group p-1.5"
-              >
-                <span
-                  className={`block h-2 w-2 rounded-full transition-colors ${
-                    i === ativo
-                      ? 'bg-ember-400 shadow-[0_0_6px_rgba(176,51,44,0.7)]'
-                      : 'bg-ink-600 group-hover:bg-bone-600'
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className="relative order-1 lg:order-2">
@@ -182,15 +158,29 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Marcador de tempo do carrossel: uma linha de luz vermelha bem na
-          divisória entre o hero (ink-950) e a próxima seção, em vez das
-          três barras que ficavam no meio do conteúdo. Enche da esquerda
-          pra direita ao longo dos 7s de cada peça e reinicia na troca. */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 z-10 h-px bg-ink-800">
-        <div
-          className="h-full bg-ember-400 shadow-[0_0_8px_2px_rgba(176,51,44,0.55)] transition-[width]"
-          style={{ width: `${progresso * 100}%`, transitionDuration: progresso === 0 ? '0ms' : '80ms' }}
-        />
+      {/* Seletor de peça: bolinhas padrão de carrossel, embaixo e centradas
+          na seção inteira (não mais dentro da coluna de texto). Sem
+          indicador de tempo visível — troca sozinha a cada 7s por baixo
+          dos panos, o clique aqui só pula direto pra peça escolhida. */}
+      <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center gap-3">
+        {destaques.map((d, i) => (
+          <button
+            key={d.titulo + d.subtitulo}
+            type="button"
+            onClick={() => irPara(i)}
+            aria-label={`Ver ${d.titulo} ${d.subtitulo}`}
+            aria-current={i === ativo}
+            className="group p-1.5"
+          >
+            <span
+              className={`block h-2 w-2 rounded-full transition-colors ${
+                i === ativo
+                  ? 'bg-ember-400 shadow-[0_0_6px_rgba(176,51,44,0.7)]'
+                  : 'bg-ink-600 group-hover:bg-bone-600'
+              }`}
+            />
+          </button>
+        ))}
       </div>
     </section>
   )

@@ -136,7 +136,13 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     origem: 'modelo',
     escultor: 'KAI',
-    fotos: fotos('mustang_dodoi', 8),
+    // A 01 é o render de pré-suporte (peça em cores separadas, sem pintura) —
+    // ruim como capa. Invertida com a 02, que é a arte final, para a capa
+    // (catálogo, biblioteca e galeria da página) puxar a foto certa.
+    fotos: (() => {
+      const [primeira, segunda, ...resto] = fotos('mustang_dodoi', 8)
+      return [segunda, primeira, ...resto]
+    })(),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'A versão marcada pela batalha, para quem prefere a cena dramática.',
     paragrafos: [
