@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { acharPeca, pecas, whatsappPeca } from '../data/site'
 import Reveal from '../components/Reveal'
+import { definirMeta } from '../lib/meta'
 
 const etapas = [
   { n: '01', titulo: 'Você escolhe', texto: 'Manda a peça no WhatsApp com as customizações que quiser.' },
@@ -22,7 +23,11 @@ export default function Produto() {
   }, [slug])
 
   useEffect(() => {
-    if (peca) document.title = `${peca.nome} · Narakaito Lab`
+    if (!peca) return
+    definirMeta(
+      `${peca.nome} — ${peca.serie} em resina pintada à mão · Narakaito Lab`,
+      `${peca.chamada} Impressa em resina premium e pintada à mão sob encomenda, com envio para todo o Brasil.`,
+    )
   }, [peca])
 
   if (!peca) {
