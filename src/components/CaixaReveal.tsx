@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import {
   motion,
   useMotionTemplate,
@@ -39,12 +39,17 @@ export default function CaixaReveal() {
   // Uma vez vista, a animação não repete: ao navegar pra uma página de peça
   // e voltar pra home, essa seção reaparece já aberta, sem obrigar a rolar
   // de novo pelos ~4.6 telas da revelação. Só reinicia com F5.
-  const [jaAbriu, setJaAbriu] = useState(jaAbriuNestaCarga)
+  //
+  // A decisão é tomada UMA vez, na montagem, e não é estado reativo de
+  // propósito: trocar para a versão estática no meio da rolagem encolhia a
+  // seção de 460vh para ~1 tela de uma vez, a página inteira subia debaixo do
+  // usuário e o scroll caía lá embaixo, depois da revelação. Marcar o flag
+  // sem re-renderizar deixa a animação terminar inteira nesta visita.
+  const jaAbriu = useRef(jaAbriuNestaCarga).current
 
   useMotionValueEvent(p, 'change', (v) => {
-    if (v < 0.8 || jaAbriuNestaCarga) return
+    if (v < 0.8) return
     jaAbriuNestaCarga = true
-    setJaAbriu(true)
   })
 
   // Linha do tempo. O trecho final (0.80 -> 1) repete os mesmos valores de
