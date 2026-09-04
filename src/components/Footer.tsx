@@ -11,9 +11,9 @@ export default function Footer() {
           <img
             src="/images/logo-full.png"
             alt="Narakaito Lab"
-            className="h-16 w-auto"
-            width={617}
-            height={606}
+            className="h-28 w-auto"
+            width={752}
+            height={748}
           />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-bone-500">
             Colecionáveis em resina premium, impressos em alta resolução e pintados à mão,

@@ -43,15 +43,15 @@ export default function Header() {
             alt=""
             aria-hidden
             className="h-11 w-auto md:h-12"
-            width={512}
-            height={512}
+            width={366}
+            height={628}
           />
           <img
             src="/images/logo-wordmark.png"
             alt="Narakaito Lab"
-            className="ml-3 h-6 w-auto md:h-7"
-            width={593}
-            height={124}
+            className="ml-3 h-4 w-auto md:h-[18px]"
+            width={752}
+            height={81}
           />
         </Link>
 
