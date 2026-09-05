@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { destaques, duracaoDestaque } from '../data/site'
+import { useArrastoHorizontal } from '../lib/arrasto'
 import Particles from './Particles'
 
 /** Escreve o texto letra por letra. Devolve o trecho já digitado. */
@@ -66,6 +67,10 @@ export default function Hero() {
     setAtivo(i)
     setProgresso(0)
   }
+
+  const arrasto = useArrastoHorizontal({
+    aoArrastar: (d) => irPara((ativo + d + destaques.length) % destaques.length),
+  })
 
   return (
     <section
@@ -165,7 +170,10 @@ export default function Hero() {
         <div className="relative order-1 lg:order-2">
           {/* Sem mode="wait": a foto nova entra por cima enquanto a antiga sai,
               senão o hero fica sem imagem nenhuma durante a troca. */}
-          <div className="relative mx-auto aspect-4/5 h-[min(52svh,40rem)] w-[min(41.6svh,32rem)] max-w-full">
+          <div
+            className="relative mx-auto aspect-4/5 h-[min(52svh,40rem)] w-[min(41.6svh,32rem)] max-w-full touch-pan-y select-none"
+            {...arrasto}
+          >
             <AnimatePresence>
               <motion.div
                 key={`foto-${ativo}`}
@@ -181,6 +189,7 @@ export default function Hero() {
                   src={peca.foto.full}
                   alt={`${peca.titulo} ${peca.subtitulo} — peça pintada à mão`}
                   className="foto-sangrada h-full w-full object-cover"
+                  draggable={false}
                   fetchPriority="high"
                 />
               </motion.div>

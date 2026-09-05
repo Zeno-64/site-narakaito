@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { acharPeca, pecas, whatsappPeca } from '../data/site'
 import Reveal from '../components/Reveal'
+import { useArrastoHorizontal } from '../lib/arrasto'
 import { definirMeta } from '../lib/meta'
 
 const etapas = [
@@ -16,6 +17,13 @@ export default function Produto() {
   const { slug } = useParams()
   const peca = acharPeca(slug)
   const [ativa, setAtiva] = useState(0)
+
+  // `peca` pode ser undefined (rota 404), e hook não pode ficar atrás de
+  // early return -- daí o total sair de um encadeamento opcional.
+  const totalFotos = peca?.fotos.length ?? 0
+  const arrasto = useArrastoHorizontal({
+    aoArrastar: (d) => setAtiva((v) => (v + d + totalFotos) % totalFotos),
+  })
 
   useEffect(() => {
     setAtiva(0)
@@ -80,12 +88,14 @@ export default function Produto() {
             initial={{ opacity: 0.4 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.35 }}
-            className="relative aspect-4/5 overflow-hidden border border-ink-700 bg-ink-850"
+            className="relative aspect-4/5 touch-pan-y select-none overflow-hidden border border-ink-700 bg-ink-850"
+            {...arrasto}
           >
             <img
               src={peca.fotos[ativa].full}
               alt={`${peca.nome} — foto ${ativa + 1} de ${peca.fotos.length}`}
               className="h-full w-full object-cover"
+              draggable={false}
               fetchPriority="high"
             />
             {peca.badges && (

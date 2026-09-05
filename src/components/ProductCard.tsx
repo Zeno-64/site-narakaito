@@ -1,22 +1,28 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Peca } from '../data/site'
+import { useArrastoHorizontal } from '../lib/arrasto'
 
 export default function ProductCard({ product }: { product: Peca }) {
   const [i, setI] = useState(0)
   const total = product.fotos.length
 
   const passar = (delta: number) => setI((v) => (v + delta + total) % total)
+  const arrasto = useArrastoHorizontal({ aoArrastar: passar })
 
   return (
     <article className="group flex h-full flex-col border border-ink-700 bg-ink-850 transition-colors hover:border-ember-500/70">
-      <div className="relative aspect-4/5 overflow-hidden bg-ink-800">
+      <div
+        className="relative aspect-4/5 touch-pan-y select-none overflow-hidden bg-ink-800"
+        {...arrasto}
+      >
         {product.fotos.map((foto, idx) => (
           <img
             key={foto.sm}
             src={foto.sm}
             alt={`${product.nome} — foto ${idx + 1}`}
             loading={idx === 0 ? 'eager' : 'lazy'}
+            draggable={false}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
               idx === i ? 'opacity-100' : 'opacity-0'
             }`}
