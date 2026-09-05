@@ -7,7 +7,7 @@ const nav = [
   { label: 'Início', href: '/' },
   { label: 'Coleções', href: '/#colecoes' },
   { label: 'Catálogo', href: '/#catalogo' },
-  { label: 'Ateliê', href: '/#atelie' },
+  { label: 'O Lab', href: '/#lab' },
   { label: 'Sobre', href: '/#sobre' },
   { label: 'FAQ', href: '/#faq' },
 ]

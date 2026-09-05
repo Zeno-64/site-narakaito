@@ -34,11 +34,11 @@ export default function CaixaReveal() {
   const { scrollYProgress } = useScroll({ target: alvo, offset: ['start start', 'end end'] })
 
   // suaviza o vínculo com o scroll para o movimento não ficar granulado
-  const p = useSpring(scrollYProgress, { stiffness: 80, damping: 22, mass: 0.4 })
+  const p = useSpring(scrollYProgress, { stiffness: 140, damping: 26, mass: 0.25 })
 
   // Uma vez vista, a animação não repete: ao navegar pra uma página de peça
   // e voltar pra home, essa seção reaparece já aberta, sem obrigar a rolar
-  // de novo pelos ~4.6 telas da revelação. Só reinicia com F5.
+  // de novo pela revelação inteira. Só reinicia com F5.
   //
   // A decisão é tomada UMA vez, na montagem, e não é estado reativo de
   // propósito: trocar para a versão estática no meio da rolagem encolhia a
@@ -48,32 +48,32 @@ export default function CaixaReveal() {
   const jaAbriu = useRef(jaAbriuNestaCarga).current
 
   useMotionValueEvent(p, 'change', (v) => {
-    if (v < 0.8) return
+    if (v < 0.72) return
     jaAbriuNestaCarga = true
   })
 
-  // Linha do tempo. O trecho final (0.80 -> 1) repete os mesmos valores de
-  // propósito: é a pausa em que a página fica presa sem nada se mexer.
-  const tampa = useTransform(p, [0.03, 0.34], [-90, 18])
-  const abaFrente = useTransform(p, [0.03, 0.34], [-90, -8])
-  const cena = useTransform(p, [0, 0.62, 1], [INCLINACAO, 50, 50])
-  const giro = useTransform(p, [0, 0.62, 1], [-16, 4, 4])
+  // Linha do tempo. Tudo acontece antes de 0.8; o resto é a folga que segura
+  // a cena montada por um instante antes de a página voltar a rolar.
+  const tampa = useTransform(p, [0.02, 0.22], [-90, 18])
+  const abaFrente = useTransform(p, [0.02, 0.22], [-90, -8])
+  const cena = useTransform(p, [0, 0.46, 1], [INCLINACAO, 50, 50])
+  const giro = useTransform(p, [0, 0.46, 1], [-16, 4, 4])
 
-  const pecaOpacidade = useTransform(p, [0.24, 0.38], [0, 1])
+  const pecaOpacidade = useTransform(p, [0.16, 0.28], [0, 1])
   // Escala e subida bem menores que antes (eram 1.52x / -104px): com a
   // origem da transformação na base da peça, escalar pra cima faz a
   // imagem crescer só pelo topo -- em 1.52x ela furava o teto da tela e
   // sobrava um vão enorme até o texto embaixo.
-  const pecaSobe = useTransform(p, [0.24, 0.52, 0.78, 1], [30, -70, -40, -40])
-  const pecaEscala = useTransform(p, [0.24, 0.52, 0.78, 1], [0.82, 1, 1.15, 1.15])
+  const pecaSobe = useTransform(p, [0.16, 0.38, 0.62, 1], [30, -70, -40, -40])
+  const pecaEscala = useTransform(p, [0.16, 0.38, 0.62, 1], [0.82, 1, 1.15, 1.15])
 
   // a caixa se dissolve depois que a peça já saiu de dentro dela
-  const caixaOpacidade = useTransform(p, [0.54, 0.74], [1, 0])
-  const caixaDesce = useTransform(p, [0.54, 0.74], [0, 40])
+  const caixaOpacidade = useTransform(p, [0.4, 0.56], [1, 0])
+  const caixaDesce = useTransform(p, [0.4, 0.56], [0, 40])
 
-  const luz = useTransform(p, [0.22, 0.5], [0, 1])
-  const textoOp = useTransform(p, [0.80, 0.92], [0, 1])
-  const textoY = useTransform(p, [0.80, 0.92], [20, 0])
+  const luz = useTransform(p, [0.14, 0.36], [0, 1])
+  const textoOp = useTransform(p, [0.58, 0.72], [0, 1])
+  const textoY = useTransform(p, [0.58, 0.72], [20, 0])
 
   const cenaTransform = useMotionTemplate`rotateX(${cena}deg) rotateZ(${giro}deg)`
   const corpoTransform = useMotionTemplate`translateY(${caixaDesce}px)`
@@ -84,7 +84,7 @@ export default function CaixaReveal() {
   const foto = products[0].fotos[6] ?? products[0].fotos[0]
 
   // Versão estática: mesmo visual do fim da revelação (peça grande, caixa já
-  // sumida), mas em fluxo normal de página -- sem os ~4.6 telas de altura
+  // sumida), mas em fluxo normal de página -- sem as telas de altura extra
   // que só existiam para dar espaço de rolagem à animação.
   if (jaAbriu) {
     return (
@@ -101,11 +101,12 @@ export default function CaixaReveal() {
           />
           <p className="eyebrow mt-10 text-ember-300">Chega assim</p>
           <h2 className="mt-4 font-display text-3xl text-bone-100 md:text-4xl">
-            Caixa reforçada, peça inteira
+            Da bancada para a sua estante
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-bone-500">
-            Berço interno, proteção individual e um lacre que só você abre. Do ateliê até a
-            sua estante, sem sustos no caminho.
+            Antes de despachar, a gente fotografa a peça pronta e manda o código de
+            rastreio. Deu problema no caminho? Manda foto na hora de abrir que a gente
+            resolve.
           </p>
         </div>
       </section>
@@ -113,7 +114,7 @@ export default function CaixaReveal() {
   }
 
   return (
-    <section ref={alvo} className="relative h-[460vh] bg-ink-950">
+    <section ref={alvo} className="relative h-[240vh] bg-ink-950">
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
         <motion.div
           aria-hidden
@@ -160,11 +161,12 @@ export default function CaixaReveal() {
         >
           <p className="eyebrow text-ember-300">Chega assim</p>
           <h2 className="mt-4 font-display text-3xl text-bone-100 md:text-4xl">
-            Caixa reforçada, peça inteira
+            Da bancada para a sua estante
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-bone-500">
-            Berço interno, proteção individual e um lacre que só você abre. Do ateliê até a
-            sua estante, sem sustos no caminho.
+            Antes de despachar, a gente fotografa a peça pronta e manda o código de
+            rastreio. Deu problema no caminho? Manda foto na hora de abrir que a gente
+            resolve.
           </p>
         </motion.div>
       </div>

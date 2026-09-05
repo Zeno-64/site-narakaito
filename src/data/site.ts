@@ -13,8 +13,8 @@ export type Peca = {
   nome: string
   serie: string
   fotos: Foto[]
-  /** 'atelie' = fotos da nossa bancada. 'modelo' = arte de divulgação do escultor. */
-  origem: 'atelie' | 'modelo'
+  /** 'lab' = fotos da nossa bancada. 'modelo' = arte de divulgação do escultor. */
+  origem: 'lab' | 'modelo'
   escultor?: string
   chamada: string
   paragrafos: string[]
@@ -37,8 +37,8 @@ const fichaComum = [
 const incluiComum = [
   'A peça montada, pintada e selada',
   'Base cenário já fixada',
-  'Caixa reforçada com berço interno',
   'Fotos da peça pronta antes do envio',
+  'Envio com código de rastreio para todo o Brasil',
 ]
 
 const alturaEscala = [
@@ -51,7 +51,7 @@ export const pecas: Peca[] = [
     slug: 'madara-uchiha',
     nome: 'Madara Uchiha',
     serie: 'Naruto Shippuden',
-    origem: 'atelie',
+    origem: 'lab',
     fotos: fotos('madara', 9),
     badges: ['Sob encomenda'],
     chamada: 'O Uchiha em pose de combate, com a foice em arco e a chakra acesa.',
@@ -67,7 +67,7 @@ export const pecas: Peca[] = [
     slug: 'link-adulto',
     nome: 'Link Adulto',
     serie: 'The Legend of Zelda',
-    origem: 'atelie',
+    origem: 'lab',
     fotos: fotos('link_adulto_zelda', 11),
     badges: ['Sob encomenda'],
     chamada: 'Túnica verde, escudo hyliano e a Master Sword sacada junto da árvore.',
@@ -83,7 +83,7 @@ export const pecas: Peca[] = [
     slug: 'link-crianca',
     nome: 'Link Criança',
     serie: 'The Legend of Zelda',
-    origem: 'atelie',
+    origem: 'lab',
     fotos: fotos('link_crianca_zelda', 12),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'Sentado no toco, ocarina nas mãos e as notas saindo em luz azul.',
@@ -104,14 +104,19 @@ export const pecas: Peca[] = [
     serie: 'Jujutsu Kaisen',
     origem: 'modelo',
     escultor: 'Michel Rodrigues',
-    fotos: fotos('sukuna', 8),
+    fotos: fotos('sukuna', 7),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'O Rei das Maldições sobre o crânio, com o fogo subindo da base.',
     paragrafos: [
       'Escultura com muita pele exposta, o que torna a peça um exercício de degradê: o tom precisa variar do músculo à sombra sem marcar transição. As marcas pretas do rosto e do tronco entram depois, à mão livre, e é onde a peça ganha ou perde a semelhança.',
+      'As quatro marcas do rosto, os dois pares de olhos e as bocas extras do tronco entram à mão livre, depois da pele pronta. Errar a espessura dessas linhas é errar o Sukuna: é o traço que faz o Rei das Maldições parecer ele mesmo.',
       'A base traz crânios, a arcada e as chamas esculpidas, que pintamos em laranja quente com as pontas puxadas ao branco para simular incandescência.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: [
+      { rotulo: 'Altura', valor: '330 mm' },
+      { rotulo: 'Base', valor: '211 × 229 mm' },
+      ...fichaComum,
+    ],
     inclui: incluiComum,
   },
   {
@@ -120,14 +125,19 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     origem: 'modelo',
     escultor: 'KAI',
-    fotos: fotos('roy_mustang', 8),
+    fotos: fotos('roy_mustang', 7),
     badges: ['Sob encomenda'],
     chamada: 'O Alquimista de Chamas com o estalo aceso na ponta dos dedos.',
     paragrafos: [
       'O uniforme azul-escuro é o desafio: azul escuro engole detalhe se for pintado chapado, então vai em camadas, com realce nas dobras e nos vivos dourados do casaco.',
-      'O círculo no chão e a chama na mão são pintados como fonte de luz, com o calor subindo pelo tecido — é o que amarra a peça e faz o fogo parecer aceso de verdade.',
+      'A luva de ignição da mão direita é o detalhe que define o personagem: o círculo de transmutação bordado nela sai pintado à mão, fio a fio, e a chama que nasce do estalo é feita em degradê do branco ao laranja para parecer temperatura, não tinta.',
+      'O fogo da base sobe pelo casaco esvoaçante e ilumina o tecido de baixo para cima — é essa luz pintada que amarra a peça e faz o Alquimista de Chamas parecer no meio de um combate, e não posando.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: [
+      { rotulo: 'Altura', valor: '233 mm' },
+      { rotulo: 'Base', valor: '164 × 209 mm' },
+      ...fichaComum,
+    ],
     inclui: incluiComum,
   },
   {
@@ -136,20 +146,19 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     origem: 'modelo',
     escultor: 'KAI',
-    // A 01 é o render de pré-suporte (peça em cores separadas, sem pintura) —
-    // ruim como capa. Invertida com a 02, que é a arte final, para a capa
-    // (catálogo, biblioteca e galeria da página) puxar a foto certa.
-    fotos: (() => {
-      const [primeira, segunda, ...resto] = fotos('mustang_dodoi', 8)
-      return [segunda, primeira, ...resto]
-    })(),
+    fotos: fotos('mustang_dodoi', 7),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'A versão marcada pela batalha, para quem prefere a cena dramática.',
     paragrafos: [
       'Variante da escultura anterior, com o dano da batalha esculpido. Pede uma pintura mais suja: o uniforme perde o brilho, ganha poeira nas partes baixas e o tecido rasgado recebe fiapos pintados um a um.',
+      'O uniforme rasgado deixa o torso à mostra, e é aí que a peça se decide: o hematoma e o sangue seco pedem camadas transparentes por cima da pele já pronta, senão viram uma mancha vermelha chapada.',
       'Funciona especialmente bem ao lado da versão íntegra, formando um par que conta a passagem da luta na estante.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: [
+      { rotulo: 'Altura', valor: '237 mm' },
+      { rotulo: 'Base', valor: '132 × 161 mm' },
+      ...fichaComum,
+    ],
     inclui: incluiComum,
   },
   {
@@ -163,7 +172,24 @@ export const pecas: Peca[] = [
     chamada: 'O mago de chapéu com o manto em movimento e a paleta mais colorida do catálogo.',
     paragrafos: [
       'A peça mais colorida que oferecemos, e uma das mais divertidas de pintar: verde-água, roxo, amarelo e rosa dividem a mesma escultura sem nenhuma poder vazar na outra. Exige máscara e paciência entre camadas.',
-      'O manto em movimento e a base circular com relevo dão bastante superfície para trabalhar sombra, o que faz a peça render muito bem em foto e em estante iluminada.',
+      'O chapéu pontudo e o manto em movimento dão bastante superfície para trabalhar sombra, e o caldeirão suspenso no aro da base — com a água e as folhas dentro — é uma segunda cena inteira, pintada separada antes de a peça fechar.',
+    ],
+    ficha: [...alturaEscala, ...fichaComum],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'frieren',
+    nome: 'Frieren',
+    serie: 'Frieren e a Jornada para o Além',
+    origem: 'modelo',
+    escultor: 'YoruNoAne',
+    fotos: fotos('frieren', 7),
+    badges: ['Sob encomenda'],
+    chamada: 'A maga elfa com coroa de flores, cajado em arco e o manto aberto no vento.',
+    paragrafos: [
+      'É a peça de paleta mais clara que oferecemos, e por isso a mais implacável: branco e prata não escondem nada, então cada risco de lixa precisa sumir antes da primeira camada de tinta. O manto e a saia são superfície lisa quase inteira — só o acabamento sustenta.',
+      'O cabelo prateado sai em duas marias longas que atravessam a composição. Vai com base fria e realce quase branco nas mechas de cima, para o volume aparecer mesmo de longe, e a coroa de flores entra depois, flor por flor, como o único ponto de cor quente da peça.',
+      'O cajado desenha um arco por trás do corpo, e os anéis ficam em resina translúcida, sem pigmento opaco, para acender com a luz do ambiente — o mesmo tratamento que damos à chakra do Madara e às notas do Link criança.',
     ],
     ficha: [
       { rotulo: 'Altura', valor: '276 mm' },
@@ -173,23 +199,142 @@ export const pecas: Peca[] = [
     inclui: incluiComum,
   },
   {
-    slug: 'peca-a-confirmar',
-    nome: 'A confirmar',
-    serie: 'A confirmar',
+    slug: 'claire-redfield',
+    nome: 'Claire Redfield',
+    serie: 'Resident Evil',
     origem: 'modelo',
-    escultor: 'YoruNoAne',
-    fotos: fotos('frieren', 8),
-    badges: ['Sob encomenda'],
-    chamada: 'Peça com coroa de flores e foice, em paleta clara.',
+    escultor: 'Szymon Szpaczek',
+    fotos: fotos('claire_redfield', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'Jaqueta de couro vermelha, pistola em punho e o "Let me live" nas costas.',
     paragrafos: [
-      'Escultura de paleta clara e composição vertical, com bastante superfície lisa — o tipo de peça em que o acabamento aparece, porque não há textura para esconder falha de lixa.',
+      'A jaqueta é o centro da peça: vermelho de couro montado em camadas, com verniz seletivo só nas partes altas. É o que separa couro de plástico pintado de vermelho quando a luz da estante bate na peça.',
+      'Nas costas vem o "Let me live" com o anjo alado em relevo, pintado à mão livre — o detalhe que quem jogou Resident Evil 2 procura assim que vira a peça.',
+      'A base é o piso de pedra da delegacia, com brasões em relevo, coluna quebrada e entulho. Cada material leva uma lavagem de sujeira diferente, senão o conjunto vira um bloco cinza só.',
+    ],
+    ficha: [
+      { rotulo: 'Altura', valor: '237 mm' },
+      { rotulo: 'Base', valor: '119 × 120 mm' },
+      ...fichaComum,
+    ],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'gwen-stacy',
+    nome: 'Gwen Stacy',
+    serie: 'Marvel · Aranhaverso',
+    origem: 'modelo',
+    escultor: 'Lukas Lima e Alex Gray',
+    fotos: fotos('gwen_stacy', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'Equilibrada no poste da Broadway, capuz aberto e o V nos dedos.',
+    paragrafos: [
+      'O traje é branco, preto e um rosa que precisa cair exatamente no tom: o rosa da Gwen é marca registrada e denuncia qualquer erro de mistura. As faixas correm do capuz até o pé, e cada uma é mascarada e pintada separada da vizinha.',
+      'A pose se apoia em uma perna só, sobre o poste com semáforo e as placas de Broadway e Wall St. As placas levam letra pintada à mão e desgaste de metal exposto; os pombos da base saem em cinza fumê com o peito iridescente.',
+      'O capuz aberto deixa o cabelo loiro e o rosto à mostra, e é aí que a peça se decide — olho pequeno, sobrancelha marcada e nenhum espaço para pincel tremido.',
+    ],
+    ficha: [
+      { rotulo: 'Altura', valor: '234 mm' },
+      { rotulo: 'Base', valor: '104 × 164 mm' },
+      ...fichaComum,
+    ],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'ken-kaneki',
+    nome: 'Ken Kaneki',
+    serie: 'Tokyo Ghoul',
+    origem: 'modelo',
+    escultor: 'Samiho Studios',
+    fotos: fotos('kaneki', 7),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'Cabelo branco, olho de ghoul e o kagune fechando um arco vermelho atrás do corpo.',
+    paragrafos: [
+      'O kagune domina a composição: uma espiral que sobe do ombro e dá a volta na figura inteira. Vai em resina translúcida com pigmento no lugar de tinta opaca, para a luz atravessar e o vermelho acender por dentro em vez de ficar chapado.',
+      'O contraste é o motor da peça — cabelo branco, roupa escura, pele fria — com o kagune e as flores-aranha da base como únicas cores quentes. É uma paleta curta, o que deixa cada erro de tom muito visível.',
+      'No rosto, um olho fica humano e o outro recebe a esclera preta com íris vermelha, pintados com pincel de dois fios. É essa assimetria que conta a história do personagem, e é o último detalhe a entrar na peça.',
+    ],
+    ficha: [
+      { rotulo: 'Escala', valor: '1/6' },
+      { rotulo: 'Altura', valor: 'A confirmar' },
+      ...fichaComum,
+    ],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'lady-maria',
+    nome: 'Lady Maria',
+    serie: 'Bloodborne',
+    origem: 'modelo',
+    escultor: 'Lora Kolori',
+    fotos: fotos('lady_maria', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'Chapéu tricórnio, lâmina em punho e a sala da torre do relógio sob os pés.',
+    paragrafos: [
+      'A peça inteira vive numa paleta escura: couro preto, tecido marrom queimado e prata suja. Tudo aqui é sombra, e o detalhe só sobrevive com realce seco nas quinas — sem isso, a silhueta vira um borrão preto na estante.',
+      'O cabelo prateado e a echarpe clara no pescoço são os dois pontos de luz da composição, e é por eles que o olho entra na peça. O sangue da lâmina entra por último, em camadas transparentes, para ficar úmido em vez de virar tinta vermelha.',
+      'A base é a sala hexagonal da torre, com arcos vazados. É onde a escultura ganha profundidade e onde a pintura precisa fingir uma fonte de luz que não existe.',
+    ],
+    ficha: [
+      { rotulo: 'Altura', valor: '305 mm' },
+      { rotulo: 'Base', valor: '132 × 204 mm' },
+      ...fichaComum,
+    ],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'toph',
+    nome: 'Toph',
+    serie: 'Avatar · A Lenda de Aang',
+    origem: 'modelo',
+    escultor: 'Alex Gray',
+    fotos: fotos('toph', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'A dobradora de terra adulta, punhos fechados e as lascas de rocha subindo do chão.',
+    paragrafos: [
+      'A pose é de impacto: pé firme, punho fechado e as lascas de rocha saindo do chão em leque atrás dela. Essa parte é pintada como pedra viva, com cinza frio na face de fora e ocre na fratura — senão vira um monte de espeto cinza.',
+      'O corpo é o outro desafio. É uma escultura de musculatura marcada e muita pele exposta, o que significa degradê sem transição visível: sombra na costela, luz no ombro e nada de linha dura entre as duas.',
+      'A faixa do peito e a calça verde seguram a paleta, e a bandana amarela na testa é o único ponto de cor forte — o truque de sempre para o olho ir direto ao rosto.',
+    ],
+    ficha: [...alturaEscala, ...fichaComum],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'verso',
+    nome: 'Verso',
+    serie: 'Clair Obscur · Expedition 33',
+    origem: 'modelo',
+    escultor: 'Vik3DFigures',
+    fotos: fotos('verso', 7),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'Casaco escuro, faixa roxa e a espada baixa, no fim da caminhada.',
+    paragrafos: [
+      'É a peça mais contida do catálogo: nada de pose de combate, só a figura de pé com a espada baixa. Sem ação para chamar atenção, quem sustenta a peça é o tecido — e tecido escuro é o pior cenário possível para quem pinta.',
+      'O casaco vai em camadas de cinza-azulado para as dobras existirem, com realce seco nas quinas. A faixa roxa da cintura e os cordões dourados do peito são os únicos pontos de cor, e por isso entram por último, com a peça já quase fechada.',
+      'O cabelo grisalho e a barba pedem pincel fino: são fios curtos, um a um, com o branco puxado só nas pontas. A base é rocha baixa e discreta de propósito, para não competir com a figura.',
+    ],
+    ficha: [...alturaEscala, ...fichaComum],
+    inclui: incluiComum,
+  },
+  {
+    slug: 'mario-e-luigi',
+    nome: 'Mario & Luigi',
+    serie: 'Super Mario',
+    origem: 'modelo',
+    fotos: fotos('mario_luigi', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada: 'A dupla em poncho e sombrero, com as caveiras mexicanas pintadas no rosto.',
+    paragrafos: [
+      'Um par, não uma peça só: os dois irmãos lado a lado, de poncho bordado e sombrero, cada um na sua base — que podem ficar juntas ou separadas na estante.',
+      'Depois do Qifrey, é a peça mais colorida que oferecemos. Os ponchos levam faixas em laranja, amarelo e verde pintadas uma a uma, e o bordado das barras sai ponto por ponto, na ponta do pincel.',
+      'Nas artes do escultor a dupla aparece das duas formas, de rosto descoberto e com a caveira mexicana pintada; na hora da encomenda a gente combina qual das duas versões você quer na sua.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
   },
 ]
 
-export const products = pecas.filter((p) => p.origem === 'atelie')
+export const products = pecas.filter((p) => p.origem === 'lab')
 export const modelos = pecas.filter((p) => p.origem === 'modelo')
 
 export function acharPeca(slug: string | undefined) {
@@ -236,7 +381,7 @@ export const destaques: Destaque[] = [
 ]
 
 export const duracaoDestaque = 7000
-export const fotoAtelie = products[1].fotos[2]
+export const fotoBancada = products[1].fotos[2]
 
 export const comparador = {
   cru: '/fotos/comparador/sukuna-resina.webp',
@@ -252,7 +397,7 @@ export const collections = [
 export const differentials = [
   { title: 'Resina Premium', text: 'Resina de alta densidade, curada por UV, com acabamento firme e sem deformar com o tempo.' },
   { title: 'Pintura à Mão', text: 'Aerografia e pincel, camada por camada. Nenhuma peça sai igual à outra.' },
-  { title: 'Chega Inteira', text: 'Caixa reforçada, berço interno e proteção individual para viajar o Brasil sem susto.' },
+  { title: 'Envio Rastreado', text: 'Fotos da peça pronta antes de despachar e código de rastreio até a sua porta, em todo o Brasil.' },
   { title: 'Fala Direto com o Lab', text: 'Do orçamento à entrega, você conversa com quem está pintando a sua peça.' },
 ]
 
@@ -274,7 +419,7 @@ export const faq = [
   },
   {
     q: 'Como funciona o pagamento?',
-    a: 'Sinal para entrar na fila do ateliê e o restante antes do envio. Parcelamos no cartão; combinamos tudo por mensagem, sem letra miúda.',
+    a: 'Sinal para entrar na fila do Lab e o restante antes do envio. Parcelamos no cartão; combinamos tudo por mensagem, sem letra miúda.',
   },
   {
     q: 'E se a peça chegar danificada?',

@@ -11,7 +11,7 @@ export default function Library() {
         <SectionTitle
           eyebrow="Biblioteca de modelos"
           title="Escolha um personagem!"
-          blurb="Estes são modelos disponíveis para encomenda. As imagens são as artes de divulgação dos escultores que assinam cada escultura — a sua peça é impressa e pintada aqui no ateliê."
+          blurb="Estes são modelos disponíveis para encomenda. As imagens são as artes de divulgação dos escultores que assinam cada escultura — a sua peça é impressa e pintada aqui no Lab."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -29,9 +29,11 @@ export default function Library() {
                 <div className="flex flex-1 flex-col p-6">
                   <h3 className="font-display text-lg text-bone-100">{modelo.nome}</h3>
                   <p className="eyebrow mt-2 text-[0.625rem] text-bone-600">{modelo.serie}</p>
-                  <p className="mt-4 text-xs text-bone-600">
-                    Escultura de {modelo.escultor}
-                  </p>
+                  {modelo.escultor && (
+                    <p className="mt-4 text-xs text-bone-600">
+                      Escultura de {modelo.escultor}
+                    </p>
+                  )}
                   <Link
                     to={`/peca/${modelo.slug}`}
                     className="eyebrow mt-5 block border border-ink-600 py-3 text-center text-bone-300 transition-colors group-hover:border-ember-500 group-hover:text-bone-100"

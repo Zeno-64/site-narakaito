@@ -10,7 +10,7 @@ export default function Catalog() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionTitle
           eyebrow="Figures em destaque"
-          title="Saindo do ateliê"
+          title="Saindo da bancada"
           blurb="Peças que já passaram pela nossa bancada, fotografadas depois de prontas. Todas sob encomenda."
         />
 

@@ -1,4 +1,14 @@
 {
+ "claire_redfield": [
+  "claire_redfield-01",
+  "claire_redfield-02",
+  "claire_redfield-03",
+  "claire_redfield-04",
+  "claire_redfield-05",
+  "claire_redfield-06",
+  "claire_redfield-07",
+  "claire_redfield-08"
+ ],
  "frieren": [
   "frieren-01",
   "frieren-02",
@@ -6,8 +16,36 @@
   "frieren-04",
   "frieren-05",
   "frieren-06",
-  "frieren-07",
-  "frieren-08"
+  "frieren-07"
+ ],
+ "gwen_stacy": [
+  "gwen_stacy-01",
+  "gwen_stacy-02",
+  "gwen_stacy-03",
+  "gwen_stacy-04",
+  "gwen_stacy-05",
+  "gwen_stacy-06",
+  "gwen_stacy-07",
+  "gwen_stacy-08"
+ ],
+ "kaneki": [
+  "kaneki-01",
+  "kaneki-02",
+  "kaneki-03",
+  "kaneki-04",
+  "kaneki-05",
+  "kaneki-06",
+  "kaneki-07"
+ ],
+ "lady_maria": [
+  "lady_maria-01",
+  "lady_maria-02",
+  "lady_maria-03",
+  "lady_maria-04",
+  "lady_maria-05",
+  "lady_maria-06",
+  "lady_maria-07",
+  "lady_maria-08"
  ],
  "link_adulto_zelda": [
   "link_adulto_zelda-01",
@@ -17,7 +55,10 @@
   "link_adulto_zelda-05",
   "link_adulto_zelda-06",
   "link_adulto_zelda-07",
-  "link_adulto_zelda-08"
+  "link_adulto_zelda-08",
+  "link_adulto_zelda-09",
+  "link_adulto_zelda-10",
+  "link_adulto_zelda-11"
  ],
  "link_crianca_zelda": [
   "link_crianca_zelda-01",
@@ -27,7 +68,11 @@
   "link_crianca_zelda-05",
   "link_crianca_zelda-06",
   "link_crianca_zelda-07",
-  "link_crianca_zelda-08"
+  "link_crianca_zelda-08",
+  "link_crianca_zelda-09",
+  "link_crianca_zelda-10",
+  "link_crianca_zelda-11",
+  "link_crianca_zelda-12"
  ],
  "madara": [
   "madara-01",
@@ -37,7 +82,18 @@
   "madara-05",
   "madara-06",
   "madara-07",
-  "madara-08"
+  "madara-08",
+  "madara-09"
+ ],
+ "mario_luigi": [
+  "mario_luigi-01",
+  "mario_luigi-02",
+  "mario_luigi-03",
+  "mario_luigi-04",
+  "mario_luigi-05",
+  "mario_luigi-06",
+  "mario_luigi-07",
+  "mario_luigi-08"
  ],
  "mustang_dodoi": [
   "mustang_dodoi-01",
@@ -46,8 +102,7 @@
   "mustang_dodoi-04",
   "mustang_dodoi-05",
   "mustang_dodoi-06",
-  "mustang_dodoi-07",
-  "mustang_dodoi-08"
+  "mustang_dodoi-07"
  ],
  "qifrey": [
   "qifrey-01",
@@ -66,8 +121,7 @@
   "roy_mustang-04",
   "roy_mustang-05",
   "roy_mustang-06",
-  "roy_mustang-07",
-  "roy_mustang-08"
+  "roy_mustang-07"
  ],
  "sukuna": [
   "sukuna-01",
@@ -76,7 +130,25 @@
   "sukuna-04",
   "sukuna-05",
   "sukuna-06",
-  "sukuna-07",
-  "sukuna-08"
+  "sukuna-07"
+ ],
+ "toph": [
+  "toph-01",
+  "toph-02",
+  "toph-03",
+  "toph-04",
+  "toph-05",
+  "toph-06",
+  "toph-07",
+  "toph-08"
+ ],
+ "verso": [
+  "verso-01",
+  "verso-02",
+  "verso-03",
+  "verso-04",
+  "verso-05",
+  "verso-06",
+  "verso-07"
  ]
 }

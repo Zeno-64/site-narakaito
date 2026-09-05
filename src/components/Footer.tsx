@@ -35,8 +35,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/#atelie" className="transition-colors hover:text-ember-200">
-                Ateliê
+              <Link to="/#lab" className="transition-colors hover:text-ember-200">
+                O Lab
               </Link>
             </li>
             <li>

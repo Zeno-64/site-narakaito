@@ -9,7 +9,7 @@ const etapas = [
   { n: '01', titulo: 'Você escolhe', texto: 'Manda a peça no WhatsApp com as customizações que quiser.' },
   { n: '02', titulo: 'A gente orça', texto: 'Volta com preço fechado, prazo e as condições de parcelamento.' },
   { n: '03', titulo: 'Entra na fila', texto: 'Com o sinal pago, a peça vai para a impressora e depois para a bancada.' },
-  { n: '04', titulo: 'Chega na sua casa', texto: 'Fotos antes de despachar, caixa reforçada e rastreio até a porta.' },
+  { n: '04', titulo: 'Chega na sua casa', texto: 'Fotos da peça pronta antes de despachar e rastreio até a sua porta.' },
 ]
 
 export default function Produto() {
@@ -154,7 +154,7 @@ export default function Produto() {
           {peca.origem === 'modelo' && peca.escultor && (
             <p className="mt-6 text-xs leading-relaxed text-bone-600">
               As imagens desta página são a arte de divulgação da escultura, assinada por{' '}
-              {peca.escultor}. A impressão e a pintura são feitas aqui no ateliê.
+              {peca.escultor}. A impressão e a pintura são feitas aqui no Lab.
             </p>
           )}
         </div>
@@ -216,7 +216,7 @@ export default function Produto() {
       {/* outras peças */}
       <section className="bg-ink-900 py-20">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-display text-2xl text-bone-100">Outras peças do ateliê</h2>
+          <h2 className="font-display text-2xl text-bone-100">Outras peças do Lab</h2>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {outras.map((o, i) => (
@@ -252,7 +252,7 @@ export default function Produto() {
           </h2>
           <p className="mt-5 text-base leading-relaxed text-bone-500">
             Manda mensagem que a gente fecha o orçamento, define as customizações e te coloca
-            na fila do ateliê.
+            na fila do Lab.
           </p>
           <a
             href={link}
@@ -260,7 +260,7 @@ export default function Produto() {
             rel="noreferrer"
             className="eyebrow mt-10 inline-block bg-ember-500 px-10 py-4 text-bone-100 transition-colors hover:bg-ember-400"
           >
-            Falar com o ateliê →
+            Falar com o Lab →
           </a>
         </div>
       </section>

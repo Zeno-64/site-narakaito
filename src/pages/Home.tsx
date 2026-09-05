@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import About from '../components/About'
-import Atelier from '../components/Atelier'
+import Lab from '../components/Lab'
 import BeforeAfter from '../components/BeforeAfter'
 import CaixaReveal from '../components/CaixaReveal'
 import Catalog from '../components/Catalog'
@@ -34,7 +34,7 @@ export default function Home() {
       <CaixaReveal />
       <Library />
       <BeforeAfter />
-      <Atelier />
+      <Lab />
       <About />
       <Faq />
     </main>

@@ -1,5 +1,5 @@
 import Reveal from './Reveal'
-import { fotoAtelie, whatsappUrl } from '../data/site'
+import { fotoBancada, whatsappUrl } from '../data/site'
 
 export default function About() {
   return (
@@ -12,8 +12,8 @@ export default function About() {
         <Reveal>
           <div className="relative aspect-4/5 overflow-hidden border border-ink-700 bg-ink-850">
             <img
-              src={fotoAtelie.full}
-              alt="Peça pintada à mão no ateliê da Narakaito Lab"
+              src={fotoBancada.full}
+              alt="Peça pintada à mão na bancada da Narakaito Lab"
               loading="lazy"
               className="h-full w-full object-cover"
             />
@@ -43,7 +43,7 @@ export default function About() {
             rel="noreferrer"
             className="eyebrow mt-10 inline-block border border-ember-500/60 px-8 py-4 text-bone-100 transition-colors hover:bg-ember-700/30"
           >
-            Conversar com o ateliê →
+            Conversar com o Lab →
           </a>
         </Reveal>
       </div>

@@ -70,7 +70,7 @@ export default function Hero() {
   return (
     <section
       id="topo"
-      className="relative overflow-hidden"
+      className="relative flex min-h-[calc(100svh-12rem)] items-center overflow-hidden"
       onMouseEnter={() => setPausado(true)}
       onMouseLeave={() => setPausado(false)}
       onFocusCapture={() => setPausado(true)}
@@ -81,9 +81,40 @@ export default function Hero() {
           preto sobre o ink-950 (#070605), que já é quase preto, não muda
           nada visualmente, então o fundo virou só a cor sólida. */}
       <div aria-hidden className="absolute inset-0 bg-ink-950" />
+
+      {/* Halo de brasa atrás da peça: a figura não tinha de onde receber luz e
+          o fundo ficava preto chapado. No mobile o halo fica no centro; no
+          desktop, atrás da coluna da foto. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(46%_52%_at_50%_40%,rgba(176,51,44,0.28),transparent_72%)] lg:bg-[radial-gradient(34%_56%_at_71%_46%,rgba(176,51,44,0.34),transparent_72%)]"
+      />
+
+      {/* A chama da marca, gigante e quase apagada, ocupando o vazio atrás do
+          nome da peça. É o mesmo símbolo do header, só que em escala de fundo. */}
+      <img
+        aria-hidden
+        alt=""
+        src="/images/logo-mark.png"
+        className="pointer-events-none absolute -left-20 top-1/2 hidden h-[125%] max-w-none -translate-y-1/2 opacity-[0.07] lg:block"
+        style={{ filter: 'brightness(2.4) saturate(1.15)' }}
+      />
+
+      {/* Poça de luz no rodapé da seção, para o hero não terminar em corte seco */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(58%_100%_at_50%_100%,rgba(224,112,79,0.16),transparent_72%)]"
+      />
+
       <Particles />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1fr_1fr] lg:gap-4 lg:px-8 lg:py-24">
+      {/* Vinheta: fecha os cantos e empurra o olho para o centro */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(115%_85%_at_50%_45%,transparent_46%,rgba(0,0,0,0.6))]"
+      />
+
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-12 lg:grid-cols-[1fr_1fr] lg:gap-4 lg:px-8 lg:pb-20 lg:pt-14">
         <div className="relative z-10 order-2 lg:order-1">
           <AnimatePresence mode="wait">
             <motion.p
@@ -134,7 +165,7 @@ export default function Hero() {
         <div className="relative order-1 lg:order-2">
           {/* Sem mode="wait": a foto nova entra por cima enquanto a antiga sai,
               senão o hero fica sem imagem nenhuma durante a troca. */}
-          <div className="relative mx-auto aspect-4/5 w-full max-w-xl">
+          <div className="relative mx-auto aspect-4/5 h-[min(52svh,40rem)] w-[min(41.6svh,32rem)] max-w-full">
             <AnimatePresence>
               <motion.div
                 key={`foto-${ativo}`}
@@ -162,6 +193,16 @@ export default function Hero() {
           na seção inteira (não mais dentro da coluna de texto). Sem
           indicador de tempo visível — troca sozinha a cada 7s por baixo
           dos panos, o clique aqui só pula direto pra peça escolhida. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-8 right-6 z-10 hidden items-center gap-3 lg:flex"
+      >
+        <span className="eyebrow text-[0.625rem] text-bone-600">Role</span>
+        <span className="relative block h-14 w-px overflow-hidden bg-ink-600">
+          <span className="absolute inset-x-0 top-0 block h-5 animate-[descer_2.2s_ease-in-out_infinite] bg-ember-400" />
+        </span>
+      </div>
+
       <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center gap-3">
         {destaques.map((d, i) => (
           <button
