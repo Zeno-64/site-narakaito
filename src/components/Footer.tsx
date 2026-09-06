@@ -25,11 +25,6 @@ export default function Footer() {
           <p className="eyebrow text-bone-100">Navegar</p>
           <ul className="mt-5 space-y-3 text-sm text-bone-500">
             <li>
-              <Link to="/#colecoes" className="transition-colors hover:text-ember-200">
-                Coleções
-              </Link>
-            </li>
-            <li>
               <Link to="/#catalogo" className="transition-colors hover:text-ember-200">
                 Catálogo
               </Link>

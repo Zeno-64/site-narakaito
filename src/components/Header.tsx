@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { whatsappUrl } from '../data/site'
 
 // com o "/" na frente, funcionam tanto na home quanto dentro de /peca/:slug
 const nav = [
   { label: 'Início', href: '/' },
-  { label: 'Coleções', href: '/#colecoes' },
   { label: 'Catálogo', href: '/#catalogo' },
   { label: 'O Lab', href: '/#lab' },
   { label: 'Sobre', href: '/#sobre' },
@@ -15,6 +14,20 @@ const nav = [
 export default function Header() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
+  const { pathname } = useLocation()
+
+  // 2) "Início" aponta para "/" sem âncora. Estando já na home, o react-router
+  //    vê a mesma rota, não dispara navegação nenhuma e o clique morria ali.
+  //    O scroll agora é explícito: suave quando já estamos na home, seco
+  //    quando o clique também troca de página.
+  const aoClicar = (href: string) => {
+    setOpen(false)
+    if (href !== '/') return
+    // 'instant', não 'auto': o html tem scroll-behavior: smooth, e 'auto'
+    // herdaria isso -- a volta de uma página de peça sairia rolando o site
+    // inteiro por baixo durante a troca de rota.
+    window.scrollTo({ top: 0, behavior: pathname === '/' ? 'smooth' : 'instant' })
+  }
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 24)
@@ -60,6 +73,7 @@ export default function Header() {
             <Link
               key={item.href}
               to={item.href}
+              onClick={() => aoClicar(item.href)}
               className="eyebrow text-bone-300 transition-colors hover:text-ember-200"
             >
               {item.label}
@@ -95,7 +109,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                onClick={() => setOpen(false)}
+                onClick={() => aoClicar(item.href)}
                 className="eyebrow border-b border-ink-800 py-4 text-bone-300"
               >
                 {item.label}
