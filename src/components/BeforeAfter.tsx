@@ -5,6 +5,10 @@ import SectionTitle from './SectionTitle'
 /** Comparador arrastável: resina crua de um lado, peça pintada do outro. */
 export default function BeforeAfter() {
   const [pos, setPos] = useState(52)
+  // Enquanto o cabo está na mão (ou o teclado está no controle), a emenda
+  // acende. É o único momento em que o visitante compara resina crua e peça
+  // pintada lado a lado -- vale marcar que ali está acontecendo alguma coisa.
+  const [aceso, setAceso] = useState(false)
   const frame = useRef<HTMLDivElement>(null)
 
   const moveTo = useCallback((clientX: number) => {
@@ -28,11 +32,14 @@ export default function BeforeAfter() {
           ref={frame}
           onPointerDown={(e) => {
             e.currentTarget.setPointerCapture(e.pointerId)
+            setAceso(true)
             moveTo(e.clientX)
           }}
           onPointerMove={(e) => {
             if (e.buttons === 1) moveTo(e.clientX)
           }}
+          onPointerUp={() => setAceso(false)}
+          onPointerCancel={() => setAceso(false)}
           className="relative mt-14 aspect-square w-full cursor-ew-resize touch-none select-none overflow-hidden border border-ink-700 bg-ink-850"
         >
           <img
@@ -60,8 +67,27 @@ export default function BeforeAfter() {
           </span>
 
           {/* Cabo */}
-          <div className="absolute inset-y-0 w-px bg-ember-400" style={{ left: `${pos}%` }} aria-hidden>
-            <span className="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ember-400 bg-ink-950 text-ember-200">
+          <div className="absolute inset-y-0 w-px" style={{ left: `${pos}%` }} aria-hidden>
+            {/* brilho lateral: some para os dois lados a partir da emenda */}
+            <span
+              className={`absolute inset-y-0 left-1/2 w-24 -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(224,112,79,0.22),transparent)] transition-opacity duration-300 ${
+                aceso ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+            <span
+              className={`absolute inset-y-0 left-0 w-px bg-ember-400 transition-shadow duration-300 ${
+                aceso
+                  ? 'shadow-[0_0_18px_4px_rgba(224,112,79,0.55)]'
+                  : 'shadow-[0_0_8px_1px_rgba(224,112,79,0.25)]'
+              }`}
+            />
+            <span
+              className={`absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border bg-ink-950 transition-all duration-300 ${
+                aceso
+                  ? 'border-ember-300 text-ember-200 shadow-[0_0_22px_rgba(224,112,79,0.6)]'
+                  : 'border-ember-400 text-ember-200'
+              }`}
+            >
               ⟷
             </span>
           </div>
@@ -72,6 +98,8 @@ export default function BeforeAfter() {
             max={100}
             value={Math.round(pos)}
             onChange={(e) => setPos(Number(e.target.value))}
+            onFocus={() => setAceso(true)}
+            onBlur={() => setAceso(false)}
             aria-label="Comparar resina crua e peça pintada"
             className="absolute bottom-4 left-1/2 w-2/3 -translate-x-1/2 accent-ember-400 opacity-0 focus-visible:opacity-100"
           />

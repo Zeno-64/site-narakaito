@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import type { PointerEvent as EventoDePonteiro } from 'react'
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { destaques, duracaoDestaque } from '../data/site'
 import { useArrastoHorizontal } from '../lib/arrasto'
@@ -68,6 +75,63 @@ export default function Hero() {
     setProgresso(0)
   }
 
+  // ---- luz que segue o ponteiro ------------------------------------------
+  // O hero é escuro e a peça não tinha de onde receber luz: sem uma fonte
+  // aparente, a foto fica chapada sobre o preto. Aqui a peça inclina de leve
+  // e o halo de brasa anda junto, como se a luz viesse de onde o olho está.
+  // Tudo em transform, nada de repintar gradiente por quadro.
+  const [semMovimento] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+
+  const ponteiroX = useMotionValue(0)
+  const ponteiroY = useMotionValue(0)
+  const molaX = useSpring(ponteiroX, { stiffness: 55, damping: 16, mass: 0.5 })
+  const molaY = useSpring(ponteiroY, { stiffness: 55, damping: 16, mass: 0.5 })
+
+  const haloX = useTransform(molaX, [-1, 1], [-80, 80])
+  const haloY = useTransform(molaY, [-1, 1], [-50, 50])
+  const giroY = useTransform(molaX, [-1, 1], [-3.4, 3.4])
+  const giroX = useTransform(molaY, [-1, 1], [2.6, -2.6])
+  // a marca d'água anda ao contrário: dá profundidade sem custar nada
+  const marcaX = useTransform(molaX, [-1, 1], [26, -26])
+
+  const seguirPonteiro = (e: EventoDePonteiro<HTMLElement>) => {
+    // só mouse e caneta: no toque o dedo cobre justamente a peça
+    if (semMovimento || e.pointerType === 'touch') return
+    const area = e.currentTarget.getBoundingClientRect()
+    ponteiroX.set(((e.clientX - area.left) / area.width) * 2 - 1)
+    ponteiroY.set(((e.clientY - area.top) / area.height) * 2 - 1)
+  }
+
+  const centrarLuz = () => {
+    ponteiroX.set(0)
+    ponteiroY.set(0)
+  }
+
+  // No celular quem move a luz é a inclinação do aparelho. O iOS exige um
+  // gesto do usuário para liberar o giroscópio, e não vale um pedido de
+  // permissão por um efeito decorativo -- lá o hero simplesmente fica parado.
+  useEffect(() => {
+    if (semMovimento) return
+    const Evento = window.DeviceOrientationEvent as
+      | (typeof window.DeviceOrientationEvent & { requestPermission?: unknown })
+      | undefined
+    if (!Evento || typeof Evento.requestPermission === 'function') return
+
+    const aoInclinar = (e: DeviceOrientationEvent) => {
+      if (e.gamma == null || e.beta == null) return
+      const limita = (v: number) => Math.min(1, Math.max(-1, v))
+      ponteiroX.set(limita(e.gamma / 28))
+      ponteiroY.set(limita((e.beta - 48) / 28))
+    }
+
+    window.addEventListener('deviceorientation', aoInclinar)
+    return () => window.removeEventListener('deviceorientation', aoInclinar)
+  }, [ponteiroX, ponteiroY, semMovimento])
+
   const arrasto = useArrastoHorizontal({
     aoArrastar: (d) => irPara((ativo + d + destaques.length) % destaques.length),
   })
@@ -77,7 +141,11 @@ export default function Hero() {
       id="topo"
       className="relative flex min-h-[calc(100svh-12rem)] items-center overflow-hidden"
       onMouseEnter={() => setPausado(true)}
-      onMouseLeave={() => setPausado(false)}
+      onMouseLeave={() => {
+        setPausado(false)
+        centrarLuz()
+      }}
+      onPointerMove={seguirPonteiro}
       onFocusCapture={() => setPausado(true)}
       onBlurCapture={() => setPausado(false)}
     >
@@ -90,19 +158,20 @@ export default function Hero() {
       {/* Halo de brasa atrás da peça: a figura não tinha de onde receber luz e
           o fundo ficava preto chapado. No mobile o halo fica no centro; no
           desktop, atrás da coluna da foto. */}
-      <div
+      <motion.div
         aria-hidden
+        style={{ x: haloX, y: haloY }}
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(46%_52%_at_50%_40%,rgba(176,51,44,0.28),transparent_72%)] lg:bg-[radial-gradient(34%_56%_at_71%_46%,rgba(176,51,44,0.34),transparent_72%)]"
       />
 
       {/* A chama da marca, gigante e quase apagada, ocupando o vazio atrás do
           nome da peça. É o mesmo símbolo do header, só que em escala de fundo. */}
-      <img
+      <motion.img
         aria-hidden
         alt=""
         src="/images/logo-mark.png"
-        className="pointer-events-none absolute -left-20 top-1/2 hidden h-[125%] max-w-none -translate-y-1/2 opacity-[0.07] lg:block"
-        style={{ filter: 'brightness(2.4) saturate(1.15)' }}
+        className="pointer-events-none absolute -left-20 top-1/2 hidden h-[125%] max-w-none opacity-[0.07] lg:block"
+        style={{ x: marcaX, y: '-50%', filter: 'brightness(2.4) saturate(1.15)' }}
       />
 
       {/* Poça de luz no rodapé da seção, para o hero não terminar em corte seco */}
@@ -170,7 +239,8 @@ export default function Hero() {
         <div className="relative order-1 lg:order-2">
           {/* Sem mode="wait": a foto nova entra por cima enquanto a antiga sai,
               senão o hero fica sem imagem nenhuma durante a troca. */}
-          <div
+          <motion.div
+            style={{ rotateX: giroX, rotateY: giroY, transformPerspective: 1400 }}
             className="relative mx-auto aspect-4/5 h-[min(52svh,40rem)] w-[min(41.6svh,32rem)] max-w-full touch-pan-y select-none"
             {...arrasto}
           >
@@ -194,7 +264,7 @@ export default function Hero() {
                 />
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
 
