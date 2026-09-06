@@ -1,16 +1,13 @@
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import {
-  animate,
   motion,
   useMotionTemplate,
-  useMotionValue,
   useMotionValueEvent,
   useScroll,
   useSpring,
   useTransform,
 } from 'framer-motion'
 import { products } from '../data/site'
-import PecaTresD from './PecaTresD'
 
 // Variável de módulo, não sessionStorage: sessionStorage sobrevive a um F5,
 // e o pedido era exatamente o contrário -- "só volta a funcionar com
@@ -63,21 +60,6 @@ export default function CaixaReveal() {
   const giro = useTransform(p, [0, 0.46, 1], [-16, 4, 4])
 
   const pecaOpacidade = useTransform(p, [0.16, 0.28], [0, 1])
-
-  // A foto é o padrão e o 3D é o bônus: ela some só quando o modelo avisa
-  // que carregou. Sem WebGL, sem rede ou com prefers-reduced-motion, a
-  // revelação continua exatamente como era.
-  const parede = useRef<HTMLDivElement>(null)
-  const fadeDaFoto = useMotionValue(1)
-  // sem setState de propósito: a troca acontece toda na motion value, então
-  // a chegada do modelo não força um render da seção inteira
-  const aoFicarPronto = useCallback(() => {
-    animate(fadeDaFoto, 0, { duration: 0.45 })
-  }, [fadeDaFoto])
-  const fotoOpacidade = useTransform(
-    [pecaOpacidade, fadeDaFoto],
-    ([a, b]: number[]) => a * b,
-  )
   // Escala e subida bem menores que antes (eram 1.52x / -104px): com a
   // origem da transformação na base da peça, escalar pra cima faz a
   // imagem crescer só pelo topo -- em 1.52x ela furava o teto da tela e
@@ -140,8 +122,6 @@ export default function CaixaReveal() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_45%_at_50%_52%,rgba(176,51,44,0.45),transparent_70%)]"
         />
 
-        <PecaTresD progresso={p} aoFicarPronto={aoFicarPronto} boca={parede} />
-
         <div className="caixa-palco">
           <motion.div className="caixa-cena" style={{ transform: cenaTransform }}>
             {/* chão */}
@@ -152,7 +132,7 @@ export default function CaixaReveal() {
                 src={foto.full}
                 alt={`${products[0].nome} saindo da caixa`}
                 className="caixa-peca foto-sangrada"
-                style={{ transform: pecaTransform, opacity: fotoOpacidade }}
+                style={{ transform: pecaTransform, opacity: pecaOpacidade }}
                 loading="lazy"
               />
 
@@ -163,7 +143,7 @@ export default function CaixaReveal() {
                 <div className="caixa-piso" />
                 <div className="caixa-parede caixa-esq" />
                 <div className="caixa-parede caixa-dir" />
-                <div ref={parede} className="caixa-parede caixa-frente" />
+                <div className="caixa-parede caixa-frente" />
                 <div className="caixa-parede caixa-tras">
                   <motion.div className="caixa-tampa" style={{ transform: tampaTransform }}>
                     <div className="caixa-tampa-interna" />
