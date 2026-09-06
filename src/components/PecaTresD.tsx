@@ -68,7 +68,7 @@ export default function PecaTresD({ progresso, aoFicarPronto, boca }: Props) {
       }
 
       renderer.setClearAlpha(0)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75))
       renderer.domElement.className = 'h-full w-full'
       alvo.appendChild(renderer.domElement)
 
@@ -111,9 +111,15 @@ export default function PecaTresD({ progresso, aoFicarPronto, boca }: Props) {
       modelo.position.set(-centro.x, -caixa.min.y, -centro.z)
       grupo.add(modelo)
 
+      // Enquadramento pela esfera envolvente, e nao pela altura: com a base
+      // de pedra e o gunbai deitado, a peca e quase tao larga quanto alta, e
+      // uma distancia calculada so pela altura cortava as pontas.
       const altura = tamanho.y
-      camera.position.set(0, altura * 0.52, altura * 3.4)
-      camera.lookAt(0, altura * 0.52, 0)
+      const esfera = new THREE.Box3().setFromObject(grupo).getBoundingSphere(new THREE.Sphere())
+      const meiaFov = (camera.fov * Math.PI) / 360
+      const distancia = (esfera.radius / Math.sin(meiaFov)) * 1.35
+      camera.position.set(0, esfera.center.y, distancia)
+      camera.lookAt(0, esfera.center.y, 0)
 
       const medir = () => {
         const { clientWidth: l, clientHeight: a } = alvo!
@@ -153,7 +159,7 @@ export default function PecaTresD({ progresso, aoFicarPronto, boca }: Props) {
         // sobe de dentro da caixa e cresce um pouco no fim do percurso
         const subida = suave(p, 0.2, 0.52)
         const crescimento = suave(p, 0.52, 0.8)
-        grupo.position.y = -altura * 0.5 + subida * altura * 0.77
+        grupo.position.y = -altura * 0.5 + subida * altura * 0.72
         const escala = 0.9 + crescimento * 0.16
         grupo.scale.setScalar(escala)
 
