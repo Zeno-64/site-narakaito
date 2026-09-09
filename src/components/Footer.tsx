@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { whatsappUrl } from '../data/site'
+import { instagramUrl, whatsappUrl } from '../data/site'
 
 const year = new Date().getFullYear()
 
@@ -62,7 +62,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://instagram.com/"
+                href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="transition-colors hover:text-ember-200"

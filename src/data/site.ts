@@ -435,6 +435,7 @@ export const faq = [
 ]
 
 export const whatsappUrl = 'https://wa.me/5531000000000'
+export const instagramUrl = 'https://www.instagram.com/narakaitolab/'
 
 /** Link de WhatsApp já com a peça escrita na mensagem. */
 export function whatsappPeca(nome: string) {
