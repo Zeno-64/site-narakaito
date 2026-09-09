@@ -26,15 +26,28 @@ export default function About() {
           <span aria-hidden className="mt-6 block h-px w-20 bg-ember-500" />
 
           <p className="mt-7 text-base leading-relaxed text-bone-300">
-            A Narakaito é uma operação independente de figures colecionáveis, em São
-            Paulo. O projeto é conduzido pelo próprio criador, que participa de todas as
-            etapas: fatiamento do modelo, impressão em resina, lavagem, cura, remoção de
-            suportes, preparação de superfície, primer, pintura, verniz e montagem.
+            O que começou como um hobby foi, aos poucos, se transformando em um trabalho.
           </p>
           <p className="mt-5 text-base leading-relaxed text-bone-300">
-            Não existe linha de produção. Existe tempo de secagem e uma pessoa decidindo
-            onde vai a próxima sombra, peça por peça. O que sai daqui é uma figure pronta
-            para a estante — não uma impressão recém-tirada da máquina.
+            No início, a ideia era simplesmente produzir figures e explorar as
+            possibilidades da impressão 3D. Com o tempo, a experiência foi aumentando,
+            novas técnicas foram aprendidas e a busca por qualidade passou a fazer parte
+            de cada etapa do processo.
+          </p>
+          <p className="mt-5 text-base leading-relaxed text-bone-300">
+            A impressão deixou de ser apenas o ponto final de um arquivo digital. Vieram
+            a preparação das peças, o cuidado com a superfície, o primer, a pintura
+            manual, o acabamento e a montagem. Cada etapa trouxe novos aprendizados e,
+            consequentemente, peças cada vez mais bem executadas.
+          </p>
+          <p className="mt-5 text-base leading-relaxed text-bone-300">
+            Foi essa evolução constante que transformou uma atividade feita por hobby em
+            um negócio voltado à produção de figures colecionáveis.
+          </p>
+          <p className="mt-5 text-base leading-relaxed text-bone-300">
+            Ainda existe a mesma curiosidade de quando tudo começou, mas hoje existe
+            também o compromisso de entregar uma peça que represente todo o trabalho,
+            tempo e atenção dedicados a ela.
           </p>
 
           <a
