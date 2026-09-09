@@ -77,6 +77,18 @@ export default function ProductCard({ product }: { product: Peca }) {
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-display text-xl text-bone-100">{product.nome}</h3>
         <p className="eyebrow mt-2 text-bone-600">{product.serie}</p>
+
+        {/* De onde vem a foto do card. As peças da bancada são nossas; nas
+            outras a imagem é do escultor, e isso precisa estar dito. */}
+        <p className="mt-3 text-xs text-bone-600">
+          {product.origem === 'lab' ? 'Foto da nossa bancada' : 'Arte de divulgação'}
+        </p>
+        {product.escultor && (
+          <p className="text-xs text-bone-600">
+            {product.escultor}
+            {product.estudio && ` · ${product.estudio}`}
+          </p>
+        )}
         <p className="mt-5 text-sm text-bone-300">{product.preco ?? 'Orçamento sob consulta'}</p>
         <Link
           to={`/peca/${product.slug}`}
