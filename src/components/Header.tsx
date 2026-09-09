@@ -6,7 +6,7 @@ import { whatsappUrl } from '../data/site'
 const nav = [
   { label: 'Início', href: '/' },
   { label: 'Catálogo', href: '/#catalogo' },
-  { label: 'O Lab', href: '/#lab' },
+  { label: 'Narakaito', href: '/#lab' },
   { label: 'Sobre', href: '/#sobre' },
   { label: 'FAQ', href: '/#faq' },
 ]

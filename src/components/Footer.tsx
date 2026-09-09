@@ -31,7 +31,7 @@ export default function Footer() {
             </li>
             <li>
               <Link to="/#lab" className="transition-colors hover:text-ember-200">
-                O Lab
+                Narakaito
               </Link>
             </li>
             <li>

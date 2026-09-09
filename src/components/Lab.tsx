@@ -7,7 +7,7 @@ export default function Lab() {
     <section id="lab" className="border-y border-ink-800 bg-ink-850 py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionTitle
-          eyebrow="O Lab por dentro"
+          eyebrow="A Narakaito por dentro"
           title="Ferramenta boa aparece no acabamento"
           blurb="Não dá para entregar detalhe fino com equipamento improvisado. Este é o que usamos em cada etapa da peça."
         />

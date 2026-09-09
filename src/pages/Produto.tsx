@@ -131,7 +131,7 @@ export default function Produto() {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow text-ember-300">{peca.serie}</p>
           <h1 className="mt-4 font-display text-4xl text-bone-100 lg:text-5xl">{peca.nome}</h1>
-          <p className="mt-5 text-lg leading-relaxed text-bone-300">{peca.chamada}</p>
+          <p className="mt-5 text-lg italic leading-relaxed text-bone-300">{peca.chamada}</p>
 
           <div className="mt-8 border-y border-ink-700 py-6">
             <p className="text-2xl text-bone-100">{peca.preco ?? 'Orçamento sob consulta'}</p>
@@ -149,7 +149,7 @@ export default function Produto() {
             Pedir orçamento no WhatsApp →
           </a>
           <p className="mt-3 text-center text-xs text-bone-600">
-            Resposta no mesmo dia, direto com quem pinta.
+            Resposta no mesmo dia.
           </p>
 
           <dl className="mt-10 divide-y divide-ink-800 border-y border-ink-800">
@@ -161,12 +161,12 @@ export default function Produto() {
             ))}
           </dl>
 
-          {peca.origem === 'modelo' && peca.escultor && (
+          {peca.escultor && (
             <p className="mt-6 text-xs leading-relaxed text-bone-600">
               As imagens desta página são a arte de divulgação da escultura, assinada por{' '}
               {peca.escultor}
               {peca.estudio && ` para o ${peca.estudio}`}. A impressão e a pintura são feitas
-              aqui no Lab.
+              aqui na Narakaito.
             </p>
           )}
         </div>
@@ -228,7 +228,7 @@ export default function Produto() {
       {/* outras peças */}
       <section className="bg-ink-900 py-20">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-display text-2xl text-bone-100">Outras peças do Lab</h2>
+          <h2 className="font-display text-2xl text-bone-100">Outras peças da Narakaito</h2>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {outras.map((o, i) => (
@@ -264,7 +264,7 @@ export default function Produto() {
           </h2>
           <p className="mt-5 text-base leading-relaxed text-bone-500">
             Manda mensagem que a gente fecha o orçamento, define as customizações e te coloca
-            na fila do Lab.
+            na fila da Narakaito.
           </p>
           <a
             href={link}
@@ -272,7 +272,7 @@ export default function Produto() {
             rel="noreferrer"
             className="eyebrow mt-10 inline-block bg-ember-500 px-10 py-4 text-bone-100 transition-colors hover:bg-ember-400"
           >
-            Falar com o Lab →
+            Falar com a Narakaito →
           </a>
         </div>
       </section>

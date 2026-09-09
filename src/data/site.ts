@@ -13,8 +13,6 @@ export type Peca = {
   nome: string
   serie: string
   fotos: Foto[]
-  /** 'lab' = fotos da nossa bancada. 'modelo' = arte de divulgação do escultor. */
-  origem: 'lab' | 'modelo'
   escultor?: string
   /** Estúdio que assina a escultura, quando há um por trás do escultor. */
   estudio?: string
@@ -29,16 +27,16 @@ export type Peca = {
 // Ficha que vale para tudo que sai daqui. Altura e escala ficam por peça,
 // porque variam — as marcadas como "A confirmar" precisam ser medidas.
 const fichaComum = [
-  { rotulo: 'Material', valor: 'Resina JAYO, lavada e curada em UV' },
+  { rotulo: 'Material', valor: 'Resina JAYO' },
   { rotulo: 'Impressão', valor: 'Creality Halot Mage 8K' },
-  { rotulo: 'Pintura', valor: 'À mão, com pincel — sem processo automatizado' },
+  { rotulo: 'Pintura', valor: 'Artesanal, com pincéis' },
   { rotulo: 'Prazo', valor: 'Definido no orçamento, conforme tamanho e complexidade' },
   { rotulo: 'Produção', valor: 'São Paulo, SP' },
 ]
 
 const incluiComum = [
-  'A peça montada, pintada à mão e envernizada',
-  'Pintura aplicada peça por peça, sem processo automatizado',
+  'A peça pintada à mão e envernizada',
+  'As partes separadas, para encaixe ou colagem quando for preciso',
   'Inspeção antes de embalar',
 ]
 
@@ -68,14 +66,14 @@ export const pecas: Peca[] = [
     slug: 'madara-uchiha',
     nome: 'Madara Uchiha',
     serie: 'Naruto Shippuden',
-    origem: 'lab',
+    escultor: 'Bionic 3D',
     fotos: fotos('madara', 9),
     badges: ['Sob encomenda'],
-    chamada: 'O Uchiha em pose de combate, com a foice em arco e a chakra acesa.',
+    chamada:
+      'A pose é a de quem não precisa se mover para dominar o campo: o corpo solto, o olhar baixo e as lâminas de chakra já abertas atrás, como se o combate fosse detalhe.',
     paragrafos: [
-      'A armadura vermelha é o centro da peça: cada placa foi pintada em camadas, com o desgaste puxado nas quinas para não parecer plástico recém-saído do molde. Por baixo dela, o manto roxo recebe uma lavagem escura nas dobras, que é o que dá volume ao tecido quando a peça está na estante.',
-      'A foice desenha um arco que atravessa a composição inteira, com a lâmina em degradê do preto ao branco. Atrás, as lâminas de chakra em resina translúcida azul ficam sem tinta opaca de propósito, para a luz do ambiente atravessar e acender o efeito.',
-      'A base é rocha com raiz e musgo, em tons frios para empurrar o vermelho da armadura para a frente. É a peça que melhor mostra o que a pintura à mão faz por uma escultura.',
+      'A composição se organiza em torno da foice, que corta a peça na diagonal e liga o alto da lâmina à base de rocha. Atrás, as lâminas de chakra sobem em leque, e o gunbai fica preso às costas.',
+      'A base é rocha com raiz e musgo, e é ela que dá peso à cena: o solo quebrado sugere que a luta já passou por ali.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
@@ -84,14 +82,14 @@ export const pecas: Peca[] = [
     slug: 'link-adulto',
     nome: 'Link Adulto',
     serie: 'The Legend of Zelda',
-    origem: 'lab',
+    escultor: 'Bionic 3D',
     fotos: fotos('link_adulto_zelda', 11),
     badges: ['Sob encomenda'],
-    chamada: 'Túnica verde, escudo hyliano e a Master Sword sacada junto da árvore.',
+    chamada:
+      'A árvore retorcida, a espada sacada e a fada acesa ao lado: a cena é a do herói no meio da jornada, não a do começo dela.',
     paragrafos: [
-      'O verde da túnica é construído em três camadas: base, sombra nas dobras e luz nas partes altas do tecido. É o que separa uma peça pintada à mão de uma pintada por spray — de longe você vê o volume do pano, não uma mancha só de cor.',
-      'O escudo traz o brasão pintado à mão livre, e a espada recebe acabamento metálico no fio com a guarda em azul. A fada acompanha a composição em resina translúcida, acesa por dentro.',
-      'A base é uma cena inteira: árvore com folhagem recortada, cogumelos, musgo, a ocarina pendurada e a máscara de pedra encostada. São dezenas de pontos de tinta separados, e é onde mais se gasta tempo.',
+      'A escultura arma um cenário inteiro em volta da figura — tronco com folhagem recortada, cogumelos, musgo, a ocarina pendurada e a máscara de pedra encostada na base de tijolo.',
+      'O escudo hyliano nas costas e a Master Sword em punho fecham a silhueta, e a fada marca o ponto de luz da composição.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
@@ -100,14 +98,14 @@ export const pecas: Peca[] = [
     slug: 'link-crianca',
     nome: 'Link Criança',
     serie: 'The Legend of Zelda',
-    origem: 'lab',
+    escultor: 'Bionic 3D',
     fotos: fotos('link_crianca_zelda', 12),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Sentado no toco, ocarina nas mãos e as notas saindo em luz azul.',
+    chamada:
+      'Sentado no toco, ocarina nas mãos e as notas subindo em espiral. É a única peça do catálogo em que nada está acontecendo — e é esse o ponto.',
     paragrafos: [
-      'É a peça mais silenciosa do catálogo, e por isso a mais difícil de acertar. Sem pose de luta para chamar atenção, tudo depende do rosto e das mãos: a expressão de quem está concentrado tocando, e os dedos posicionados nos furos da ocarina.',
-      'As notas musicais e a fada são resina translúcida azul, sem pigmento opaco, para captarem a luz do ambiente. Contra o verde da túnica e o marrom do toco, é esse azul que puxa o olho para o centro da peça.',
-      'A base combina toco de árvore, pedra e tijolo, cada material com textura e tom próprios. Os cogumelos são pintados um a um, com os pontos brancos aplicados na ponta do pincel.',
+      'A cena é de pausa: o herói criança concentrado na música, com a fada rodeando as notas que saem do instrumento.',
+      'A base combina toco de árvore, pedra e tijolo, com cogumelos ao redor e a lua ao fundo. É o cenário que faz o trabalho que a pose não precisa fazer.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
@@ -119,16 +117,15 @@ export const pecas: Peca[] = [
     slug: 'sukuna',
     nome: 'Sukuna',
     serie: 'Jujutsu Kaisen',
-    origem: 'modelo',
     escultor: 'Michel Rodrigues',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('sukuna', 7),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'O Rei das Maldições sobre o crânio, com o fogo subindo da base.',
+    chamada:
+      'A base composta por um crânio com chifres, dentes monstruosos expostos e chamas ascendentes evoca a ideia do Santuário Malevolente (Fukuma Mizushi). O posicionamento de Sukuna no topo desta pilha de restos indica que o sofrimento alheio é literalmente o chão onde ele pisa. Ele é o senhor absoluto do seu próprio inferno.',
     paragrafos: [
-      'Escultura de Michel Rodrigues para o Bulkamancer Sculpts, em escala 1/8 e 330 mm de altura. O kit vem em 40 peças, montadas, lixadas e pintadas uma a uma aqui no Lab.',
-      'É uma escultura de muita pele exposta, o que a torna um exercício de degradê: o tom precisa variar do músculo à sombra sem marcar transição. As marcas pretas do rosto e do tronco entram depois, à mão livre, e é onde a peça ganha ou perde a semelhança.',
-      'O escultor entrega duas expressões de rosto. Você escolhe qual quer na hora da encomenda.',
+      'A pilha de crânios não é só apoio: os chifres, as arcadas expostas e o fogo que sobe entre os ossos montam o cenário, e é dele que a pose tira a altura.',
+      'No corpo, as quatro marcas do rosto, os dois pares de olhos e as bocas do tronco são o que identifica o personagem à primeira vista. A escultura tem duas expressões de rosto, e você escolhe qual quer na encomenda.',
     ],
     ficha: fichaOficial('229 × 211 × 330', '40 peças', 'Duas expressões de rosto'),
     inclui: incluiComum,
@@ -137,16 +134,15 @@ export const pecas: Peca[] = [
     slug: 'roy-mustang',
     nome: 'Roy Mustang',
     serie: 'Fullmetal Alchemist',
-    origem: 'modelo',
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('roy_mustang', 7),
     badges: ['Sob encomenda'],
-    chamada: 'O Alquimista de Chamas com o estalo aceso na ponta dos dedos.',
+    chamada:
+      'O estalo dos dedos é a única coisa que ele precisa fazer. O resto da cena — o círculo aceso no chão, o casaco erguido pelo calor — é consequência.',
     paragrafos: [
-      'Escultura de KAI para o Bulkamancer Sculpts, em escala 1/8 e 233 mm de altura, montada a partir de 22 peças.',
-      'O uniforme azul-escuro é o desafio: azul escuro engole detalhe se for pintado chapado, então vai em camadas, com realce nas dobras e nos vivos dourados do casaco.',
-      'A chama na mão e o fogo da base são pintados como fonte de luz, com o calor subindo pelo tecido — é o que amarra a peça e faz o fogo parecer aceso.',
+      'A composição gira em torno do fogo: as chamas nascem na base, sobem em volta das pernas e levantam o casaco, que fica aberto e dá largura à silhueta.',
+      'A luva de ignição na mão direita, com o círculo de transmutação bordado, é o detalhe que fecha a leitura do personagem.',
     ],
     ficha: fichaOficial('209 × 164 × 233', '22 peças'),
     inclui: incluiComum,
@@ -155,16 +151,15 @@ export const pecas: Peca[] = [
     slug: 'roy-mustang-ferido',
     nome: 'Roy Mustang · Ferido',
     serie: 'Fullmetal Alchemist',
-    origem: 'modelo',
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('mustang_dodoi', 7),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'A versão marcada pela batalha, para quem prefere a cena dramática.',
+    chamada:
+      'A mesma alquimia, depois do preço: o uniforme rasgado, o corpo marcado e a postura que insiste em ficar de pé.',
     paragrafos: [
-      'Variante da escultura anterior, também de KAI, com o dano da batalha esculpido. Escala 1/8, 237 mm de altura e 21 peças.',
-      'Pede uma pintura mais suja: o uniforme perde o brilho, ganha poeira nas partes baixas e o tecido rasgado recebe fiapos pintados um a um.',
-      'Funciona especialmente bem ao lado da versão íntegra, formando um par que conta a passagem da luta na estante.',
+      'Variante da escultura anterior, com o dano da batalha esculpido: o tecido rasga, o torso fica exposto e a pose perde a folga da versão íntegra.',
+      'Funciona especialmente bem ao lado da outra, formando um par que conta a passagem da luta na estante.',
     ],
     ficha: fichaOficial('161 × 132 × 237', '21 peças'),
     inclui: incluiComum,
@@ -173,16 +168,15 @@ export const pecas: Peca[] = [
     slug: 'qifrey',
     nome: 'Qifrey',
     serie: 'Witch Hat Atelier',
-    origem: 'modelo',
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('qifrey', 8),
     badges: ['Sob encomenda'],
-    chamada: 'O mago de chapéu com o manto em movimento e a paleta mais colorida do catálogo.',
+    chamada:
+      'O mago em pleno gesto, com o manto girando e o aro da base suspendendo a água. A magia aqui é desenho, e a escultura trata disso.',
     paragrafos: [
-      'Escultura de Alex Gray para o Bulkamancer Sculpts, em escala 1/8 e 286 mm de altura, em 37 peças.',
-      'A peça mais colorida que oferecemos, e uma das mais divertidas de pintar: verde-água, roxo, amarelo e rosa dividem a mesma escultura sem nenhuma poder vazar na outra. Exige máscara e paciência entre camadas.',
-      'O chapéu pontudo e o manto em movimento dão bastante superfície para trabalhar sombra, o que faz a peça render bem em estante iluminada.',
+      'O chapéu pontudo e o manto em movimento organizam a silhueta na diagonal, e o aro da base fecha a composição por baixo.',
+      'É a peça de paleta mais variada do catálogo: verde-água, roxo, amarelo e rosa dividem a mesma escultura.',
     ],
     ficha: fichaOficial('136 × 224 × 286', '37 peças'),
     inclui: incluiComum,
@@ -191,16 +185,15 @@ export const pecas: Peca[] = [
     slug: 'frieren',
     nome: 'Frieren',
     serie: 'Frieren e a Jornada para o Além',
-    origem: 'modelo',
     escultor: 'YoruNoAme',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('frieren', 7),
     badges: ['Sob encomenda'],
-    chamada: 'A maga elfa de manto claro, com o cajado em arco atrás do corpo.',
+    chamada:
+      'A maga elfa que atravessou séculos, retratada num instante de calma: o manto aberto, o cajado em arco e nenhuma pressa.',
     paragrafos: [
-      'Escultura de YoruNoAme para o Bulkamancer Sculpts, em escala 1/8 e 276 mm de altura, em 33 peças.',
-      'É a peça de paleta mais clara que oferecemos, e por isso a mais implacável: branco e prata não escondem nada, então cada risco de lixa precisa sumir antes da primeira camada de tinta.',
-      'Duas partes são opcionais e ficam a seu critério: a coroa de flores e o círculo atrás da cabeça. Dá para pedir com as duas, com uma, ou sem nenhuma.',
+      'A composição é vertical e limpa. O cajado desenha um arco atrás do corpo, e o manto e a saia ocupam quase toda a superfície da peça.',
+      'Duas partes são opcionais: a coroa de flores e o círculo atrás da cabeça. Dá para pedir com as duas, com uma, ou sem nenhuma.',
     ],
     ficha: fichaOficial(
       '145 × 167 × 276',
@@ -213,16 +206,15 @@ export const pecas: Peca[] = [
     slug: 'claire-redfield',
     nome: 'Claire Redfield',
     serie: 'Resident Evil',
-    origem: 'modelo',
     escultor: 'Szymon Szpaczek',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('claire_redfield', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Jaqueta de couro vermelha, pistola em punho e o "Let me live" nas costas.',
+    chamada:
+      'Arma em punho no meio da delegacia em ruínas, com o "Let me live" nas costas — a frase que virou assinatura da personagem.',
     paragrafos: [
-      'Escultura de Szymon Szpaczek para o Bulkamancer Sculpts, em escala 1/8 e 237 mm de altura, em 18 peças.',
-      'A jaqueta é o centro da peça: vermelho de couro montado em camadas, com verniz seletivo só nas partes altas. É o que separa couro de plástico pintado de vermelho quando a luz da estante bate.',
-      'Nas costas vem o "Let me live" com o anjo alado em relevo, pintado à mão livre. O escultor entrega duas expressões de rosto — você escolhe na encomenda.',
+      'A base reproduz o piso de pedra da delegacia, com brasões em relevo, coluna quebrada e entulho. A cena situa a personagem sem precisar de mais nada.',
+      'Nas costas da jaqueta vem o bordado com o anjo alado em relevo. A escultura tem duas expressões de rosto, e você escolhe qual quer na encomenda.',
     ],
     ficha: fichaOficial('120 × 119 × 237', '18 peças', 'Duas expressões de rosto'),
     inclui: incluiComum,
@@ -231,16 +223,15 @@ export const pecas: Peca[] = [
     slug: 'gwen-stacy',
     nome: 'Gwen Stacy',
     serie: 'Marvel · Aranhaverso',
-    origem: 'modelo',
     escultor: 'Lukas Lima e Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('gwen_stacy', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Equilibrada no poste da Broadway, com o V nos dedos.',
+    chamada:
+      'Equilibrada num poste da Broadway, o V nos dedos e os pombos como única plateia. A cidade inteira embaixo e nenhuma pressa.',
     paragrafos: [
-      'Escultura de Lukas Lima e Alex Gray para o Bulkamancer Sculpts, em escala 1/8 e 234 mm de altura, em 23 peças.',
-      'O traje é branco, preto e um rosa que precisa cair exatamente no tom: o rosa da Gwen é marca registrada e denuncia qualquer erro de mistura. As faixas correm do capuz até o pé, e cada uma é mascarada e pintada separada da vizinha.',
-      'A pose se apoia em uma perna só, sobre o poste com semáforo e as placas de rua. A máscara é opcional: dá para receber a peça mascarada ou com o rosto à mostra.',
+      'A pose se apoia em uma perna só, sobre o poste com semáforo e as placas de rua. É esse ponto único de contato que dá a sensação de leveza.',
+      'A máscara é opcional: dá para receber a peça mascarada ou com o rosto à mostra.',
     ],
     ficha: fichaOficial('164 × 104 × 234', '23 peças', 'Máscara opcional'),
     inclui: incluiComum,
@@ -249,15 +240,14 @@ export const pecas: Peca[] = [
     slug: 'ken-kaneki',
     nome: 'Ken Kaneki',
     serie: 'Tokyo Ghoul',
-    origem: 'modelo',
     escultor: 'Samiho Studios',
     fotos: fotos('kaneki', 7),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Cabelo branco, olho de ghoul e o kagune fechando um arco vermelho atrás do corpo.',
+    chamada:
+      'O kagune sobe do ombro e fecha um arco em volta do corpo, enquanto as flores-aranha abrem na base. A peça encena a transformação, não a luta.',
     paragrafos: [
-      'O kagune domina a composição: uma espiral que sobe do ombro e dá a volta na figura inteira. Vai em resina translúcida com pigmento no lugar de tinta opaca, para a luz atravessar e o vermelho acender por dentro em vez de ficar chapado.',
-      'O contraste é o motor da peça — cabelo branco, roupa escura, pele fria — com o kagune e as flores-aranha da base como únicas cores quentes. É uma paleta curta, o que deixa cada erro de tom muito visível.',
-      'No rosto, um olho fica humano e o outro recebe a esclera preta com íris vermelha, pintados com pincel de dois fios. É essa assimetria que conta a história do personagem, e é o último detalhe a entrar na peça.',
+      'A espiral do kagune domina a composição e é o que dá volume à peça. O corpo, em contraste, fica quieto no centro.',
+      'Na base, as flores-aranha cercam a rocha — na cultura japonesa, a flor associada à morte e à despedida.',
     ],
     ficha: [
       { rotulo: 'Escala', valor: '1/6' },
@@ -270,16 +260,15 @@ export const pecas: Peca[] = [
     slug: 'lady-maria',
     nome: 'Lady Maria',
     serie: 'Bloodborne',
-    origem: 'modelo',
     escultor: 'Lora Kolori',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('lady_maria', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Chapéu tricórnio, lâmina em punho e a sala da torre do relógio sob os pés.',
+    chamada:
+      'De pé no alto da torre do relógio, lâmina em punho, guardando o que está atrás dela. A pose é de quem não vai sair do lugar.',
     paragrafos: [
-      'Escultura de Lora Kolori para o Bulkamancer Sculpts, em escala 1/8 e 305 mm de altura, em 34 peças.',
-      'A peça inteira vive numa paleta escura: couro preto, tecido marrom queimado e prata suja. Tudo aqui é sombra, e o detalhe só sobrevive com realce seco nas quinas — sem isso, a silhueta vira um borrão preto na estante.',
-      'O cabelo prateado e a echarpe clara no pescoço são os dois pontos de luz da composição, e é por eles que o olho entra na peça.',
+      'A base é a sala hexagonal da torre, com arcos vazados que abrem a composição por baixo e dão profundidade à peça.',
+      'O chapéu tricórnio, o casaco longo e a echarpe no pescoço montam a silhueta. O sangue na lâmina é o único detalhe narrativo que a escultura entrega.',
     ],
     ficha: fichaOficial('204 × 132 × 305', '34 peças'),
     inclui: incluiComum,
@@ -288,15 +277,14 @@ export const pecas: Peca[] = [
     slug: 'toph',
     nome: 'Toph',
     serie: 'Avatar · A Lenda de Aang',
-    origem: 'modelo',
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('toph', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'A dobradora de terra em guarda, com as lascas de rocha subindo do chão.',
+    chamada:
+      'Punho fechado, pé fincado e a rocha subindo do chão em leque. A escultura pega o instante exato entre o golpe e o impacto.',
     paragrafos: [
-      'Escultura de Alex Gray para o Bulkamancer Sculpts, em escala 1/8 e 261 mm de altura, em 16 peças.',
-      'A pose é de impacto: pé firme, punho fechado e as lascas de rocha saindo do chão em leque atrás dela. Essa parte é pintada como pedra viva, com cinza frio na face de fora e ocre na fratura — senão vira um monte de espeto cinza.',
+      'As lascas de pedra saem do solo atrás dela e abrem a composição para os lados, transformando a base em parte da ação.',
       'A máscara é opcional: dá para receber a peça com ou sem ela.',
     ],
     ficha: fichaOficial('113 × 193 × 261', '16 peças', 'Máscara opcional'),
@@ -306,15 +294,14 @@ export const pecas: Peca[] = [
     slug: 'verso',
     nome: 'Verso',
     serie: 'Clair Obscur · Expedition 33',
-    origem: 'modelo',
     escultor: 'Vik3DFigures',
     fotos: fotos('verso', 7),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Casaco escuro, faixa roxa e a espada baixa, no fim da caminhada.',
+    chamada:
+      'De pé, espada baixa, no fim da caminhada. Nenhuma pose de combate — a peça aposta na contenção.',
     paragrafos: [
-      'É a peça mais contida do catálogo: nada de pose de combate, só a figura de pé com a espada baixa. Sem ação para chamar atenção, quem sustenta a peça é o tecido — e tecido escuro é o pior cenário possível para quem pinta.',
-      'O casaco vai em camadas de cinza-azulado para as dobras existirem, com realce seco nas quinas. A faixa roxa da cintura e os cordões dourados do peito são os únicos pontos de cor, e por isso entram por último, com a peça já quase fechada.',
-      'O cabelo grisalho e a barba pedem pincel fino: são fios curtos, um a um, com o branco puxado só nas pontas. A base é rocha baixa e discreta de propósito, para não competir com a figura.',
+      'A composição é vertical e fechada: o casaco longo, a faixa na cintura e os cordões no peito formam a silhueta inteira, sem nada saindo para os lados.',
+      'A base é rocha baixa e discreta, feita para não competir com a figura.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
@@ -323,22 +310,20 @@ export const pecas: Peca[] = [
     slug: 'mario-e-luigi',
     nome: 'Mario & Luigi',
     serie: 'Super Mario',
-    origem: 'modelo',
+    escultor: 'Bionic 3D',
     fotos: fotos('mario_luigi', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'A dupla em poncho e sombrero, com as caveiras mexicanas pintadas no rosto.',
+    chamada:
+      'Os dois irmãos de poncho e sombrero, com a caveira mexicana pintada no rosto. O encontro entre o encanador e o Día de Muertos.',
     paragrafos: [
-      'Um par, não uma peça só: os dois irmãos lado a lado, de poncho bordado e sombrero, cada um na sua base — que podem ficar juntas ou separadas na estante.',
-      'Depois do Qifrey, é a peça mais colorida que oferecemos. Os ponchos levam faixas em laranja, amarelo e verde pintadas uma a uma, e o bordado das barras sai ponto por ponto, na ponta do pincel.',
-      'Nas artes do escultor a dupla aparece das duas formas, de rosto descoberto e com a caveira mexicana pintada; na hora da encomenda a gente combina qual das duas versões você quer na sua.',
+      'É um par, não uma peça só: cada irmão tem a própria base, e elas podem ficar juntas ou separadas na estante.',
+      'Os ponchos bordados, os sombreros e os cactos da base montam o cenário. Nas artes a dupla aparece de rosto descoberto e com a caveira pintada — na encomenda a gente combina qual das duas versões você quer.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
   },
 ]
 
-export const products = pecas.filter((p) => p.origem === 'lab')
-export const modelos = pecas.filter((p) => p.origem === 'modelo')
 
 export function acharPeca(slug: string | undefined) {
   return pecas.find((p) => p.slug === slug)
@@ -347,44 +332,59 @@ export function acharPeca(slug: string | undefined) {
 export type Destaque = {
   eyebrow: string
   titulo: string
-  subtitulo: string
+  /** Segunda linha do nome. Personagem de nome único fica só com a primeira. */
+  subtitulo?: string
   texto: string
   foto: Foto
   slug: string
 }
 
-export const destaques: Destaque[] = [
-  {
-    eyebrow: 'Naruto Shippuden · Peça em destaque',
-    titulo: 'Madara',
-    subtitulo: 'Uchiha',
-    texto:
-      'Armadura vermelha, gunbai nas costas e a foice cortando o ar em lâmina roxa. Impressa em resina, lixada peça por peça e pintada à mão até o azul da chakra ficar no ponto.',
-    foto: products[0].fotos[0],
-    slug: products[0].slug,
-  },
-  {
-    eyebrow: 'The Legend of Zelda · Peça em destaque',
-    titulo: 'Link',
-    subtitulo: 'Adulto',
-    texto:
-      'Túnica verde, escudo hyliano nas costas e a Master Sword sacada junto da árvore. Base cheia de folha, cogumelo e musgo, tudo pintado fio a fio.',
-    foto: products[1].fotos[0],
-    slug: products[1].slug,
-  },
-  {
-    eyebrow: 'The Legend of Zelda · Peça em destaque',
-    titulo: 'Link',
-    subtitulo: 'Criança',
-    texto:
-      'Sentado no toco, ocarina nas mãos e as notas saindo em luz azul. Uma peça silenciosa no meio de tanta pose de luta — e das mais difíceis de pintar.',
-    foto: products[2].fotos[0],
-    slug: products[2].slug,
-  },
-]
+/**
+ * Monta o destaque a partir da peça, para nome de série e foto de capa não
+ * viverem duplicados aqui e na lista.
+ */
+function destaque(slug: string, titulo: string, subtitulo: string | undefined, texto: string): Destaque {
+  const peca = acharPeca(slug)
+  if (!peca) throw new Error(`destaque: não existe peça com slug ${slug}`)
+  return {
+    eyebrow: `${peca.serie} · Peça em destaque`,
+    titulo,
+    subtitulo,
+    texto,
+    foto: peca.fotos[0],
+    slug,
+  }
+}
 
+export const destaques: Destaque[] = [
+  destaque(
+    'sukuna',
+    'Ryomen',
+    'Sukuna',
+    'O Rei das Maldições no alto de uma pilha de crânios, com as chamas subindo entre os ossos. A maior peça do catálogo: 330 mm em escala 1/8.',
+  ),
+  destaque(
+    'frieren',
+    'Frieren',
+    undefined,
+    'A maga elfa em manto claro, com o cajado desenhando um arco atrás do corpo. Coroa de flores e círculo atrás da cabeça são opcionais.',
+  ),
+  destaque(
+    'madara-uchiha',
+    'Madara',
+    'Uchiha',
+    'De pé sobre a rocha, gunbai às costas e a foice traçando um arco largo, com as lâminas de chakra abertas atrás dele.',
+  ),
+  destaque(
+    'roy-mustang',
+    'Roy',
+    'Mustang',
+    'O Alquimista de Chamas no instante do estalo: o círculo aceso no chão e o fogo levantando o casaco.',
+  ),
+]
 export const duracaoDestaque = 7000
-export const fotoBancada = products[1].fotos[2]
+/** Foto que ilustra a seção "Sobre". */
+export const fotoSobre = pecas[0].fotos[1]
 
 export const comparador = {
   cru: '/fotos/comparador/sukuna-resina.webp',
@@ -408,7 +408,7 @@ export const equipment = [
   { brand: 'Creality', model: 'Halot Mage 8K', text: 'A impressora de resina onde a peça nasce. É ela que reproduz o corte do escultor.' },
   { brand: 'JAYO', model: 'Resina', text: 'A resina usada em tudo que sai daqui.' },
   { brand: 'Anycubic', model: 'Lavagem & Cura', text: 'Lava e cura a peça logo depois da impressão, antes de qualquer preparação de superfície.' },
-  { brand: 'Pincel', model: 'Trabalho manual', text: 'Não existe pintura automatizada aqui. Cor, sombra, luz e detalhe entram à mão, um de cada vez.' },
+  { brand: 'Pincel', model: 'Pintura artesanal', text: 'Cor, sombra, luz e detalhe entram à mão, um de cada vez, peça por peça.' },
 ]
 
 export const faq = [
@@ -426,7 +426,23 @@ export const faq = [
   },
   {
     q: 'O que eu recebo, exatamente?',
-    a: 'Uma peça física montada, pintada e envernizada, pronta para exposição e coleção — e não uma impressão 3D recém-tirada da máquina.',
+    a: 'Uma peça física pintada à mão e envernizada, pronta para exposição e coleção — e não uma impressão 3D recém-tirada da máquina.',
+  },
+  {
+    q: 'A peça chega montada?',
+    a: 'Não. Ela vai em partes, para encaixe ou colagem quando for preciso. As esculturas são divididas em muitas peças justamente para caber na impressora, e algumas passam de trinta.',
+  },
+  {
+    q: 'As fotos são da peça que eu vou receber?',
+    a: 'Não. As imagens do site são a arte de divulgação de quem esculpiu cada modelo. A sua é impressa e pintada aqui, uma de cada vez — então existe variação natural entre uma peça e outra.',
+  },
+  {
+    q: 'Posso pedir uma pintura diferente da foto?',
+    a: 'Pode. Manda a referência no WhatsApp junto do pedido: como a pintura é feita à mão, peça por peça, dá para ajustar paleta e acabamento.',
+  },
+  {
+    q: 'Qual é o tamanho das peças?',
+    a: 'Varia. A ficha de cada peça traz escala e dimensões; a maior parte é escala 1/8, entre 23 e 33 cm de altura.',
   },
   {
     q: 'Como funcionam pagamento e envio?',

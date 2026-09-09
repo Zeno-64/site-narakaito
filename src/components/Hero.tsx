@@ -40,7 +40,9 @@ export default function Hero() {
   const [pausado, setPausado] = useState(false)
 
   const peca = destaques[ativo]
-  const nomeCompleto = `${peca.titulo}\n${peca.subtitulo}`
+  const nomeCompleto = peca.subtitulo
+    ? `${peca.titulo}\n${peca.subtitulo}`
+    : peca.titulo
   const digitado = useMaquinaDeEscrever(nomeCompleto)
   const [linha1, linha2 = ''] = digitado.split('\n')
 
@@ -205,12 +207,14 @@ export default function Hero() {
 
           <h1
             className="mt-6 font-display text-5xl font-normal leading-[1.05] tracking-[0.02em] text-bone-100 md:text-6xl lg:text-7xl"
-            aria-label={`${peca.titulo} ${peca.subtitulo}`}
+            aria-label={nomeCompleto.replace('\n', ' ')}
           >
             <span aria-hidden>
-              <span className="block min-h-[1.05em]">{linha1}</span>
+              {/* Sem subtítulo, o nome inteiro vai na linha em brasa: uma
+                  linha vazia de altura fixa abriria um buraco no título. */}
+              {peca.subtitulo && <span className="block min-h-[1.05em]">{linha1}</span>}
               <span className="brilho-ember block min-h-[1.05em] text-ember-400">
-                {linha2}
+                {peca.subtitulo ? linha2 : linha1}
                 {digitado.length < nomeCompleto.length && (
                   <span className="ml-1 inline-block w-[0.06em] animate-pulse bg-ember-400 align-baseline text-transparent">
                     |
@@ -285,10 +289,10 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center gap-3">
         {destaques.map((d, i) => (
           <button
-            key={d.titulo + d.subtitulo}
+            key={d.slug}
             type="button"
             onClick={() => irPara(i)}
-            aria-label={`Ver ${d.titulo} ${d.subtitulo}`}
+            aria-label={`Ver ${[d.titulo, d.subtitulo].filter(Boolean).join(' ')}`}
             aria-current={i === ativo}
             className="group p-1.5"
           >
