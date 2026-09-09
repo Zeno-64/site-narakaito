@@ -11,7 +11,8 @@ Nada nesta pasta entra no build: o Vite só empacota `src/` e `public/`.
 ## Como estava ligado no site
 
 `PecaTresD.tsx` (nesta pasta) era um componente que entrava dentro do
-`CaixaReveal`, num `<canvas>` por cima da caixa em CSS 3D.
+`CaixaReveal`, num `<canvas>` por cima da caixa em CSS 3D. A seção da caixa
+também saiu do site e está em [`../caixa-reveal/`](../caixa-reveal/README.md).
 
 Canvas e CSS 3D não se intercalam — o canvas é sempre uma camada inteira na
 frente —, então a ilusão de "sair de dentro da caixa" vinha de um `clip-path`

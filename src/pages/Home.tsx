@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom'
 import About from '../components/About'
 import Lab from '../components/Lab'
 import BeforeAfter from '../components/BeforeAfter'
-import CaixaReveal from '../components/CaixaReveal'
 import Catalog from '../components/Catalog'
 import Differentials from '../components/Differentials'
 import Faq from '../components/Faq'
@@ -31,7 +30,6 @@ export default function Home() {
       <Hero />
       <Differentials />
       <Catalog />
-      <CaixaReveal />
       <Library />
       <BeforeAfter />
       <Lab />
