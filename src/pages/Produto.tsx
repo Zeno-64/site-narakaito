@@ -164,7 +164,9 @@ export default function Produto() {
           {peca.origem === 'modelo' && peca.escultor && (
             <p className="mt-6 text-xs leading-relaxed text-bone-600">
               As imagens desta página são a arte de divulgação da escultura, assinada por{' '}
-              {peca.escultor}. A impressão e a pintura são feitas aqui no Lab.
+              {peca.escultor}
+              {peca.estudio && ` para o ${peca.estudio}`}. A impressão e a pintura são feitas
+              aqui no Lab.
             </p>
           )}
         </div>

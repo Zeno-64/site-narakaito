@@ -16,6 +16,8 @@ export type Peca = {
   /** 'lab' = fotos da nossa bancada. 'modelo' = arte de divulgação do escultor. */
   origem: 'lab' | 'modelo'
   escultor?: string
+  /** Estúdio que assina a escultura, quando há um por trás do escultor. */
+  estudio?: string
   chamada: string
   paragrafos: string[]
   ficha: { rotulo: string; valor: string }[]
@@ -45,6 +47,22 @@ const alturaEscala = [
   { rotulo: 'Altura', valor: 'A confirmar' },
   { rotulo: 'Escala', valor: 'A confirmar' },
 ]
+
+/**
+ * Ficha da escultura como vem no readme do estúdio, sem nada inferido.
+ *
+ * As dimensões são do modelo inteiro, no padrão do arquivo (largura ×
+ * profundidade × altura) -- não da base, como estava escrito antes aqui.
+ */
+function fichaOficial(dimensoes: string, montagem: string, opcoes?: string) {
+  return [
+    { rotulo: 'Escala', valor: '1/8' },
+    { rotulo: 'Dimensões', valor: `${dimensoes} mm (L × P × A)` },
+    { rotulo: 'Montagem', valor: montagem },
+    ...(opcoes ? [{ rotulo: 'Opções', valor: opcoes }] : []),
+    ...fichaComum,
+  ]
+}
 
 export const pecas: Peca[] = [
   {
@@ -104,19 +122,16 @@ export const pecas: Peca[] = [
     serie: 'Jujutsu Kaisen',
     origem: 'modelo',
     escultor: 'Michel Rodrigues',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('sukuna', 7),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'O Rei das Maldições sobre o crânio, com o fogo subindo da base.',
     paragrafos: [
-      'Escultura com muita pele exposta, o que torna a peça um exercício de degradê: o tom precisa variar do músculo à sombra sem marcar transição. As marcas pretas do rosto e do tronco entram depois, à mão livre, e é onde a peça ganha ou perde a semelhança.',
-      'As quatro marcas do rosto, os dois pares de olhos e as bocas extras do tronco entram à mão livre, depois da pele pronta. Errar a espessura dessas linhas é errar o Sukuna: é o traço que faz o Rei das Maldições parecer ele mesmo.',
-      'A base traz crânios, a arcada e as chamas esculpidas, que pintamos em laranja quente com as pontas puxadas ao branco para simular incandescência.',
+      'Escultura de Michel Rodrigues para o Bulkamancer Sculpts, em escala 1/8 e 330 mm de altura. O kit vem em 40 peças, montadas, lixadas e pintadas uma a uma aqui no Lab.',
+      'É uma escultura de muita pele exposta, o que a torna um exercício de degradê: o tom precisa variar do músculo à sombra sem marcar transição. As marcas pretas do rosto e do tronco entram depois, à mão livre, e é onde a peça ganha ou perde a semelhança.',
+      'O escultor entrega duas expressões de rosto. Você escolhe qual quer na hora da encomenda.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '330 mm' },
-      { rotulo: 'Base', valor: '211 × 229 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial('229 × 211 × 330', '40 peças', 'Duas expressões de rosto'),
     inclui: incluiComum,
   },
   {
@@ -125,19 +140,16 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     origem: 'modelo',
     escultor: 'KAI',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('roy_mustang', 7),
     badges: ['Sob encomenda'],
     chamada: 'O Alquimista de Chamas com o estalo aceso na ponta dos dedos.',
     paragrafos: [
+      'Escultura de KAI para o Bulkamancer Sculpts, em escala 1/8 e 233 mm de altura, montada a partir de 22 peças.',
       'O uniforme azul-escuro é o desafio: azul escuro engole detalhe se for pintado chapado, então vai em camadas, com realce nas dobras e nos vivos dourados do casaco.',
-      'A luva de ignição da mão direita é o detalhe que define o personagem: o círculo de transmutação bordado nela sai pintado à mão, fio a fio, e a chama que nasce do estalo é feita em degradê do branco ao laranja para parecer temperatura, não tinta.',
-      'O fogo da base sobe pelo casaco esvoaçante e ilumina o tecido de baixo para cima — é essa luz pintada que amarra a peça e faz o Alquimista de Chamas parecer no meio de um combate, e não posando.',
+      'A chama na mão e o fogo da base são pintados como fonte de luz, com o calor subindo pelo tecido — é o que amarra a peça e faz o fogo parecer aceso.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '233 mm' },
-      { rotulo: 'Base', valor: '164 × 209 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial('209 × 164 × 233', '22 peças'),
     inclui: incluiComum,
   },
   {
@@ -146,19 +158,16 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     origem: 'modelo',
     escultor: 'KAI',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('mustang_dodoi', 7),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'A versão marcada pela batalha, para quem prefere a cena dramática.',
     paragrafos: [
-      'Variante da escultura anterior, com o dano da batalha esculpido. Pede uma pintura mais suja: o uniforme perde o brilho, ganha poeira nas partes baixas e o tecido rasgado recebe fiapos pintados um a um.',
-      'O uniforme rasgado deixa o torso à mostra, e é aí que a peça se decide: o hematoma e o sangue seco pedem camadas transparentes por cima da pele já pronta, senão viram uma mancha vermelha chapada.',
+      'Variante da escultura anterior, também de KAI, com o dano da batalha esculpido. Escala 1/8, 237 mm de altura e 21 peças.',
+      'Pede uma pintura mais suja: o uniforme perde o brilho, ganha poeira nas partes baixas e o tecido rasgado recebe fiapos pintados um a um.',
       'Funciona especialmente bem ao lado da versão íntegra, formando um par que conta a passagem da luta na estante.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '237 mm' },
-      { rotulo: 'Base', valor: '132 × 161 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial('161 × 132 × 237', '21 peças'),
     inclui: incluiComum,
   },
   {
@@ -166,15 +175,17 @@ export const pecas: Peca[] = [
     nome: 'Qifrey',
     serie: 'Witch Hat Atelier',
     origem: 'modelo',
-    escultor: 'Bulkamancer',
+    escultor: 'Alex Gray',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('qifrey', 8),
     badges: ['Sob encomenda'],
     chamada: 'O mago de chapéu com o manto em movimento e a paleta mais colorida do catálogo.',
     paragrafos: [
+      'Escultura de Alex Gray para o Bulkamancer Sculpts, em escala 1/8 e 286 mm de altura, em 37 peças.',
       'A peça mais colorida que oferecemos, e uma das mais divertidas de pintar: verde-água, roxo, amarelo e rosa dividem a mesma escultura sem nenhuma poder vazar na outra. Exige máscara e paciência entre camadas.',
-      'O chapéu pontudo e o manto em movimento dão bastante superfície para trabalhar sombra, e o caldeirão suspenso no aro da base — com a água e as folhas dentro — é uma segunda cena inteira, pintada separada antes de a peça fechar.',
+      'O chapéu pontudo e o manto em movimento dão bastante superfície para trabalhar sombra, o que faz a peça render bem em estante iluminada.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: fichaOficial('136 × 224 × 286', '37 peças'),
     inclui: incluiComum,
   },
   {
@@ -182,20 +193,21 @@ export const pecas: Peca[] = [
     nome: 'Frieren',
     serie: 'Frieren e a Jornada para o Além',
     origem: 'modelo',
-    escultor: 'YoruNoAne',
+    escultor: 'YoruNoAme',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('frieren', 7),
     badges: ['Sob encomenda'],
-    chamada: 'A maga elfa com coroa de flores, cajado em arco e o manto aberto no vento.',
+    chamada: 'A maga elfa de manto claro, com o cajado em arco atrás do corpo.',
     paragrafos: [
-      'É a peça de paleta mais clara que oferecemos, e por isso a mais implacável: branco e prata não escondem nada, então cada risco de lixa precisa sumir antes da primeira camada de tinta. O manto e a saia são superfície lisa quase inteira — só o acabamento sustenta.',
-      'O cabelo prateado sai em duas marias longas que atravessam a composição. Vai com base fria e realce quase branco nas mechas de cima, para o volume aparecer mesmo de longe, e a coroa de flores entra depois, flor por flor, como o único ponto de cor quente da peça.',
-      'O cajado desenha um arco por trás do corpo, e os anéis ficam em resina translúcida, sem pigmento opaco, para acender com a luz do ambiente — o mesmo tratamento que damos à chakra do Madara e às notas do Link criança.',
+      'Escultura de YoruNoAme para o Bulkamancer Sculpts, em escala 1/8 e 276 mm de altura, em 33 peças.',
+      'É a peça de paleta mais clara que oferecemos, e por isso a mais implacável: branco e prata não escondem nada, então cada risco de lixa precisa sumir antes da primeira camada de tinta.',
+      'Duas partes são opcionais e ficam a seu critério: a coroa de flores e o círculo atrás da cabeça. Dá para pedir com as duas, com uma, ou sem nenhuma.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '276 mm' },
-      { rotulo: 'Base', valor: '167 × 145 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial(
+      '145 × 167 × 276',
+      '33 peças',
+      'Coroa de flores e círculo atrás da cabeça, cada um opcional',
+    ),
     inclui: incluiComum,
   },
   {
@@ -204,19 +216,16 @@ export const pecas: Peca[] = [
     serie: 'Resident Evil',
     origem: 'modelo',
     escultor: 'Szymon Szpaczek',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('claire_redfield', 8),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'Jaqueta de couro vermelha, pistola em punho e o "Let me live" nas costas.',
     paragrafos: [
-      'A jaqueta é o centro da peça: vermelho de couro montado em camadas, com verniz seletivo só nas partes altas. É o que separa couro de plástico pintado de vermelho quando a luz da estante bate na peça.',
-      'Nas costas vem o "Let me live" com o anjo alado em relevo, pintado à mão livre — o detalhe que quem jogou Resident Evil 2 procura assim que vira a peça.',
-      'A base é o piso de pedra da delegacia, com brasões em relevo, coluna quebrada e entulho. Cada material leva uma lavagem de sujeira diferente, senão o conjunto vira um bloco cinza só.',
+      'Escultura de Szymon Szpaczek para o Bulkamancer Sculpts, em escala 1/8 e 237 mm de altura, em 18 peças.',
+      'A jaqueta é o centro da peça: vermelho de couro montado em camadas, com verniz seletivo só nas partes altas. É o que separa couro de plástico pintado de vermelho quando a luz da estante bate.',
+      'Nas costas vem o "Let me live" com o anjo alado em relevo, pintado à mão livre. O escultor entrega duas expressões de rosto — você escolhe na encomenda.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '237 mm' },
-      { rotulo: 'Base', valor: '119 × 120 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial('120 × 119 × 237', '18 peças', 'Duas expressões de rosto'),
     inclui: incluiComum,
   },
   {
@@ -225,19 +234,16 @@ export const pecas: Peca[] = [
     serie: 'Marvel · Aranhaverso',
     origem: 'modelo',
     escultor: 'Lukas Lima e Alex Gray',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('gwen_stacy', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'Equilibrada no poste da Broadway, capuz aberto e o V nos dedos.',
+    chamada: 'Equilibrada no poste da Broadway, com o V nos dedos.',
     paragrafos: [
+      'Escultura de Lukas Lima e Alex Gray para o Bulkamancer Sculpts, em escala 1/8 e 234 mm de altura, em 23 peças.',
       'O traje é branco, preto e um rosa que precisa cair exatamente no tom: o rosa da Gwen é marca registrada e denuncia qualquer erro de mistura. As faixas correm do capuz até o pé, e cada uma é mascarada e pintada separada da vizinha.',
-      'A pose se apoia em uma perna só, sobre o poste com semáforo e as placas de Broadway e Wall St. As placas levam letra pintada à mão e desgaste de metal exposto; os pombos da base saem em cinza fumê com o peito iridescente.',
-      'O capuz aberto deixa o cabelo loiro e o rosto à mostra, e é aí que a peça se decide — olho pequeno, sobrancelha marcada e nenhum espaço para pincel tremido.',
+      'A pose se apoia em uma perna só, sobre o poste com semáforo e as placas de rua. A máscara é opcional: dá para receber a peça mascarada ou com o rosto à mostra.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '234 mm' },
-      { rotulo: 'Base', valor: '104 × 164 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial('164 × 104 × 234', '23 peças', 'Máscara opcional'),
     inclui: incluiComum,
   },
   {
@@ -267,19 +273,16 @@ export const pecas: Peca[] = [
     serie: 'Bloodborne',
     origem: 'modelo',
     escultor: 'Lora Kolori',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('lady_maria', 8),
     badges: ['Novidade', 'Sob encomenda'],
     chamada: 'Chapéu tricórnio, lâmina em punho e a sala da torre do relógio sob os pés.',
     paragrafos: [
+      'Escultura de Lora Kolori para o Bulkamancer Sculpts, em escala 1/8 e 305 mm de altura, em 34 peças.',
       'A peça inteira vive numa paleta escura: couro preto, tecido marrom queimado e prata suja. Tudo aqui é sombra, e o detalhe só sobrevive com realce seco nas quinas — sem isso, a silhueta vira um borrão preto na estante.',
-      'O cabelo prateado e a echarpe clara no pescoço são os dois pontos de luz da composição, e é por eles que o olho entra na peça. O sangue da lâmina entra por último, em camadas transparentes, para ficar úmido em vez de virar tinta vermelha.',
-      'A base é a sala hexagonal da torre, com arcos vazados. É onde a escultura ganha profundidade e onde a pintura precisa fingir uma fonte de luz que não existe.',
+      'O cabelo prateado e a echarpe clara no pescoço são os dois pontos de luz da composição, e é por eles que o olho entra na peça.',
     ],
-    ficha: [
-      { rotulo: 'Altura', valor: '305 mm' },
-      { rotulo: 'Base', valor: '132 × 204 mm' },
-      ...fichaComum,
-    ],
+    ficha: fichaOficial('204 × 132 × 305', '34 peças'),
     inclui: incluiComum,
   },
   {
@@ -288,15 +291,16 @@ export const pecas: Peca[] = [
     serie: 'Avatar · A Lenda de Aang',
     origem: 'modelo',
     escultor: 'Alex Gray',
+    estudio: 'Bulkamancer Sculpts',
     fotos: fotos('toph', 8),
     badges: ['Novidade', 'Sob encomenda'],
-    chamada: 'A dobradora de terra adulta, punhos fechados e as lascas de rocha subindo do chão.',
+    chamada: 'A dobradora de terra em guarda, com as lascas de rocha subindo do chão.',
     paragrafos: [
+      'Escultura de Alex Gray para o Bulkamancer Sculpts, em escala 1/8 e 261 mm de altura, em 16 peças.',
       'A pose é de impacto: pé firme, punho fechado e as lascas de rocha saindo do chão em leque atrás dela. Essa parte é pintada como pedra viva, com cinza frio na face de fora e ocre na fratura — senão vira um monte de espeto cinza.',
-      'O corpo é o outro desafio. É uma escultura de musculatura marcada e muita pele exposta, o que significa degradê sem transição visível: sombra na costela, luz no ombro e nada de linha dura entre as duas.',
-      'A faixa do peito e a calça verde seguram a paleta, e a bandana amarela na testa é o único ponto de cor forte — o truque de sempre para o olho ir direto ao rosto.',
+      'A máscara é opcional: dá para receber a peça com ou sem ela.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: fichaOficial('113 × 193 × 261', '16 peças', 'Máscara opcional'),
     inclui: incluiComum,
   },
   {

@@ -32,6 +32,7 @@ export default function Library() {
                   {modelo.escultor && (
                     <p className="mt-4 text-xs text-bone-600">
                       Escultura de {modelo.escultor}
+                      {modelo.estudio && ` · ${modelo.estudio}`}
                     </p>
                   )}
                   <Link
