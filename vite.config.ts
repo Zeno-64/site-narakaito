@@ -90,7 +90,7 @@ function metaPorPeca(): Plugin {
           // mesmos textos que o definirMeta usa na página, para o que o
           // crawler lê e o que o visitante vê não divergirem
           titulo: `${peca.nome} — ${peca.serie} em resina pintada à mão · Narakaito Lab`,
-          descricao: `${peca.chamada} Impressa em resina premium e pintada à mão sob encomenda, com envio para todo o Brasil.`,
+          descricao: `${peca.chamada} Impressa em resina e pintada à mão, peça por peça, sob encomenda em São Paulo.`,
           imagem,
           url: `${SITE}/peca/${peca.slug}`,
           alt: `${peca.nome} — peça em resina pintada à mão`,

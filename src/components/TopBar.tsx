@@ -1,9 +1,9 @@
 import { whatsappUrl } from '../data/site'
 
 const notices = [
-  'Fila de setembro aberta · poucas vagas',
-  'Envio para todo o Brasil com rastreio',
-  'Parcelamos no cartão',
+  'Produção artesanal em São Paulo',
+  'Impressão em resina e pintura à mão, peça por peça',
+  'Cada figure é produzida individualmente',
   'Orçamento sem compromisso no WhatsApp',
 ]
 

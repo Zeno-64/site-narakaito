@@ -25,7 +25,7 @@ export default function BeforeAfter() {
           eyebrow="Antes & depois"
           title="O que a pintura à mão muda"
           align="center"
-          blurb="Toda peça começa cinza e sem graça. O que dá vida a ela são as horas de aerógrafo, pincel e lavagem de sombra. Arraste para comparar."
+          blurb="Toda peça começa cinza e sem graça. O que dá vida a ela são as horas de pincel: cor, sombra, luz e detalhe, um a um. Arraste para comparar."
         />
 
         <div

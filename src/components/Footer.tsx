@@ -16,8 +16,8 @@ export default function Footer() {
             height={748}
           />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-bone-500">
-            Colecionáveis em resina premium, impressos em alta resolução e pintados à mão,
-            peça por peça. Sob encomenda, com envio para todo o Brasil.
+            Colecionáveis em resina, impressos em 3D e pintados à mão, peça por peça.
+            Operação independente em São Paulo, sob encomenda.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export default function Footer() {
             </li>
           </ul>
           <p className="eyebrow mt-8 text-[0.625rem] text-bone-600">
-            Envio para todo o Brasil · Parcelamos no cartão
+            São Paulo, SP · Produção sob encomenda
           </p>
         </div>
       </div>

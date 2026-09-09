@@ -26,15 +26,15 @@ export default function About() {
           <span aria-hidden className="mt-6 block h-px w-20 bg-ember-500" />
 
           <p className="mt-7 text-base leading-relaxed text-bone-300">
-            O Narakaito Lab nasceu de uma bancada pequena, uma impressora de resina e a
-            teimosia de fazer o próprio colecionável em vez de esperar o lançamento oficial.
-            De lá pra cá virou ofício: cada peça passa por impressão, lixa, primer, aerógrafo
-            e pincel antes de sair daqui.
+            O Narakaito Lab é uma operação independente de figures colecionáveis, em São
+            Paulo. O projeto é conduzido pelo próprio criador, que participa de todas as
+            etapas: fatiamento do modelo, impressão em resina, lavagem, cura, remoção de
+            suportes, preparação de superfície, primer, pintura, verniz e montagem.
           </p>
           <p className="mt-5 text-base leading-relaxed text-bone-300">
-            Não existe linha de produção. Existe fila, tempo de secagem e uma pessoa
-            decidindo onde vai a próxima sombra. Você fala com quem está pintando, acompanha o
-            processo por foto e recebe a peça em casa.
+            Não existe linha de produção nem pintura automatizada. Existe tempo de secagem
+            e uma pessoa decidindo onde vai a próxima sombra, peça por peça. O que sai daqui é
+            uma figure pronta para a estante — não uma impressão recém-tirada da máquina.
           </p>
 
           <a

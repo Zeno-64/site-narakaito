@@ -104,9 +104,8 @@ export default function CaixaReveal() {
             Da bancada para a sua estante
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-bone-500">
-            Antes de despachar, a gente fotografa a peça pronta e manda o código de
-            rastreio. Deu problema no caminho? Manda foto na hora de abrir que a gente
-            resolve.
+            Cada peça passa por inspeção antes de ser embalada. O que chega até você é uma
+            figure montada, pintada à mão e envernizada — pronta para a estante.
           </p>
         </div>
       </section>
@@ -164,9 +163,8 @@ export default function CaixaReveal() {
             Da bancada para a sua estante
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-bone-500">
-            Antes de despachar, a gente fotografa a peça pronta e manda o código de
-            rastreio. Deu problema no caminho? Manda foto na hora de abrir que a gente
-            resolve.
+            Cada peça passa por inspeção antes de ser embalada. O que chega até você é uma
+            figure montada, pintada à mão e envernizada — pronta para a estante.
           </p>
         </motion.div>
       </div>

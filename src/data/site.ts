@@ -29,18 +29,17 @@ export type Peca = {
 // Ficha que vale para tudo que sai daqui. Altura e escala ficam por peça,
 // porque variam — as marcadas como "A confirmar" precisam ser medidas.
 const fichaComum = [
-  { rotulo: 'Material', valor: 'Resina de alta densidade, curada em UV' },
-  { rotulo: 'Pintura', valor: 'À mão: aerógrafo, pincel e lavagem de sombra' },
-  { rotulo: 'Impressão', valor: 'LCD 16K' },
-  { rotulo: 'Prazo', valor: '2 a 4 semanas após a confirmação' },
-  { rotulo: 'Envio', valor: 'Todo o Brasil, com rastreio' },
+  { rotulo: 'Material', valor: 'Resina JAYO, lavada e curada em UV' },
+  { rotulo: 'Impressão', valor: 'Creality Halot Mage 8K' },
+  { rotulo: 'Pintura', valor: 'À mão, com pincel — sem processo automatizado' },
+  { rotulo: 'Prazo', valor: 'Definido no orçamento, conforme tamanho e complexidade' },
+  { rotulo: 'Produção', valor: 'São Paulo, SP' },
 ]
 
 const incluiComum = [
-  'A peça montada, pintada e selada',
-  'Base cenário já fixada',
-  'Fotos da peça pronta antes do envio',
-  'Envio com código de rastreio para todo o Brasil',
+  'A peça montada, pintada à mão e envernizada',
+  'Pintura aplicada peça por peça, sem processo automatizado',
+  'Inspeção antes de embalar',
 ]
 
 const alturaEscala = [
@@ -399,39 +398,39 @@ export const collections = [
 ]
 
 export const differentials = [
-  { title: 'Resina Premium', text: 'Resina de alta densidade, curada por UV, com acabamento firme e sem deformar com o tempo.' },
-  { title: 'Pintura à Mão', text: 'Aerografia e pincel, camada por camada. Nenhuma peça sai igual à outra.' },
-  { title: 'Envio Rastreado', text: 'Fotos da peça pronta antes de despachar e código de rastreio até a sua porta, em todo o Brasil.' },
-  { title: 'Fala Direto com o Lab', text: 'Do orçamento à entrega, você conversa com quem está pintando a sua peça.' },
+  { title: 'Impressão em Resina', text: 'Creality Halot Mage 8K com resina JAYO: é o que reproduz o corte do escultor, detalhe por detalhe.' },
+  { title: 'Pintura à Mão', text: 'Pincel, camada por camada. Cor, sombra, luz e detalhe entram um a um — nenhuma peça sai igual à outra.' },
+  { title: 'Peça por Peça', text: 'Cada figure é produzida individualmente, do fatiamento do modelo até a embalagem.' },
+  { title: 'Direto com Quem Faz', text: 'Operação independente em São Paulo, conduzida pelo próprio criador.' },
 ]
 
 export const equipment = [
-  { brand: 'Elegoo', model: 'Impressora LCD 16K', text: 'Resolução alta o bastante para preservar cada corte do escultor, fio de cabelo incluso.' },
-  { brand: 'Elegoo', model: 'Lavagem & Cura', text: 'Estação de lavagem e cura UV: peça limpa, rígida e estável antes de ver tinta.' },
-  { brand: 'Aerógrafo', model: 'Bico 0.2 mm', text: 'Dual-action para os detalhes finos — íris, degradês de pele e sombras suaves.' },
-  { brand: 'Aerógrafo', model: 'Bico 0.5 mm', text: 'Coberturas, primer e camadas de base uniformes em superfícies grandes.' },
+  { brand: 'Creality', model: 'Halot Mage 8K', text: 'A impressora de resina onde a peça nasce. É ela que reproduz o corte do escultor.' },
+  { brand: 'JAYO', model: 'Resina', text: 'A resina usada em tudo que sai daqui.' },
+  { brand: 'Anycubic', model: 'Lavagem & Cura', text: 'Lava e cura a peça logo depois da impressão, antes de qualquer preparação de superfície.' },
+  { brand: 'Pincel', model: 'Trabalho manual', text: 'Não existe pintura automatizada aqui. Cor, sombra, luz e detalhe entram à mão, um de cada vez.' },
 ]
 
 export const faq = [
   {
     q: 'Quanto tempo leva para ficar pronta?',
-    a: 'Depende do tamanho e do nível de detalhe. Peças de bancada costumam levar de 2 a 4 semanas entre impressão, acabamento e pintura. O prazo exato sai junto do orçamento.',
+    a: 'Depende do tamanho e da complexidade. Cada peça passa por impressão, lavagem, cura, remoção de suportes, preparação de superfície, primer, pintura à mão, verniz e montagem — e a pintura é a etapa que mais varia. O prazo sai junto do orçamento.',
   },
   {
     q: 'Dá para pedir um personagem que não está no site?',
-    a: 'Dá. Manda o personagem no WhatsApp e a gente verifica se existe modelo disponível ou se vale esculpir sob medida. Também aceitamos referência de pose e paleta.',
+    a: 'Dá. Manda o personagem no WhatsApp e a gente verifica se existe modelo disponível. Também aceitamos referência de pose e paleta.',
   },
   {
-    q: 'Como funciona o pagamento?',
-    a: 'Sinal para entrar na fila do Lab e o restante antes do envio. Parcelamos no cartão; combinamos tudo por mensagem, sem letra miúda.',
+    q: 'A pintura é feita à mão mesmo?',
+    a: 'É. Não existe processo automatizado de pintura aqui: cada peça é trabalhada individualmente, com pincel, aplicando cor, sombra, luz e detalhe. É por isso que nenhuma sai idêntica à outra.',
   },
   {
-    q: 'E se a peça chegar danificada?',
-    a: 'Fotografamos a peça embalada antes de despachar. Se acontecer algo no transporte, é só mandar foto na hora da abertura que a gente resolve reparo ou reposição.',
+    q: 'O que eu recebo, exatamente?',
+    a: 'Uma peça física montada, pintada e envernizada, pronta para exposição e coleção — e não uma impressão 3D recém-tirada da máquina.',
   },
   {
-    q: 'Vocês enviam para todo o Brasil?',
-    a: 'Sim, para todo o país, com código de rastreio. Em Belo Horizonte e região dá para combinar retirada.',
+    q: 'Como funcionam pagamento e envio?',
+    a: 'Combinamos por mensagem, junto do orçamento. A produção fica em São Paulo.',
   },
 ]
 

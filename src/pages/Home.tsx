@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     definirMeta(
       'Narakaito Lab · Colecionáveis em Resina Pintados à Mão',
-      'Figures colecionáveis em resina premium, impressas em alta resolução e pintadas à mão, peça por peça. Sob encomenda, com envio para todo o Brasil.',
+      'Figures colecionáveis em resina, impressas em 3D e pintadas à mão, peça por peça. Operação independente em São Paulo, sob encomenda.',
     )
     if (!hash) return
     const alvo = document.querySelector(hash)

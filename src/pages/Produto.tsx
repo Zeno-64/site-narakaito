@@ -8,9 +8,9 @@ import { definirMeta } from '../lib/meta'
 
 const etapas = [
   { n: '01', titulo: 'Você escolhe', texto: 'Manda a peça no WhatsApp com as customizações que quiser.' },
-  { n: '02', titulo: 'A gente orça', texto: 'Volta com preço fechado, prazo e as condições de parcelamento.' },
-  { n: '03', titulo: 'Entra na fila', texto: 'Com o sinal pago, a peça vai para a impressora e depois para a bancada.' },
-  { n: '04', titulo: 'Chega na sua casa', texto: 'Fotos da peça pronta antes de despachar e rastreio até a sua porta.' },
+  { n: '02', titulo: 'A gente orça', texto: 'Volta com preço e prazo, conforme o tamanho e a complexidade da peça.' },
+  { n: '03', titulo: 'Impressão e preparo', texto: 'Impressão em resina, lavagem, cura, remoção de suportes e primer.' },
+  { n: '04', titulo: 'Pintura e montagem', texto: 'Pintura à mão com pincel, verniz, montagem e inspeção antes de embalar.' },
 ]
 
 export default function Produto() {
@@ -34,7 +34,7 @@ export default function Produto() {
     if (!peca) return
     definirMeta(
       `${peca.nome} — ${peca.serie} em resina pintada à mão · Narakaito Lab`,
-      `${peca.chamada} Impressa em resina premium e pintada à mão sob encomenda, com envio para todo o Brasil.`,
+      `${peca.chamada} Impressa em resina e pintada à mão, peça por peça, sob encomenda em São Paulo.`,
     )
   }, [peca])
 
