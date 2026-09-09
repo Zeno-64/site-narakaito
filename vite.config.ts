@@ -8,7 +8,7 @@ import { pecas } from './src/data/site.ts'
 // Domínio de produção. Crawler de link não resolve caminho relativo de forma
 // confiável -- og:image e og:url precisam ser absolutos, então este endereço
 // tem que estar certo. Dá para sobrescrever no deploy com SITE_URL=...
-const SITE = (process.env.SITE_URL ?? 'https://narakaito-lab.workers.dev').replace(/\/+$/, '')
+const SITE = (process.env.SITE_URL ?? 'https://narakaito.com').replace(/\/+$/, '')
 
 const escapar = (t: string) =>
   t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')

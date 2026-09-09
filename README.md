@@ -13,14 +13,19 @@ npm run dev
 ## Publicar
 
 ```bash
-SITE_URL=https://seu-dominio npm run build
+npm run build
 npx wrangler deploy
 ```
 
-O `SITE_URL` importa: o build gera um HTML por peça em `dist/peca/<slug>/`
-com as meta tags dela já dentro do arquivo, e crawler de link (WhatsApp,
-Instagram, Google) precisa de URL absoluta em `og:image` e `og:url`. Sem a
-variável vale o endereço padrão no topo do `vite.config.ts`.
+O site vive em `narakaito.com` (e `www`), servido pelo Worker
+`site-narakaito` — o nome no `wrangler.jsonc` tem que bater com ele, senão o
+deploy cria um Worker novo e vazio e o ar continua na versão anterior.
+
+O build gera um HTML por peça em `dist/peca/<slug>/` com as meta tags dela já
+dentro do arquivo, e crawler de link (WhatsApp, Instagram, Google) precisa de
+URL absoluta em `og:image` e `og:url`. O endereço sai do padrão no topo do
+`vite.config.ts`; para testar em outro domínio, `SITE_URL=https://... npm run
+build`.
 
 As imagens de card ficam em `public/og/`, em 1200x630 — foto quadrada vira
 card pequeno no WhatsApp. Entrou peça nova? Rode uma vez:

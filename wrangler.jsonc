@@ -1,5 +1,8 @@
 {
-  "name": "narakaito-lab",
+  // Tem que ser o nome do Worker que serve narakaito.com e
+  // www.narakaito.com. Nome errado aqui faz o deploy criar um Worker
+  // novo e vazio, e o site no ar fica congelado na versão anterior.
+  "name": "site-narakaito",
   "compatibility_date": "2024-11-01",
   "assets": {
     "directory": "./dist",
