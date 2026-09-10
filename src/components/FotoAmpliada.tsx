@@ -86,28 +86,8 @@ export default function FotoAmpliada({ fotos, nome, indice, aoTrocar, aoFechar }
 
         {total > 1 && (
           <>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                passar(-1)
-              }}
-              aria-label="Foto anterior"
-              className="absolute left-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-ink-950/70 text-2xl text-bone-300 transition-colors hover:text-ember-200 lg:left-6"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                passar(1)
-              }}
-              aria-label="Próxima foto"
-              className="absolute right-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-ink-950/70 text-2xl text-bone-300 transition-colors hover:text-ember-200 lg:right-6"
-            >
-              ›
-            </button>
+            <Seta lado="anterior" aoClicar={() => passar(-1)} />
+            <Seta lado="proxima" aoClicar={() => passar(1)} />
           </>
         )}
       </div>
@@ -134,5 +114,44 @@ export default function FotoAmpliada({ fotos, nome, indice, aoTrocar, aoFechar }
         </div>
       )}
     </div>
+  )
+}
+
+/**
+ * Seta de passar foto.
+ *
+ * O alvo é a faixa inteira da lateral, da altura toda -- o desenho no meio é
+ * só a marca visual. Botão do tamanho do ícone obriga mira, e aqui a pessoa
+ * está olhando a foto, não caçando o controle.
+ */
+function Seta({ lado, aoClicar }: { lado: 'anterior' | 'proxima'; aoClicar: () => void }) {
+  const anterior = lado === 'anterior'
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation()
+        aoClicar()
+      }}
+      aria-label={anterior ? 'Foto anterior' : 'Próxima foto'}
+      className={`group absolute top-0 flex h-full w-20 items-center justify-center lg:w-28 ${
+        anterior ? 'left-0' : 'right-0'
+      }`}
+    >
+      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink-950/70 text-bone-300 transition-colors group-hover:bg-ink-950/90 group-hover:text-ember-200 lg:h-16 lg:w-16">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-8 w-8 lg:h-9 lg:w-9"
+          aria-hidden
+        >
+          <path d={anterior ? 'M15 4 7 12l8 8' : 'M9 4l8 8-8 8'} />
+        </svg>
+      </span>
+    </button>
   )
 }
