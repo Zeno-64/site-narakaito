@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { acharPeca, pecas, whatsappPeca } from '../data/site'
+import GaleriaPeca from '../components/GaleriaPeca'
 import Reveal from '../components/Reveal'
-import { useArrastoHorizontal } from '../lib/arrasto'
 import { definirMeta } from '../lib/meta'
 
 const etapas = [
@@ -16,17 +15,8 @@ const etapas = [
 export default function Produto() {
   const { slug } = useParams()
   const peca = acharPeca(slug)
-  const [ativa, setAtiva] = useState(0)
-
-  // `peca` pode ser undefined (rota 404), e hook não pode ficar atrás de
-  // early return -- daí o total sair de um encadeamento opcional.
-  const totalFotos = peca?.fotos.length ?? 0
-  const arrasto = useArrastoHorizontal({
-    aoArrastar: (d) => setAtiva((v) => (v + d + totalFotos) % totalFotos),
-  })
 
   useEffect(() => {
-    setAtiva(0)
     window.scrollTo(0, 0)
   }, [slug])
 
@@ -81,51 +71,10 @@ export default function Produto() {
       </div>
 
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
-        {/* galeria */}
-        <div>
-          <motion.div
-            key={peca.fotos[ativa].full}
-            initial={{ opacity: 0.4 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.35 }}
-            className="relative aspect-4/5 touch-pan-y select-none overflow-hidden border border-ink-700 bg-ink-850"
-            {...arrasto}
-          >
-            <img
-              src={peca.fotos[ativa].full}
-              alt={`${peca.nome} — foto ${ativa + 1} de ${peca.fotos.length}`}
-              className="h-full w-full object-cover"
-              draggable={false}
-              fetchPriority="high"
-            />
-            {peca.badges && (
-              <div className="absolute left-4 top-4 flex flex-col items-start gap-2">
-                {peca.badges.map((b) => (
-                  <span key={b} className="eyebrow bg-ink-950/85 px-3 py-1.5 text-[0.625rem] text-ember-200">
-                    {b}
-                  </span>
-                ))}
-              </div>
-            )}
-          </motion.div>
-
-          <div className="mt-4 grid grid-cols-5 gap-3 sm:grid-cols-6">
-            {peca.fotos.map((f, i) => (
-              <button
-                key={f.sm}
-                type="button"
-                onClick={() => setAtiva(i)}
-                aria-label={`Ver foto ${i + 1}`}
-                aria-current={i === ativa}
-                className={`aspect-square overflow-hidden border transition-colors ${
-                  i === ativa ? 'border-ember-500' : 'border-ink-700 hover:border-ink-600'
-                }`}
-              >
-                <img src={f.sm} alt="" loading="lazy" className="h-full w-full object-cover" />
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* galeria: foto grande com lupa, miniaturas e tela cheia.
+            A key remonta ao trocar de peça, e com isso a foto volta para a
+            primeira sem precisar de efeito para zerar o índice. */}
+        <GaleriaPeca key={peca.slug} peca={peca} />
 
         {/* informação e conversão */}
         <div className="lg:sticky lg:top-28 lg:self-start">
