@@ -16,18 +16,28 @@ export default function ProductCard({ product }: { product: Peca }) {
         className="relative aspect-4/5 touch-pan-y select-none overflow-hidden bg-ink-800"
         {...arrasto}
       >
-        {product.fotos.map((foto, idx) => (
-          <img
-            key={foto.sm}
-            src={foto.sm}
-            alt={`${product.nome} — foto ${idx + 1}`}
-            loading={idx === 0 ? 'eager' : 'lazy'}
-            draggable={false}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-              idx === i ? 'opacity-100' : 'opacity-0'
-            }`}
-          />
-        ))}
+        {/* A foto leva para a página da peça, igual ao botão lá embaixo. As
+            setas e os pontos ficam FORA deste link, como irmãos: assim passar
+            de foto não navega junto. */}
+        <Link
+          to={`/peca/${product.slug}`}
+          aria-label={`Ver ${product.nome}`}
+          draggable={false}
+          className="absolute inset-0 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ember-300"
+        >
+          {product.fotos.map((foto, idx) => (
+            <img
+              key={foto.sm}
+              src={foto.sm}
+              alt={`${product.nome} — foto ${idx + 1}`}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+              draggable={false}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+                idx === i ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
+        </Link>
 
         {product.badges && (
           <div className="absolute left-3 top-3 z-10 flex flex-col items-start gap-2">

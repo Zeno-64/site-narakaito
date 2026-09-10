@@ -1,5 +1,8 @@
 import { useRef } from 'react'
-import type { PointerEvent as EventoDePonteiro } from 'react'
+import type { MouseEvent as EventoDeMouse, PointerEvent as EventoDePonteiro } from 'react'
+
+/** Folga em pixels antes de um clique virar arrasto. */
+const FOLGA_DO_CLIQUE = 6
 
 type Opcoes = {
   /** Chamado com 1 para "próxima" (arrastou para a esquerda) e -1 para "anterior". */
@@ -22,6 +25,7 @@ type Opcoes = {
 export function useArrastoHorizontal({ aoArrastar, limite = 45 }: Opcoes) {
   const inicio = useRef<{ x: number; y: number } | null>(null)
   const jaDisparou = useRef(false)
+  const andou = useRef(false)
 
   const encerrar = () => {
     inicio.current = null
@@ -33,12 +37,17 @@ export function useArrastoHorizontal({ aoArrastar, limite = 45 }: Opcoes) {
       if (e.pointerType === 'mouse' && e.button !== 0) return
       inicio.current = { x: e.clientX, y: e.clientY }
       jaDisparou.current = false
+      andou.current = false
     },
     onPointerMove: (e: EventoDePonteiro) => {
       if (!inicio.current || jaDisparou.current) return
 
       const dx = e.clientX - inicio.current.x
       const dy = e.clientY - inicio.current.y
+
+      // Marca cedo, bem antes do swipe fechar: serve para saber, no clique que
+      // vem depois, que a mão estava arrastando e não apontando.
+      if (Math.abs(dx) > FOLGA_DO_CLIQUE) andou.current = true
 
       // A rolagem da página ganha: se o dedo desceu mais do que andou para o
       // lado, o gesto era scroll e este carrossel não tem nada a ver com isso.
@@ -58,5 +67,15 @@ export function useArrastoHorizontal({ aoArrastar, limite = 45 }: Opcoes) {
     onPointerUp: encerrar,
     onPointerCancel: encerrar,
     onPointerLeave: encerrar,
+
+    // Arrastar em cima de um link dispara clique no fim do gesto. Este guarda
+    // engole esse clique na fase de captura -- depois já é tarde, porque o
+    // Link do router navega no próprio onClick, antes de o evento subir.
+    onClickCapture: (e: EventoDeMouse) => {
+      if (!andou.current) return
+      andou.current = false
+      e.preventDefault()
+      e.stopPropagation()
+    },
   }
 }
