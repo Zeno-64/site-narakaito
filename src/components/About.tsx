@@ -56,7 +56,7 @@ export default function About() {
             rel="noreferrer"
             className="eyebrow mt-10 inline-block border border-ember-500/60 px-8 py-4 text-bone-100 transition-colors hover:bg-ember-700/30"
           >
-            Conversar com a Narakaito →
+            Conversar com o Narakaito →
           </a>
         </Reveal>
       </div>

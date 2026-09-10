@@ -75,7 +75,13 @@ export const pecas: Peca[] = [
       'A composição se organiza em torno da foice, que corta a peça na diagonal e liga o alto da lâmina à base de rocha. Atrás, as lâminas de chakra sobem em leque, e o gunbai fica preso às costas.',
       'A base é rocha com raiz e musgo, e é ela que dá peso à cena: o solo quebrado sugere que a luta já passou por ali.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: [
+      { rotulo: 'Escala', valor: '1/6' },
+      { rotulo: 'Formato', valor: 'Diorama' },
+      { rotulo: 'Dimensões', valor: '308 × 201 × 349 mm (L × P × A)' },
+      { rotulo: 'Opções', valor: 'Três cabeças, dois cabelos e três braços' },
+      ...fichaComum,
+    ],
     inclui: incluiComum,
   },
   {
@@ -107,7 +113,13 @@ export const pecas: Peca[] = [
       'A cena é de pausa: o herói criança concentrado na música, com a fada rodeando as notas que saem do instrumento.',
       'A base combina toco de árvore, pedra e tijolo, com cogumelos ao redor e a lua ao fundo. É o cenário que faz o trabalho que a pose não precisa fazer.',
     ],
-    ficha: [...alturaEscala, ...fichaComum],
+    ficha: [
+      { rotulo: 'Escala', valor: '1/6' },
+      { rotulo: 'Dimensões', valor: '164,91 × 149,22 × 184,25 mm (L × P × A)' },
+      { rotulo: 'Montagem', valor: '31 peças na versão Ocarina of Time' },
+      { rotulo: 'Opções', valor: "Versão Majora's Mask, com 6 peças" },
+      ...fichaComum,
+    ],
     inclui: incluiComum,
   },
 
@@ -306,22 +318,6 @@ export const pecas: Peca[] = [
     ficha: [...alturaEscala, ...fichaComum],
     inclui: incluiComum,
   },
-  {
-    slug: 'mario-e-luigi',
-    nome: 'Mario & Luigi',
-    serie: 'Super Mario',
-    escultor: 'Bionic 3D',
-    fotos: fotos('mario_luigi', 8),
-    badges: ['Novidade', 'Sob encomenda'],
-    chamada:
-      'Os dois irmãos de poncho e sombrero, com a caveira mexicana pintada no rosto. O encontro entre o encanador e o Día de Muertos.',
-    paragrafos: [
-      'É um par, não uma peça só: cada irmão tem a própria base, e elas podem ficar juntas ou separadas na estante.',
-      'Os ponchos bordados, os sombreros e os cactos da base montam o cenário. Nas artes a dupla aparece de rosto descoberto e com a caveira pintada — na encomenda a gente combina qual das duas versões você quer.',
-    ],
-    ficha: [...alturaEscala, ...fichaComum],
-    inclui: incluiComum,
-  },
 ]
 
 
@@ -405,10 +401,10 @@ export const differentials = [
 ]
 
 export const equipment = [
-  { brand: 'Creality', model: 'Halot Mage 8K', text: 'A impressora de resina onde a peça nasce. É ela que reproduz o corte do escultor.' },
-  { brand: 'JAYO', model: 'Resina', text: 'A resina usada em tudo que sai daqui.' },
-  { brand: 'Anycubic', model: 'Lavagem & Cura', text: 'Lava e cura a peça logo depois da impressão, antes de qualquer preparação de superfície.' },
-  { brand: 'Pincel', model: 'Pintura artesanal', text: 'Cor, sombra, luz e detalhe entram à mão, um de cada vez, peça por peça.' },
+  { brand: 'impressora', model: 'Halot Mage 8K', text: 'A impressora de resina onde a peça nasce. É ela que reproduz o corte do escultor.' },
+  { brand: 'resina', model: 'jayo', text: 'A resina usada em tudo que sai daqui.' },
+  { brand: 'lavagem e cura', model: 'anycubic', text: 'Lava e cura a peça logo depois da impressão, antes de qualquer preparação de superfície.' },
+  { brand: 'pintura', model: '100% artesanal a mão', text: 'Não existe pintura automatizada aqui. Cor, sombra, luz e detalhe entram à mão, um de cada vez.' },
 ]
 
 export const faq = [
