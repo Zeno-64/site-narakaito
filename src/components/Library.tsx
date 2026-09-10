@@ -22,7 +22,7 @@ export default function Library() {
         <SectionTitle
           eyebrow="Catálogo"
           title="Escolha um personagem!"
-          blurb="Tudo que dá para encomendar. As imagens são a arte de divulgação de quem esculpiu cada modelo — a sua peça é impressa e pintada aqui na Narakaito."
+          blurb="Tudo que dá para encomendar. As imagens são a arte de divulgação de quem esculpiu cada modelo — a sua peça é impressa e pintada aqui no lab."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -438,7 +438,7 @@ export const faq = [
   },
   {
     q: 'Qual é o tamanho das peças?',
-    a: 'Varia. A ficha de cada peça traz escala e dimensões; a maior parte é escala 1/8, entre 23 e 33 cm de altura.',
+    a: 'Varia. A ficha de cada peça traz escala e dimensões; a maior parte é escala 1/6, entre 25 e 45 cm.',
   },
   {
     q: 'Como funcionam pagamento e envio?',
