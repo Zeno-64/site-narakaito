@@ -166,7 +166,7 @@ export default function Produto() {
               As imagens desta página são a arte de divulgação da escultura, assinada por{' '}
               {peca.escultor}
               {peca.estudio && ` para o ${peca.estudio}`}. A impressão e a pintura são feitas
-              aqui na Narakaito.
+              aqui no Lab.
             </p>
           )}
         </div>
