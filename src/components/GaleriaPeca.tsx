@@ -10,19 +10,19 @@ import FotoAmpliada from './FotoAmpliada'
  * aparece no quadro.
  *
  * O tamanho da janelinha SAI daqui, não o contrário: ela é o pedaço do quadro
- * que cabe no painel neste aumento, ou seja `painel / (zoom * quadro)`. Foi o
- * que estava errado antes -- o fator era aplicado sobre o painel, que é menor
- * que o quadro, e o aumento real acabava em 1,3x.
+ * que cabe no painel neste aumento, ou seja `painel / zoom`.
  *
- * As fotos têm 1080 px de largura e o quadro fica perto de 630, então acima de
- * ~1,7x já não existe detalhe novo no arquivo: daqui para cima o ganho é de
- * enquadramento, e o preço é um pouco de suavização.
+ * As fotos têm 1080 a 1200 px de largura e o quadro fica perto de 625, então
+ * acima de ~1,8x já não existe detalhe novo no arquivo: daqui para cima o
+ * ganho é de enquadramento, e o preço é um pouco de suavização.
  */
-const ZOOM = 2.4
+const ZOOM = 3
 
-/** Painel do zoom, em px. Mesmo formato do quadro (4/5). */
-const PAINEL_L = 448
-const PAINEL_A = (PAINEL_L * 5) / 4
+/** Lado do painel do zoom, em px. Quadrado, e a janelinha também. */
+const PAINEL = 384
+
+/** Lado da janelinha que anda junto do mouse, em px de tela. */
+const JANELA = PAINEL / ZOOM
 
 const entre = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max)
 
@@ -37,17 +37,22 @@ export default function GaleriaPeca({ peca }: { peca: Peca }) {
   const [ativa, setAtiva] = useState(0)
   const [ampliada, setAmpliada] = useState(false)
   /**
-   * Canto superior esquerdo da janelinha, em fração do quadro, junto do
-   * tamanho que o quadro tinha na hora -- o painel precisa dele para saber em
-   * quantos pixels a foto tem de ser desenhada.
+   * Onde está a janelinha e como desenhar o fundo do painel. A conta toda é
+   * feita no `mirar`, com o quadro já medido: aqui em cima ela não teria as
+   * dimensões reais para trabalhar.
    */
   const [lupa, setLupa] = useState<{
+    /** Canto superior esquerdo da janelinha, em fração do quadro. */
     x: number
     y: number
-    largura: number
-    altura: number
+    /** Tamanho e deslocamento da foto dentro do painel, em px. */
+    fundoL: number
+    fundoA: number
+    fundoX: number
+    fundoY: number
   } | null>(null)
   const quadro = useRef<HTMLDivElement>(null)
+  const imagem = useRef<HTMLImageElement>(null)
 
   const total = peca.fotos.length
   const passar = (d: number) => setAtiva((v) => (v + d + total) % total)
@@ -58,16 +63,27 @@ export default function GaleriaPeca({ peca }: { peca: Peca }) {
   const mirar = (e: EventoDePonteiro) => {
     if (e.pointerType !== 'mouse') return
     const r = quadro.current?.getBoundingClientRect()
-    if (!r) return
-    const janelaL = PAINEL_L / (ZOOM * r.width)
-    const janelaA = PAINEL_A / (ZOOM * r.height)
-    const x = (e.clientX - r.left) / r.width - janelaL / 2
-    const y = (e.clientY - r.top) / r.height - janelaA / 2
+    const img = imagem.current
+    if (!r || !img?.naturalWidth) return
+
+    const x = entre((e.clientX - r.left - JANELA / 2) / r.width, 0, 1 - JANELA / r.width)
+    const y = entre((e.clientY - r.top - JANELA / 2) / r.height, 0, 1 - JANELA / r.height)
+
+    // O painel tem de repetir o que o `object-cover` faz no quadro: ampliar a
+    // foto até cobrir os dois lados e aparar o que sobra, metade de cada lado.
+    // Sem isso as fotos quadradas -- que são a maioria do catálogo -- chegam
+    // esticadas no painel, porque o quadro é 4/5.
+    const cobrir = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight)
+    const larguraCheia = img.naturalWidth * cobrir
+    const alturaCheia = img.naturalHeight * cobrir
+
     setLupa({
-      x: entre(x, 0, 1 - janelaL),
-      y: entre(y, 0, 1 - janelaA),
-      largura: r.width,
-      altura: r.height,
+      x,
+      y,
+      fundoL: larguraCheia * ZOOM,
+      fundoA: alturaCheia * ZOOM,
+      fundoX: ((larguraCheia - r.width) / 2 + x * r.width) * ZOOM,
+      fundoY: ((alturaCheia - r.height) / 2 + y * r.height) * ZOOM,
     })
   }
 
@@ -93,6 +109,7 @@ export default function GaleriaPeca({ peca }: { peca: Peca }) {
           className="absolute inset-0 cursor-zoom-in"
         >
           <img
+            ref={imagem}
             src={foto.full}
             alt={`${peca.nome} — foto ${ativa + 1} de ${total}`}
             className="h-full w-full object-cover"
@@ -107,8 +124,8 @@ export default function GaleriaPeca({ peca }: { peca: Peca }) {
             style={{
               left: `${lupa.x * 100}%`,
               top: `${lupa.y * 100}%`,
-              width: PAINEL_L / ZOOM,
-              height: PAINEL_A / ZOOM,
+              width: JANELA,
+              height: JANELA,
             }}
             className="pointer-events-none absolute hidden border border-bone-100/60 bg-ink-950/45 lg:block"
           />
@@ -153,11 +170,11 @@ export default function GaleriaPeca({ peca }: { peca: Peca }) {
         <div
           aria-hidden
           style={{
-            width: PAINEL_L,
-            height: PAINEL_A,
+            width: PAINEL,
+            height: PAINEL,
             backgroundImage: `url(${foto.full})`,
-            backgroundSize: `${lupa.largura * ZOOM}px ${lupa.altura * ZOOM}px`,
-            backgroundPosition: `-${lupa.x * lupa.largura * ZOOM}px -${lupa.y * lupa.altura * ZOOM}px`,
+            backgroundSize: `${lupa.fundoL}px ${lupa.fundoA}px`,
+            backgroundPosition: `-${lupa.fundoX}px -${lupa.fundoY}px`,
           }}
           className="pointer-events-none absolute left-full top-0 z-40 ml-4 hidden border border-ink-700 bg-ink-950 bg-no-repeat shadow-2xl shadow-ink-950/70 lg:block"
         />
