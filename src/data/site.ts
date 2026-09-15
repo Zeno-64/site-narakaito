@@ -50,13 +50,34 @@ const alturaEscala = [
  *
  * As dimensões são do modelo inteiro, no padrão do arquivo (largura ×
  * profundidade × altura) -- não da base, como estava escrito antes aqui.
+ *
+ * A escala era fixa em 1/8 aqui dentro, o que valeu enquanto todo modelo do
+ * estúdio era figura humana. O Titã Fêmea (1/60) e o Xenomorph (1/10) quebram
+ * isso, então ela passou a vir do readme como o resto.
  */
-function fichaOficial(dimensoes: string, montagem: string, opcoes?: string) {
+function fichaOficial(escala: string, dimensoes: string, montagem: string, opcoes?: string) {
   return [
-    { rotulo: 'Escala', valor: '1/8' },
+    { rotulo: 'Escala', valor: escala },
     { rotulo: 'Dimensões', valor: `${dimensoes} mm (L × P × A)` },
     { rotulo: 'Montagem', valor: montagem },
     ...(opcoes ? [{ rotulo: 'Opções', valor: opcoes }] : []),
+    ...fichaComum,
+  ]
+}
+
+/**
+ * Ficha das peças que vieram sem o readme do estúdio, só com a arte de
+ * medidas -- aquela render colorida com as cotas nas bordas.
+ *
+ * Dali sai a dimensão exata. A escala é calculada: altura do modelo contra a
+ * altura do personagem, conferida com o padrão do estúdio, que traz 1/8 em
+ * todo readme de figura humana. Sem readme não há contagem de peças, então
+ * ela não aparece aqui.
+ */
+function fichaMedida(escala: string, dimensoes: string) {
+  return [
+    { rotulo: 'Escala', valor: escala },
+    { rotulo: 'Dimensões', valor: `${dimensoes} mm (L × P × A)` },
     ...fichaComum,
   ]
 }
@@ -106,7 +127,7 @@ export const pecas: Peca[] = [
     serie: 'The Legend of Zelda',
     escultor: 'Bionic 3D',
     fotos: fotos('link_crianca_zelda', 12),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'Sentado no toco, ocarina nas mãos e as notas subindo em espiral. É a única peça do catálogo em que nada está acontecendo — e é esse o ponto.',
     paragrafos: [
@@ -132,14 +153,14 @@ export const pecas: Peca[] = [
     escultor: 'Michel Rodrigues',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('sukuna', 7),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'A base composta por um crânio com chifres, dentes monstruosos expostos e chamas ascendentes evoca a ideia do Santuário Malevolente (Fukuma Mizushi). O posicionamento de Sukuna no topo desta pilha de restos indica que o sofrimento alheio é literalmente o chão onde ele pisa. Ele é o senhor absoluto do seu próprio inferno.',
     paragrafos: [
       'A pilha de crânios não é só apoio: os chifres, as arcadas expostas e o fogo que sobe entre os ossos montam o cenário, e é dele que a pose tira a altura.',
       'No corpo, as quatro marcas do rosto, os dois pares de olhos e as bocas do tronco são o que identifica o personagem à primeira vista. A escultura tem duas expressões de rosto, e você escolhe qual quer na encomenda.',
     ],
-    ficha: fichaOficial('229 × 211 × 330', '40 peças', 'Duas expressões de rosto'),
+    ficha: fichaOficial('1/8', '229 × 211 × 330', '40 peças', 'Duas expressões de rosto'),
     inclui: incluiComum,
   },
   {
@@ -156,7 +177,7 @@ export const pecas: Peca[] = [
       'A composição gira em torno do fogo: as chamas nascem na base, sobem em volta das pernas e levantam o casaco, que fica aberto e dá largura à silhueta.',
       'A luva de ignição na mão direita, com o círculo de transmutação bordado, é o detalhe que fecha a leitura do personagem.',
     ],
-    ficha: fichaOficial('209 × 164 × 233', '22 peças'),
+    ficha: fichaOficial('1/8', '209 × 164 × 233', '22 peças'),
     inclui: incluiComum,
   },
   {
@@ -166,14 +187,14 @@ export const pecas: Peca[] = [
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('mustang_dodoi', 7),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'A mesma alquimia, depois do preço: o uniforme rasgado, o corpo marcado e a postura que insiste em ficar de pé.',
     paragrafos: [
       'Variante da escultura anterior, com o dano da batalha esculpido: o tecido rasga, o torso fica exposto e a pose perde a folga da versão íntegra.',
       'Funciona especialmente bem ao lado da outra, formando um par que conta a passagem da luta na estante.',
     ],
-    ficha: fichaOficial('161 × 132 × 237', '21 peças'),
+    ficha: fichaOficial('1/8', '161 × 132 × 237', '21 peças'),
     inclui: incluiComum,
   },
   {
@@ -190,7 +211,7 @@ export const pecas: Peca[] = [
       'O chapéu pontudo e o manto em movimento organizam a silhueta na diagonal, e o aro da base fecha a composição por baixo.',
       'É a peça de paleta mais variada do catálogo: verde-água, roxo, amarelo e rosa dividem a mesma escultura.',
     ],
-    ficha: fichaOficial('136 × 224 × 286', '37 peças'),
+    ficha: fichaOficial('1/8', '136 × 224 × 286', '37 peças'),
     inclui: incluiComum,
   },
   {
@@ -208,6 +229,7 @@ export const pecas: Peca[] = [
       'Duas partes são opcionais: a coroa de flores e o círculo atrás da cabeça. Dá para pedir com as duas, com uma, ou sem nenhuma.',
     ],
     ficha: fichaOficial(
+      '1/8',
       '145 × 167 × 276',
       '33 peças',
       'Coroa de flores e círculo atrás da cabeça, cada um opcional',
@@ -221,14 +243,14 @@ export const pecas: Peca[] = [
     escultor: 'Szymon Szpaczek',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('claire_redfield', 8),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'Arma em punho no meio da delegacia em ruínas, com o "Let me live" nas costas — a frase que virou assinatura da personagem.',
     paragrafos: [
       'A base reproduz o piso de pedra da delegacia, com brasões em relevo, coluna quebrada e entulho. A cena situa a personagem sem precisar de mais nada.',
       'Nas costas da jaqueta vem o bordado com o anjo alado em relevo. A escultura tem duas expressões de rosto, e você escolhe qual quer na encomenda.',
     ],
-    ficha: fichaOficial('120 × 119 × 237', '18 peças', 'Duas expressões de rosto'),
+    ficha: fichaOficial('1/8', '120 × 119 × 237', '18 peças', 'Duas expressões de rosto'),
     inclui: incluiComum,
   },
   {
@@ -238,14 +260,14 @@ export const pecas: Peca[] = [
     escultor: 'Lukas Lima e Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('gwen_stacy', 8),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'Equilibrada num poste da Broadway, o V nos dedos e os pombos como única plateia. A cidade inteira embaixo e nenhuma pressa.',
     paragrafos: [
       'A pose se apoia em uma perna só, sobre o poste com semáforo e as placas de rua. É esse ponto único de contato que dá a sensação de leveza.',
       'A máscara é opcional: dá para receber a peça mascarada ou com o rosto à mostra.',
     ],
-    ficha: fichaOficial('164 × 104 × 234', '23 peças', 'Máscara opcional'),
+    ficha: fichaOficial('1/8', '164 × 104 × 234', '23 peças', 'Máscara opcional'),
     inclui: incluiComum,
   },
   {
@@ -254,7 +276,7 @@ export const pecas: Peca[] = [
     serie: 'Tokyo Ghoul',
     escultor: 'Samiho Studios',
     fotos: fotos('kaneki', 7),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'O kagune sobe do ombro e fecha um arco em volta do corpo, enquanto as flores-aranha abrem na base. A peça encena a transformação, não a luta.',
     paragrafos: [
@@ -275,14 +297,14 @@ export const pecas: Peca[] = [
     escultor: 'Lora Kolori',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('lady_maria', 8),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'De pé no alto da torre do relógio, lâmina em punho, guardando o que está atrás dela. A pose é de quem não vai sair do lugar.',
     paragrafos: [
       'A base é a sala hexagonal da torre, com arcos vazados que abrem a composição por baixo e dão profundidade à peça.',
       'O chapéu tricórnio, o casaco longo e a echarpe no pescoço montam a silhueta. O sangue na lâmina é o único detalhe narrativo que a escultura entrega.',
     ],
-    ficha: fichaOficial('204 × 132 × 305', '34 peças'),
+    ficha: fichaOficial('1/8', '204 × 132 × 305', '34 peças'),
     inclui: incluiComum,
   },
   {
@@ -292,14 +314,14 @@ export const pecas: Peca[] = [
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('toph', 8),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'Punho fechado, pé fincado e a rocha subindo do chão em leque. A escultura pega o instante exato entre o golpe e o impacto.',
     paragrafos: [
       'As lascas de pedra saem do solo atrás dela e abrem a composição para os lados, transformando a base em parte da ação.',
       'A máscara é opcional: dá para receber a peça com ou sem ela.',
     ],
-    ficha: fichaOficial('113 × 193 × 261', '16 peças', 'Máscara opcional'),
+    ficha: fichaOficial('1/8', '113 × 193 × 261', '16 peças', 'Máscara opcional'),
     inclui: incluiComum,
   },
   {
@@ -308,7 +330,7 @@ export const pecas: Peca[] = [
     serie: 'Clair Obscur · Expedition 33',
     escultor: 'Vik3DFigures',
     fotos: fotos('verso', 7),
-    badges: ['Novidade', 'Sob encomenda'],
+    badges: ['Sob encomenda'],
     chamada:
       'De pé, espada baixa, no fim da caminhada. Nenhuma pose de combate — a peça aposta na contenção.',
     paragrafos: [
@@ -316,6 +338,196 @@ export const pecas: Peca[] = [
       'A base é rocha baixa e discreta, feita para não competir com a figura.',
     ],
     ficha: [...alturaEscala, ...fichaComum],
+    inclui: incluiComum,
+  },
+
+  // Lote de 15/09. Todas do Bulkamancer Sculpts, todas com a arte de
+  // divulgação do escultor -- por isso o crédito na página.
+  {
+    slug: 'sam-porter-bridges',
+    nome: 'Sam Porter Bridges',
+    serie: 'Death Stranding',
+    escultor: 'Szymon Szpaczek',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('sam', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'A torre de carga presa às costas, a BB no colo e o piche subindo do chão. A peça é sobre o peso que ele carrega, e isso aparece antes de qualquer outra coisa.',
+    paragrafos: [
+      'A composição é vertical e desequilibrada de propósito: o volume todo fica atrás e acima, nas caixas empilhadas no exoesqueleto, e o corpo se inclina para frente para compensar. É o que faz a figura parecer em movimento mesmo parada.',
+      'Na base, as mãos de piche saem do solo e os cristais quirais abrem em leque ao lado da bota. O odradek aberto sobre o ombro e a BB no cilindro fecham a leitura do personagem.',
+    ],
+    ficha: fichaMedida('1/8', '151 × 139 × 258'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'griffith',
+    nome: 'Griffith',
+    serie: 'Berserk',
+    escultor: 'YoruNoAme',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('griffith', 7),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'A armadura branca do Bando do Falcão, o elmo debaixo do braço e a capa parada no vento. Nenhuma arma sacada: a pose é de quem comanda, não de quem luta.',
+    paragrafos: [
+      'A silhueta se arma na diagonal — a capa cai para um lado, o peso do corpo vai para o outro, e o elmo dourado no braço esquerdo trava a composição no meio.',
+      'O personagem está todo na armadura: o falcão alado em relevo nas ombreiras, o florete na cintura e as escamas da perneira. A base é rocha baixa, para não disputar atenção.',
+    ],
+    ficha: fichaMedida('1/8', '116 × 164 × 243'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'aerith',
+    nome: 'Aerith Gainsborough',
+    serie: 'Final Fantasy VII',
+    escultor: 'Polina Shaman',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('aerith', 6),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'Sentada no banquinho, com o vestido vermelho aberto no chão e uma flor amarela na mão. É a Aerith do Wall Market, não a do campo de batalha.',
+    paragrafos: [
+      'O vestido é o que dá volume à peça: as camadas de babado se espalham pela base inteira e ocupam mais superfície que a própria figura. A perna à mostra e o salto apoiado quebram a simetria.',
+      'O cabelo vem trançado com as fitas e as florzinhas, e o lírio na mão é a referência direta à personagem. O banquinho dourado e o piso de tábua completam o cenário.',
+    ],
+    ficha: fichaMedida('1/8', '151 × 151 × 177'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'valerie',
+    nome: 'Valerie',
+    serie: 'Cyberpunk 2077',
+    escultor: 'Polina Shaman',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('valerie', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'Encostada no pilar de concreto, o rifle apoiado no ombro e Night City acesa atrás. A pose é de quem está esperando alguém aparecer.',
+    paragrafos: [
+      'A peça inteira se apoia no pilar: é ele que sustenta o corpo inclinado e dá a altura da composição. A perna dobrada e o braço sobre a cabeça fecham a diagonal.',
+      'A jaqueta com os broches, as dog tags, o implante na têmpora e o presente embrulhado no pé do pilar são os detalhes que situam a personagem — a V feminina, no nome padrão do jogo.',
+    ],
+    ficha: fichaOficial('1/8', '122 × 98 × 252', '21 peças'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'alexstrasza',
+    nome: 'Alexstrasza',
+    serie: 'World of Warcraft',
+    escultor: 'Katerina Likhacheva',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('alexstrasza', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'A Rainha Dragão em forma élfica, com a coroa de chifres, o manto vermelho aberto e um filhote de draco enrolado na pedra embaixo.',
+    paragrafos: [
+      'O manto sobe atrás do corpo e abre em duas pontas — é ele que dá toda a largura da composição, e é o que coloca a peça entre as mais altas do catálogo, com 336 mm.',
+      'A armadura de escama vermelha com filete dourado é o que mais pede pincel aqui: o relevo é miúdo e cobre quase todo o corpo. Na base, o draco e as rosas fecham a cena.',
+    ],
+    ficha: fichaOficial('1/8', '161 × 141 × 336', '37 peças'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'tita-femea',
+    nome: 'Titã Fêmea',
+    serie: 'Attack on Titan',
+    escultor: 'Alex Gray',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('tita_femea', 10),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'O punho recuado e o telhado já cedendo embaixo do pé. A escultura pega o instante anterior ao golpe, não o depois dele.',
+    paragrafos: [
+      'A base é uma casa de enxaimel partida ao meio, e é ela que dá a escala da cena: a figura passa por cima do telhado como se a construção fosse um móvel.',
+      'A escala aqui é 1/60, e não 1/8 como no resto do catálogo — o titã tem cerca de 14 metros, e em 1/8 a peça passaria de um metro e meio. A musculatura exposta é o que dá mais trabalho na pintura: cada feixe é esculpido separado.',
+    ],
+    ficha: fichaOficial('1/60', '165 × 141 × 244', '17 peças'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'malice',
+    nome: 'Malice',
+    serie: 'Original · Bulkamancer Sculpts',
+    escultor: 'KAI',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('malice', 7),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'Máscara sobre os olhos, garras abertas e a lâmina vermelha desenhando um arco em volta do corpo inteiro.',
+    paragrafos: [
+      'O arco da lâmina é o que organiza a peça: sai da mão, contorna as costas e desce até a rocha, fechando a composição num círculo quase completo.',
+      'O contraste é a proposta — cabelo branco e preto, pele clara, armadura escura, e o vermelho só na lâmina e no cachecol. A base é rocha cinza quebrada, neutra de propósito.',
+    ],
+    ficha: fichaMedida('1/8', '106 × 106 × 210'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'mayuri-shiina',
+    nome: 'Mayuri Shiina',
+    serie: 'Steins;Gate',
+    escultor: 'KAI',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('mayuri', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'De chapéu e vestido azul, com o fone do telefone-microondas na mão. É a peça mais quieta do lote, e é esse o ponto.',
+    paragrafos: [
+      'A pose é de quem acabou de se virar: o vestido ainda está girando e a mão esquerda ficou solta no ar. Nenhuma ação, nenhuma arma — a escultura aposta inteira na expressão.',
+      'A base é o Laboratório de Gadgets do Futuro, com as caixas empilhadas, o Upa no chão e o tatame embaixo. O chapéu é opcional: dá para receber a peça com ele ou com o cabelo à mostra.',
+    ],
+    ficha: fichaOficial('1/8', '111 × 118 × 203', '38 peças', 'Com ou sem o chapéu'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'xenomorph',
+    nome: 'Xenomorph',
+    serie: 'Alien',
+    escultor: 'Valentina Iudina',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('xenomorph', 8),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'Agachado sobre o ninho, com a cauda desenhando um S no ar e a boca interna já para fora. A peça é o bicho esperando, não atacando.',
+    paragrafos: [
+      'A cauda é o que ocupa o espaço: sai do corpo, dá uma volta em torno da base e termina em lâmina do outro lado. Sem ela, a silhueta seria bem menor do que é.',
+      'A escala é 1/10, não 1/8: a criatura passa dos dois metros, e a peça fica em 262 mm. A base reproduz a estrutura de resina do ninho, com as costelas saindo do chão.',
+    ],
+    ficha: fichaOficial('1/10', '178 × 159 × 262', '27 peças'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'lady',
+    nome: 'Lady',
+    serie: 'Devil May Cry',
+    escultor: 'Alex Gray',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('lady', 6),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'No ar, com a Kalina Ann atravessada nas costas e a pistola já apontada para baixo. Um pé só encosta na base.',
+    paragrafos: [
+      'O lançador é a peça dentro da peça: atravessa a composição na diagonal, do ombro esquerdo até passar da linha do corpo, com a baioneta na ponta.',
+      'O apoio é um ponto só, na bota sobre o entulho, com os vergalhões saindo do concreto. É esse contato único que dá a sensação de salto.',
+    ],
+    ficha: fichaMedida('1/8', '87 × 140 × 230'),
+    inclui: incluiComum,
+  },
+  {
+    slug: 'rena-ryugu',
+    nome: 'Rena Ryūgū',
+    serie: 'Higurashi When They Cry',
+    escultor: 'KAI',
+    estudio: 'Bulkamancer Sculpts',
+    fotos: fotos('rena', 7),
+    badges: ['Novidade', 'Sob encomenda'],
+    chamada:
+      'O sorriso aberto, o facão na mão e o vestido branco respingado. A escultura escolhe o instante exato em que a personagem se vira.',
+    paragrafos: [
+      'A pose gira: o corpo já está de frente, mas a saia e a fita roxa ainda vêm atrás. É o que faz a peça funcionar de qualquer ângulo na estante.',
+      'A base é o lixão onde a personagem cata os tesouros dela — sacos pretos, tambor, madeira quebrada e uma mão que aparece no meio do entulho. O contraste entre o uniforme branco e o cenário é a peça inteira.',
+    ],
+    ficha: fichaOficial('1/8', '154 × 121 × 219', '30 peças'),
     inclui: incluiComum,
   },
 ]
@@ -357,7 +569,7 @@ export const destaques: Destaque[] = [
     'sukuna',
     'Ryomen',
     'Sukuna',
-    'O Rei das Maldições no alto de uma pilha de crânios, com as chamas subindo entre os ossos. A maior peça do catálogo: 330 mm em escala 1/8.',
+    'O Rei das Maldições no alto de uma pilha de crânios, com as chamas subindo entre os ossos. São 330 mm em escala 1/8, com 40 peças de montagem.',
   ),
   destaque(
     'frieren',
@@ -438,7 +650,7 @@ export const faq = [
   },
   {
     q: 'Qual é o tamanho das peças?',
-    a: 'Varia. A ficha de cada peça traz escala e dimensões; a maior parte é escala 1/6, entre 25 e 45 cm.',
+    a: 'Varia. A ficha de cada peça traz escala e dimensões: a maior parte é escala 1/8, entre 18 e 35 cm de altura. Fora da régua ficam o Xenomorph, em 1/10, e o Titã Fêmea, em 1/60 — em escala de figura humana ele não caberia numa estante.',
   },
   {
     q: 'Como funcionam pagamento e envio?',

@@ -51,14 +51,19 @@ os textos das páginas, a ficha técnica, o FAQ e o número do WhatsApp. Adicion
 uma peça é acrescentar um item em `pecas` — a rota, o card do catálogo e a
 página nascem sozinhos a partir dele.
 
-Cada peça tem um campo `origem`:
+A peça que tem `escultor` mostra o crédito na página, porque a imagem é a arte
+de divulgação de quem esculpiu o modelo, com marca d'água dele. Isso é
+proposital: peça com foto de terceiro não deve ser apresentada como trabalho
+nosso.
 
-- `atelie` — as fotos são da nossa bancada. Aparece no catálogo.
-- `modelo` — a imagem é a arte de divulgação do escultor, com marca d'água
-  dele. Aparece na Biblioteca de Modelos, e a página mostra o crédito.
+A ficha técnica sai de uma de duas funções:
 
-Essa separação é proposital: peça com foto de terceiro não deve ser
-apresentada como trabalho nosso.
+- `fichaOficial(escala, dimensões, montagem, opções?)` — os dados vêm do
+  `readme.txt` que acompanha o modelo, e por isso há contagem de peças.
+- `fichaMedida(escala, dimensões)` — o modelo veio sem readme, só com a arte
+  de medidas (a render com as cotas nas bordas). Dali sai a dimensão exata; a
+  escala é calculada pela altura do modelo contra a altura do personagem. Sem
+  readme não há contagem de peças.
 
 ## Imagens
 
@@ -71,9 +76,20 @@ O que o site serve são versões WebP geradas a partir deles, em
 miniaturas) e sem sufixo (1200 px, para a foto grande). São ~15 MB no total,
 contra 60 MB dos originais.
 
-Para regerar depois de adicionar fotos novas, use o script Python que está no
-histórico do commit "Pluga as fotos reais nas seções do site" — ele faz a
-ordenação natural dos nomes do WhatsApp, redimensiona e grava os dois tamanhos.
+Entrou peça nova? Jogue os originais numa pasta por peça, com o mesmo nome que
+vai para `public/fotos/`, e rode:
+
+```bash
+python ferramentas/fotos/gerar_fotos.py <pasta-de-originais>
+python ferramentas/og/gerar_og.py
+```
+
+O primeiro faz a ordenação natural, redimensiona e grava os dois tamanhos; o
+segundo refaz os cards de link.
+
+Nas pastas do estúdio vem junto uma `*_dimensions.jpg`: **essa não entra no
+site**. Ela serve só para tirar a medida do modelo e calcular a escala, que vão
+para a ficha da peça no `site.ts`.
 
 A logo em `public/images/` foi extraída do JPEG original com o fundo removido
 por alfa, e separada em marca (`logo-mark`), wordmark (`logo-wordmark`) e
@@ -84,10 +100,10 @@ porque o lockup empilhado fica ilegível na altura da barra.
 
 - [ ] **Número do WhatsApp** — hoje é fictício (`5531000000000`), em
       `whatsappUrl` no `site.ts`. Aparece em todos os CTAs do site.
-- [ ] **Altura e escala das peças** — estão como "A confirmar" na ficha
-      técnica. É o dado que mais pesa na decisão de compra de colecionável, e
-      não dá para inventar. Só o Qifrey tem medida real (veio na arte do
-      escultor).
+- [ ] **Altura e escala de três peças** — Link (adulto), Verso e Ken Kaneki
+      seguem com "A confirmar" na ficha. É o dado que mais pesa na decisão de
+      compra de colecionável, e não dá para inventar: precisa do readme do
+      modelo ou da arte de medidas. O resto do catálogo já tem dimensão real.
 - [ ] **Peça da pasta `frieren`** — a pasta foi nomeada assim, mas a escultura
       não é a Frieren. Está no site como "A confirmar", slug
       `peca-a-confirmar`.
@@ -96,8 +112,8 @@ porque o lockup empilhado fica ilegível na altura da barra.
       não como peça sem pintar. Trocar quando houver o par real: mesma peça no
       tripé, sem mexer no enquadramento, uma antes e outra depois de pintar,
       exportadas quadradas.
-- [ ] **Imagens de terceiros** — cinco peças usam a arte de divulgação dos
-      escultores (marca d'água do Patreon visível). Substituir por fotos das
-      peças pintadas aqui, ou acertar o uso com eles.
+- [ ] **Imagens de terceiros** — quase todo o catálogo usa a arte de
+      divulgação dos escultores (marca d'água do Patreon visível). Substituir
+      por fotos das peças pintadas aqui, ou acertar o uso com eles.
 - [ ] **Repositório remoto** — ainda não existe. Os outros projetos ficam em
       `github.com/Zeno-64`.
