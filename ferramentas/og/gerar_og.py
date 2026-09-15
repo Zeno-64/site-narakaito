@@ -28,10 +28,14 @@ FUNDO = (7, 6, 5)  # ink-950, a base escura do site
 
 def pecas_do_site():
     """Tira (slug, pasta) do site.ts. Regex em vez de parser: o arquivo é uma
-    lista de literais, e assim este script não depende de rodar TypeScript."""
+    lista de literais, e assim este script não depende de rodar TypeScript.
+
+    O fim da lista é o próximo `export` do arquivo, e não um nome fixo: o
+    marcador anterior (`export const products`) sumiu numa renomeação e
+    derrubou o script sem ninguém perceber."""
     fonte = open(DADOS, encoding="utf-8").read()
     inicio = fonte.index("export const pecas")
-    fim = fonte.index("export const products")
+    fim = fonte.index("\nexport ", inicio + 1)
     achados = re.findall(r"slug: '([^']+)'|fotos\('([^']+)'", fonte[inicio:fim])
 
     saida, slug = [], None
