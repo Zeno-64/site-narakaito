@@ -86,7 +86,7 @@ export const pecas: Peca[] = [
   },
   {
     slug: 'link-adulto',
-    nome: 'Link Adulto',
+    nome: 'Link',
     serie: 'The Legend of Zelda',
     escultor: 'Bionic 3D',
     fotos: fotos('link_adulto_zelda', 11),
@@ -102,7 +102,7 @@ export const pecas: Peca[] = [
   },
   {
     slug: 'link-crianca',
-    nome: 'Link Criança',
+    nome: 'Young Link',
     serie: 'The Legend of Zelda',
     escultor: 'Bionic 3D',
     fotos: fotos('link_crianca_zelda', 12),
