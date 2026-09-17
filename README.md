@@ -94,8 +94,17 @@ para a ficha da peça no `site.ts`.
 Também não entra render em argila cinza — a peça sem pintura nenhuma, só a
 malha iluminada. Ela mostra o volume da escultura, mas quem está comprando
 quer ver a peça pintada, e no meio da galeria a foto cinza lê como peça que
-chegou sem acabamento. **Só vão para o site as fotos do produto pintado**; nas
-pastas do Drive elas são as `*_color (N).jpg`.
+chegou sem acabamento. **Só vão para o site as fotos do produto pintado.**
+
+O estúdio já separa as duas no nome do arquivo: `*_color (N).jpg` é a pintada
+e `*_grey (N).jpg` (às vezes `_gray`) é a de argila. A regra é pegar a série
+`_color` inteira e ignorar o resto da pasta.
+
+As fotos vêm do Drive compartilhado, na pasta **3D**, e ela tem dois níveis:
+uma pasta por personagem na raiz, com a série completa, e pastas por data
+(`15/09`) com os lotes que chegaram depois. A pasta do personagem é a que
+manda — foi a que ficou de fora numa primeira importação, e por isso quatro
+peças entraram no site com menos da metade das fotos pintadas que existiam.
 
 A logo em `public/images/` foi extraída do JPEG original com o fundo removido
 por alfa, e separada em marca (`logo-mark`), wordmark (`logo-wordmark`) e

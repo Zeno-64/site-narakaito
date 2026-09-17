@@ -152,7 +152,7 @@ export const pecas: Peca[] = [
     serie: 'Jujutsu Kaisen',
     escultor: 'Michel Rodrigues',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('sukuna', 7),
+    fotos: fotos('sukuna', 8),
     badges: ['Sob encomenda'],
     chamada:
       'A base composta por um crânio com chifres, dentes monstruosos expostos e chamas ascendentes evoca a ideia do Santuário Malevolente (Fukuma Mizushi). O posicionamento de Sukuna no topo desta pilha de restos indica que o sofrimento alheio é literalmente o chão onde ele pisa. Ele é o senhor absoluto do seu próprio inferno.',
@@ -169,7 +169,7 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('roy_mustang', 6),
+    fotos: fotos('roy_mustang', 7),
     badges: ['Sob encomenda'],
     chamada:
       'O estalo dos dedos é a única coisa que ele precisa fazer. O resto da cena — o círculo aceso no chão, o casaco erguido pelo calor — é consequência.',
@@ -186,7 +186,7 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('mustang_dodoi', 2),
+    fotos: fotos('mustang_dodoi', 7),
     badges: ['Sob encomenda'],
     chamada:
       'A mesma alquimia, depois do preço: o uniforme rasgado, o corpo marcado e a postura que insiste em ficar de pé.',
@@ -203,7 +203,7 @@ export const pecas: Peca[] = [
     serie: 'Witch Hat Atelier',
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('qifrey', 7),
+    fotos: fotos('qifrey', 10),
     badges: ['Sob encomenda'],
     chamada:
       'O mago em pleno gesto, com o manto girando e o aro da base suspendendo a água. A magia aqui é desenho, e a escultura trata disso.',
@@ -220,7 +220,7 @@ export const pecas: Peca[] = [
     serie: 'Frieren e a Jornada para o Além',
     escultor: 'YoruNoAme',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('frieren', 2),
+    fotos: fotos('frieren', 8),
     badges: ['Sob encomenda'],
     chamada:
       'A maga elfa que atravessou séculos, retratada num instante de calma: o manto aberto, o cajado em arco e nenhuma pressa.',
@@ -242,7 +242,7 @@ export const pecas: Peca[] = [
     serie: 'Resident Evil',
     escultor: 'Szymon Szpaczek',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('claire_redfield', 8),
+    fotos: fotos('claire_redfield', 10),
     badges: ['Sob encomenda'],
     chamada:
       'Arma em punho no meio da delegacia em ruínas, com o "Let me live" nas costas — a frase que virou assinatura da personagem.',
@@ -296,7 +296,7 @@ export const pecas: Peca[] = [
     serie: 'Bloodborne',
     escultor: 'Lora Kolori',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('lady_maria', 8),
+    fotos: fotos('lady_maria', 10),
     badges: ['Sob encomenda'],
     chamada:
       'De pé no alto da torre do relógio, lâmina em punho, guardando o que está atrás dela. A pose é de quem não vai sair do lugar.',
@@ -313,7 +313,7 @@ export const pecas: Peca[] = [
     serie: 'Avatar · A Lenda de Aang',
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('toph', 8),
+    fotos: fotos('toph', 10),
     badges: ['Sob encomenda'],
     chamada:
       'Punho fechado, pé fincado e a rocha subindo do chão em leque. A escultura pega o instante exato entre o golpe e o impacto.',
