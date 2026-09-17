@@ -12,14 +12,24 @@ npm run dev
 
 ## Publicar
 
+**Push na `main` já publica.** A Cloudflare está ligada ao repositório e faz o
+build e o deploy sozinha a cada push — não existe workflow em `.github/` aqui
+porque o gatilho mora do lado de lá, no painel da Cloudflare. Não é preciso
+rodar nada à mão para o site entrar no ar.
+
+O site vive em `narakaito.com` (e `www`).
+
+Se algum dia a build automática falhar e for preciso publicar na unha:
+
 ```bash
 npm run build
 npx wrangler deploy
 ```
 
-O site vive em `narakaito.com` (e `www`), servido pelo Worker
-`site-narakaito` — o nome no `wrangler.jsonc` tem que bater com ele, senão o
-deploy cria um Worker novo e vazio e o ar continua na versão anterior.
+Esse comando é saída de emergência, não o caminho normal: ele publica por
+fora do fluxo automático, e o nome no `wrangler.jsonc` tem que bater com o do
+alvo que serve o domínio — nome errado ali cria um destino novo e vazio, e o
+ar continua na versão anterior. Na dúvida, prefira um push novo.
 
 O build gera um HTML por peça em `dist/peca/<slug>/` com as meta tags dela já
 dentro do arquivo, e crawler de link (WhatsApp, Instagram, Google) precisa de
