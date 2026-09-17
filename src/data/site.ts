@@ -88,7 +88,7 @@ export const pecas: Peca[] = [
     nome: 'Madara Uchiha',
     serie: 'Naruto Shippuden',
     escultor: 'Bionic 3D',
-    fotos: fotos('madara', 9),
+    fotos: fotos('madara', 14),
     badges: ['Sob encomenda'],
     chamada:
       'A pose é a de quem não precisa se mover para dominar o campo: o corpo solto, o olhar baixo e as lâminas de chakra já abertas atrás, como se o combate fosse detalhe.',
