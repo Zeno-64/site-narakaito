@@ -169,7 +169,7 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('roy_mustang', 7),
+    fotos: fotos('roy_mustang', 6),
     badges: ['Sob encomenda'],
     chamada:
       'O estalo dos dedos é a única coisa que ele precisa fazer. O resto da cena — o círculo aceso no chão, o casaco erguido pelo calor — é consequência.',
@@ -186,7 +186,7 @@ export const pecas: Peca[] = [
     serie: 'Fullmetal Alchemist',
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('mustang_dodoi', 7),
+    fotos: fotos('mustang_dodoi', 2),
     badges: ['Sob encomenda'],
     chamada:
       'A mesma alquimia, depois do preço: o uniforme rasgado, o corpo marcado e a postura que insiste em ficar de pé.',
@@ -203,7 +203,7 @@ export const pecas: Peca[] = [
     serie: 'Witch Hat Atelier',
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('qifrey', 8),
+    fotos: fotos('qifrey', 7),
     badges: ['Sob encomenda'],
     chamada:
       'O mago em pleno gesto, com o manto girando e o aro da base suspendendo a água. A magia aqui é desenho, e a escultura trata disso.',
@@ -220,7 +220,7 @@ export const pecas: Peca[] = [
     serie: 'Frieren e a Jornada para o Além',
     escultor: 'YoruNoAme',
     estudio: 'Bulkamancer Sculpts',
-    fotos: fotos('frieren', 7),
+    fotos: fotos('frieren', 2),
     badges: ['Sob encomenda'],
     chamada:
       'A maga elfa que atravessou séculos, retratada num instante de calma: o manto aberto, o cajado em arco e nenhuma pressa.',

@@ -91,6 +91,12 @@ Nas pastas do estúdio vem junto uma `*_dimensions.jpg`: **essa não entra no
 site**. Ela serve só para tirar a medida do modelo e calcular a escala, que vão
 para a ficha da peça no `site.ts`.
 
+Também não entra render em argila cinza — a peça sem pintura nenhuma, só a
+malha iluminada. Ela mostra o volume da escultura, mas quem está comprando
+quer ver a peça pintada, e no meio da galeria a foto cinza lê como peça que
+chegou sem acabamento. **Só vão para o site as fotos do produto pintado**; nas
+pastas do Drive elas são as `*_color (N).jpg`.
+
 A logo em `public/images/` foi extraída do JPEG original com o fundo removido
 por alfa, e separada em marca (`logo-mark`), wordmark (`logo-wordmark`) e
 lockup completo (`logo-full`). O header usa marca + wordmark na horizontal
