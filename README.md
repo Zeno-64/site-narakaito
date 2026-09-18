@@ -72,9 +72,11 @@ nunca "a" ou "da". O site já teve as duas formas na mesma tela ("Sobre o
 Narakaito" ao lado de "Falar com a Narakaito"), então vale conferir o artigo
 a cada texto novo.
 
-O "Lab" cai fora só onde o nome é rótulo, não menção: os itens de menu do
-header e do rodapé continuam "Narakaito" seco, porque ficam encostados na
-logo, que já traz o lockup inteiro.
+Menu é outra coisa: ali o texto é rótulo de destino, não menção à marca, e
+fica encostado na logo, que já traz o lockup inteiro. Por isso o header chama
+a seção de **"O Lab"** — que é para onde ela leva, `#lab`, e casa com o
+título dela, "Por dentro do Lab". O rodapé ainda usa "Narakaito" no mesmo
+link.
 
 A ficha técnica sai de uma de duas funções:
 
