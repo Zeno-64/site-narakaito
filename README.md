@@ -1,6 +1,6 @@
 # Narakaito Lab
 
-Site da Narakaito Lab — colecionáveis em resina impressos em alta resolução e
+Site do Narakaito Lab — colecionáveis em resina impressos em alta resolução e
 pintados à mão, sob encomenda.
 
 ## Rodar
@@ -65,6 +65,11 @@ A peça que tem `escultor` mostra o crédito na página, porque a imagem é a ar
 de divulgação de quem esculpiu o modelo, com marca d'água dele. Isso é
 proposital: peça com foto de terceiro não deve ser apresentada como trabalho
 nosso.
+
+**"Narakaito" é masculino.** Escreve-se *o* Narakaito, *do* Narakaito, *com o*
+Narakaito — nunca "a" ou "da". O texto já teve as duas formas convivendo na
+mesma tela ("Sobre o Narakaito" ao lado de "Falar com a Narakaito"), então
+vale conferir o artigo a cada texto novo.
 
 A ficha técnica sai de uma de duas funções:
 

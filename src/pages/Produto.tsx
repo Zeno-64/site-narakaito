@@ -177,7 +177,7 @@ export default function Produto() {
       {/* outras peças */}
       <section className="bg-ink-900 py-20">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-display text-2xl text-bone-100">Outras peças da Narakaito</h2>
+          <h2 className="font-display text-2xl text-bone-100">Outras peças do Narakaito</h2>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {outras.map((o, i) => (
@@ -213,7 +213,7 @@ export default function Produto() {
           </h2>
           <p className="mt-5 text-base leading-relaxed text-bone-500">
             Manda mensagem que a gente fecha o orçamento, define as customizações e te coloca
-            na fila da Narakaito.
+            na fila do Narakaito.
           </p>
           <a
             href={link}
@@ -221,7 +221,7 @@ export default function Produto() {
             rel="noreferrer"
             className="eyebrow mt-10 inline-block bg-ember-500 px-10 py-4 text-bone-100 transition-colors hover:bg-ember-400"
           >
-            Falar com a Narakaito →
+            Falar com o Narakaito →
           </a>
         </div>
       </section>

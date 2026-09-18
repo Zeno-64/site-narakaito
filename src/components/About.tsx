@@ -13,7 +13,7 @@ export default function About() {
           <div className="relative aspect-4/5 overflow-hidden border border-ink-700 bg-ink-850">
             <img
               src={fotoSobre.full}
-              alt="Figure em resina do catálogo da Narakaito"
+              alt="Figure em resina do catálogo do Narakaito"
               loading="lazy"
               className="h-full w-full object-cover"
             />
