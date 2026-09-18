@@ -13,7 +13,7 @@ export default function About() {
           <div className="relative aspect-4/5 overflow-hidden border border-ink-700 bg-ink-850">
             <img
               src={fotoSobre.full}
-              alt="Figure em resina do catálogo do Narakaito"
+              alt="Figure em resina do catálogo do Narakaito Lab"
               loading="lazy"
               className="h-full w-full object-cover"
             />
@@ -56,7 +56,7 @@ export default function About() {
             rel="noreferrer"
             className="eyebrow mt-10 inline-block border border-ember-500/60 px-8 py-4 text-bone-100 transition-colors hover:bg-ember-700/30"
           >
-            Conversar com o Narakaito →
+            Conversar com o Narakaito Lab →
           </a>
         </Reveal>
       </div>

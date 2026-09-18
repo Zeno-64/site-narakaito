@@ -66,10 +66,15 @@ de divulgação de quem esculpiu o modelo, com marca d'água dele. Isso é
 proposital: peça com foto de terceiro não deve ser apresentada como trabalho
 nosso.
 
-**"Narakaito" é masculino.** Escreve-se *o* Narakaito, *do* Narakaito, *com o*
-Narakaito — nunca "a" ou "da". O texto já teve as duas formas convivendo na
-mesma tela ("Sobre o Narakaito" ao lado de "Falar com a Narakaito"), então
-vale conferir o artigo a cada texto novo.
+**"Narakaito" é masculino, e em texto corrido o nome é "Narakaito Lab".**
+Escreve-se *o* Narakaito Lab, *do* Narakaito Lab, *com o* Narakaito Lab —
+nunca "a" ou "da". O site já teve as duas formas na mesma tela ("Sobre o
+Narakaito" ao lado de "Falar com a Narakaito"), então vale conferir o artigo
+a cada texto novo.
+
+O "Lab" cai fora só onde o nome é rótulo, não menção: os itens de menu do
+header e do rodapé continuam "Narakaito" seco, porque ficam encostados na
+logo, que já traz o lockup inteiro.
 
 A ficha técnica sai de uma de duas funções:
 
