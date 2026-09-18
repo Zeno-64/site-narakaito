@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { acharPeca, pecas, whatsappPeca } from '../data/site'
+import { acharPeca, relacionadas, whatsappPeca } from '../data/site'
 import GaleriaPeca from '../components/GaleriaPeca'
 import Reveal from '../components/Reveal'
 import { definirMeta } from '../lib/meta'
@@ -46,7 +46,7 @@ export default function Produto() {
     )
   }
 
-  const outras = pecas.filter((p) => p.slug !== peca.slug).slice(0, 3)
+  const outras = relacionadas(peca)
   const link = whatsappPeca(peca.nome)
 
   return (

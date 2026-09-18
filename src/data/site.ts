@@ -8,10 +8,30 @@ function fotos(pasta: string, total: number): Foto[] {
   })
 }
 
+/**
+ * Clima da obra de onde a peça vem. Serve só para sugerir peças parecidas no
+ * fim da página, e por isso é grosso de propósito: cinco valores cobrem o
+ * catálogo sem virar trabalho de catalogação a cada peça nova.
+ */
+export type Tom = 'acao' | 'terror' | 'fantasia' | 'scifi' | 'cotidiano'
+
+/**
+ * O que a `serie` não conta sobre o personagem.
+ *
+ * É obrigatório: peça nova sem `perfil` não compila, e é assim que a gente
+ * garante que ninguém entre no catálogo sem entrar também nas sugestões.
+ */
+export type Perfil = {
+  genero: 'feminino' | 'masculino' | 'criatura'
+  /** Dois ou três, do mais forte para o mais fraco. */
+  tom: Tom[]
+}
+
 export type Peca = {
   slug: string
   nome: string
   serie: string
+  perfil: Perfil
   fotos: Foto[]
   escultor?: string
   /** Estúdio que assina a escultura, quando há um por trás do escultor. */
@@ -87,6 +107,7 @@ export const pecas: Peca[] = [
     slug: 'madara-uchiha',
     nome: 'Madara Uchiha',
     serie: 'Naruto Shippuden',
+    perfil: { genero: 'masculino', tom: ['acao', 'fantasia'] },
     escultor: 'Bionic 3D',
     fotos: fotos('madara', 14),
     badges: ['Sob encomenda'],
@@ -109,6 +130,7 @@ export const pecas: Peca[] = [
     slug: 'link-adulto',
     nome: 'Link',
     serie: 'The Legend of Zelda',
+    perfil: { genero: 'masculino', tom: ['fantasia', 'acao'] },
     escultor: 'Bionic 3D',
     fotos: fotos('link_adulto_zelda', 11),
     badges: ['Sob encomenda'],
@@ -125,6 +147,7 @@ export const pecas: Peca[] = [
     slug: 'link-crianca',
     nome: 'Young Link',
     serie: 'The Legend of Zelda',
+    perfil: { genero: 'masculino', tom: ['fantasia', 'cotidiano'] },
     escultor: 'Bionic 3D',
     fotos: fotos('link_crianca_zelda', 12),
     badges: ['Sob encomenda'],
@@ -150,6 +173,7 @@ export const pecas: Peca[] = [
     slug: 'sukuna',
     nome: 'Sukuna',
     serie: 'Jujutsu Kaisen',
+    perfil: { genero: 'masculino', tom: ['acao', 'terror'] },
     escultor: 'Michel Rodrigues',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('sukuna', 8),
@@ -167,6 +191,7 @@ export const pecas: Peca[] = [
     slug: 'roy-mustang',
     nome: 'Roy Mustang',
     serie: 'Fullmetal Alchemist',
+    perfil: { genero: 'masculino', tom: ['acao', 'fantasia'] },
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('roy_mustang', 7),
@@ -184,6 +209,7 @@ export const pecas: Peca[] = [
     slug: 'roy-mustang-ferido',
     nome: 'Roy Mustang · Ferido',
     serie: 'Fullmetal Alchemist',
+    perfil: { genero: 'masculino', tom: ['acao', 'fantasia'] },
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('mustang_dodoi', 7),
@@ -201,6 +227,7 @@ export const pecas: Peca[] = [
     slug: 'qifrey',
     nome: 'Qifrey',
     serie: 'Witch Hat Atelier',
+    perfil: { genero: 'masculino', tom: ['fantasia', 'cotidiano'] },
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('qifrey', 10),
@@ -218,6 +245,7 @@ export const pecas: Peca[] = [
     slug: 'frieren',
     nome: 'Frieren',
     serie: 'Frieren e a Jornada para o Além',
+    perfil: { genero: 'feminino', tom: ['fantasia', 'cotidiano'] },
     escultor: 'YoruNoAme',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('frieren', 8),
@@ -240,6 +268,7 @@ export const pecas: Peca[] = [
     slug: 'claire-redfield',
     nome: 'Claire Redfield',
     serie: 'Resident Evil',
+    perfil: { genero: 'feminino', tom: ['terror', 'acao'] },
     escultor: 'Szymon Szpaczek',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('claire_redfield', 10),
@@ -257,6 +286,7 @@ export const pecas: Peca[] = [
     slug: 'gwen-stacy',
     nome: 'Gwen Stacy',
     serie: 'Marvel · Aranhaverso',
+    perfil: { genero: 'feminino', tom: ['acao', 'scifi'] },
     escultor: 'Lukas Lima e Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('gwen_stacy', 8),
@@ -274,6 +304,7 @@ export const pecas: Peca[] = [
     slug: 'ken-kaneki',
     nome: 'Ken Kaneki',
     serie: 'Tokyo Ghoul',
+    perfil: { genero: 'masculino', tom: ['terror', 'acao'] },
     escultor: 'Samiho Studios',
     fotos: fotos('kaneki', 7),
     badges: ['Sob encomenda'],
@@ -294,6 +325,7 @@ export const pecas: Peca[] = [
     slug: 'lady-maria',
     nome: 'Lady Maria',
     serie: 'Bloodborne',
+    perfil: { genero: 'feminino', tom: ['terror', 'fantasia'] },
     escultor: 'Lora Kolori',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('lady_maria', 10),
@@ -311,6 +343,7 @@ export const pecas: Peca[] = [
     slug: 'toph',
     nome: 'Toph',
     serie: 'Avatar · A Lenda de Aang',
+    perfil: { genero: 'feminino', tom: ['acao', 'fantasia'] },
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('toph', 10),
@@ -328,6 +361,7 @@ export const pecas: Peca[] = [
     slug: 'verso',
     nome: 'Verso',
     serie: 'Clair Obscur · Expedition 33',
+    perfil: { genero: 'masculino', tom: ['fantasia', 'acao'] },
     escultor: 'Vik3DFigures',
     fotos: fotos('verso', 7),
     badges: ['Sob encomenda'],
@@ -347,6 +381,7 @@ export const pecas: Peca[] = [
     slug: 'sam-porter-bridges',
     nome: 'Sam Porter Bridges',
     serie: 'Death Stranding',
+    perfil: { genero: 'masculino', tom: ['scifi', 'acao'] },
     escultor: 'Szymon Szpaczek',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('sam', 8),
@@ -364,6 +399,7 @@ export const pecas: Peca[] = [
     slug: 'griffith',
     nome: 'Griffith',
     serie: 'Berserk',
+    perfil: { genero: 'masculino', tom: ['fantasia', 'terror'] },
     escultor: 'YoruNoAme',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('griffith', 7),
@@ -381,6 +417,7 @@ export const pecas: Peca[] = [
     slug: 'aerith',
     nome: 'Aerith Gainsborough',
     serie: 'Final Fantasy VII',
+    perfil: { genero: 'feminino', tom: ['fantasia', 'cotidiano'] },
     escultor: 'Polina Shaman',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('aerith', 6),
@@ -398,6 +435,7 @@ export const pecas: Peca[] = [
     slug: 'valerie',
     nome: 'Valerie',
     serie: 'Cyberpunk 2077',
+    perfil: { genero: 'feminino', tom: ['scifi', 'acao'] },
     escultor: 'Polina Shaman',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('valerie', 8),
@@ -415,6 +453,7 @@ export const pecas: Peca[] = [
     slug: 'alexstrasza',
     nome: 'Alexstrasza',
     serie: 'World of Warcraft',
+    perfil: { genero: 'feminino', tom: ['fantasia', 'acao'] },
     escultor: 'Katerina Likhacheva',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('alexstrasza', 8),
@@ -432,6 +471,7 @@ export const pecas: Peca[] = [
     slug: 'tita-femea',
     nome: 'Titã Fêmea',
     serie: 'Attack on Titan',
+    perfil: { genero: 'feminino', tom: ['terror', 'acao'] },
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('tita_femea', 10),
@@ -449,6 +489,7 @@ export const pecas: Peca[] = [
     slug: 'malice',
     nome: 'Malice',
     serie: 'Original · Bulkamancer Sculpts',
+    perfil: { genero: 'feminino', tom: ['terror', 'fantasia'] },
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('malice', 7),
@@ -466,6 +507,7 @@ export const pecas: Peca[] = [
     slug: 'mayuri-shiina',
     nome: 'Mayuri Shiina',
     serie: 'Steins;Gate',
+    perfil: { genero: 'feminino', tom: ['cotidiano', 'scifi'] },
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('mayuri', 8),
@@ -483,6 +525,7 @@ export const pecas: Peca[] = [
     slug: 'xenomorph',
     nome: 'Xenomorph',
     serie: 'Alien',
+    perfil: { genero: 'criatura', tom: ['terror', 'scifi'] },
     escultor: 'Valentina Iudina',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('xenomorph', 8),
@@ -500,6 +543,7 @@ export const pecas: Peca[] = [
     slug: 'lady',
     nome: 'Lady',
     serie: 'Devil May Cry',
+    perfil: { genero: 'feminino', tom: ['acao', 'terror'] },
     escultor: 'Alex Gray',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('lady', 6),
@@ -517,6 +561,7 @@ export const pecas: Peca[] = [
     slug: 'rena-ryugu',
     nome: 'Rena Ryūgū',
     serie: 'Higurashi When They Cry',
+    perfil: { genero: 'feminino', tom: ['terror', 'cotidiano'] },
     escultor: 'KAI',
     estudio: 'Bulkamancer Sculpts',
     fotos: fotos('rena', 7),
@@ -535,6 +580,60 @@ export const pecas: Peca[] = [
 
 export function acharPeca(slug: string | undefined) {
   return pecas.find((p) => p.slug === slug)
+}
+
+/**
+ * Ordena o catálogo por afinidade com a peça aberta, para o "Outras peças" no
+ * fim da página dela.
+ *
+ * Antes isto era `pecas.filter(...).slice(0, 3)`, ou seja, os três primeiros
+ * do array menos a peça atual -- e como Madara, Link e Young Link ocupam as
+ * três primeiras posições, eram eles em todas as páginas do site.
+ *
+ * Os pesos dizem no que a gente acredita, nesta ordem:
+ *
+ * - A **série** ganha de tudo. Quem abriu o Link quer o Young Link, e quem
+ *   abriu o Roy quer o Roy Ferido. É o único sinal que o cliente enxerga
+ *   sozinho, então nenhum outro pode passar na frente dele.
+ * - O **gênero do personagem** vem depois, e é o que faltava: quem abriu uma
+ *   personagem feminina vê outras femininas.
+ * - O **tom** existe para o gênero não bastar. Só com gênero, a Aerith
+ *   sugeriria o Titã Fêmea -- ambas femininas, mas uma é flor e a outra é
+ *   horror corporal.
+ * - O **escultor** é o desempate de quem coleciona por artista, não por obra.
+ *
+ * Nada é filtro: a lista inteira é ordenada e cortada no fim, então sempre
+ * saem três, mesmo numa peça sem nenhuma parecida.
+ */
+export function relacionadas(peca: Peca, quantas = 3): Peca[] {
+  const ponto = (c: Peca) => {
+    let n = 0
+    if (c.serie === peca.serie) n += 100
+    if (c.perfil.genero === peca.perfil.genero) n += 40
+    // A ordem do `tom` conta: bater no tom principal das duas vale mais que
+    // bater no secundário. Sem isso o Xenomorph (terror, scifi) empatava com
+    // dez peças de uma vez e o desempate cego trazia a Gwen Stacy para a
+    // página do Alien.
+    for (const t of c.perfil.tom) {
+      const i = peca.perfil.tom.indexOf(t)
+      if (i >= 0) n += 20 - 5 * (i + c.perfil.tom.indexOf(t))
+    }
+    if (c.escultor && c.escultor === peca.escultor) n += 10
+    return n
+  }
+
+  // Desempate estável, mas que varia de página para página: depende do par de
+  // slugs, não da posição no array. Sem isto as peças empatadas sairiam de
+  // novo na ordem do catálogo, que é o bug de hoje um degrau abaixo. Ser
+  // determinístico importa porque a mesma página tem de render igual duas
+  // vezes seguidas -- nada de sugestão trocando sozinha na tela.
+  const mistura = (c: Peca) =>
+    [...(peca.slug + c.slug)].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 9973, 7)
+
+  return pecas
+    .filter((c) => c.slug !== peca.slug)
+    .sort((a, b) => ponto(b) - ponto(a) || mistura(a) - mistura(b))
+    .slice(0, quantas)
 }
 
 export type Destaque = {
